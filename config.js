@@ -1,0 +1,12 @@
+module.exports = [{
+	name: 'roulette',
+	path: './src/games/Roulette/index.js',
+	filename: 'index.html',
+	templatename: '大转盘',
+	template: './src/example/roulette.ejs'
+},{
+	name: 'boxroulette',
+	path: './src/games/BoxRoulette/index.js',
+	templatename: '九宫格',
+	template: './src/example/boxroulette.ejs'
+}];
