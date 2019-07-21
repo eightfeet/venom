@@ -2,7 +2,7 @@ import { ResultModal, AddressModal, Loading, tools, htmlFactory } from '@byhealt
 // import s from './template/game.scss';
 
 const { dormancyFor, isObject } = tools;
-const { createDom, removeDom } = htmlFactory;
+const { removeDom } = htmlFactory;
 
 const stamp = (new Date()).getTime();
 
@@ -68,7 +68,7 @@ class Core {
 			submitSuccessText, submitAddressText, submitFailedText,
 			emBase,
 			loading,
-			lotteryForms
+			lottery
 		} = config;
 		const { SuccessModalTheme, FailedModalTheme, AddressModalTheme, MessageTheme, LoadingTheme } = style;
 
@@ -102,22 +102,6 @@ class Core {
 			onCancel: this.onCancel(onCancel)
 		});
 
-		// 抽奖形式
-		// this.lotteryForms = {
-		// 	template: '<div id="aaasss">5555</div>',
-		// 	launcher: '#aaasss',
-		// 	action: prize => new Promise((resolve) => {
-				
-		// 	})
-		// };
-
-		const { template, launcher, action}  = lotteryForms || {};
-		this.lotteryTemplate = template && launcher ? template : '<div id="launchbutton">抽奖</div>';
-		this.launcherButton = template && launcher ? launcher : '#launchbutton';
-		this.lotteryAction = action || (() => new Promise((resolve, reject) => {
-			reject('lotteryForms.action方法必须返回一个Promise对象');
-		}));
-
 		this.AddressModal     = new AddressModal({ AddressModalTheme,outerFrameId, MessageTheme, playerPhone, receiverInfo, cardIdRequest, checkVerificationCode });
 		const data = {style:LoadingTheme, parentId:outerFrameId, ...this.loadingSet};
 		this.Loading          = new Loading(data);
@@ -127,8 +111,13 @@ class Core {
 		}));
 
 		// 重制游戏时this.onSaveAddress嫁接saveAddress方法
-		this.saveAddress      = this.onSaveAddress(saveAddress);
-		this.initTheme(this.lotteryTemplate, this.launcherButton);
+		this.saveAddress      = saveAddress || (() => new Promise((resolve, reject) => {
+			reject('需要saveAddress方法用来保存你的地址');
+		}));
+
+		this.lotteryAction = lottery || (() => new Promise((resolve, reject) => {
+			reject('lottery方法必须返回一个Promise对象');
+		}));
 	}
 
 	/**
@@ -138,20 +127,6 @@ class Core {
 	 */
 	onCancel = (cancel) => () => {
 		cancel();
-	}
-
-	/**
-	 * 保存地址成功后重置游戏
-	 * @param {Function} saveAddress 承接保存地址方法
-	 * @memberof Core
-	 */
-	onSaveAddress = (saveAddress) => (data) => {
-		if (saveAddress && typeof saveAddress === 'function') {
-			return saveAddress(data);
-		}
-		return () => {
-			throw '无保存地址方法';
-		};
 	}
 
 	/**
@@ -182,38 +157,6 @@ class Core {
 		])
 			.then()
 			.catch(err => console.log(err));
-	}
-
-	/**
-	 * @param {String} template HTML Text
-	 * @param {String} Launcher HTML target
-	 * 初始化模板
-	 * @memberof Core
-	 */
-	initTheme = (template, Launcher) => {
-		return createDom(
-			template,
-			this.targetId,
-			this.parentId,
-			this.emBase
-		)
-			.then(() => {
-				const target = document.getElementById(this.targetId);
-				target.style.width = '100%';
-				target.style.height = '100%';
-				target.style.position = 'relative';
-				return dormancyFor(50);
-			})
-			.then(() => {
-				const target = document.getElementById(this.targetId);
-				const lotterybtn = target.querySelector(Launcher);
-				if (!lotterybtn) {
-					throw new Error('HTML DOM of launch buttons not found!');
-				}
-				lotterybtn.onclick = e => {
-					return this.lottery(e);
-				};
-			});
 	}
 
 	/**
