@@ -1,11 +1,13 @@
 const configs = require('./config');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const scripts = `<script src="https://by-health-cdn.oss-cn-beijing.aliyuncs.com/region/regions.js"></script>
-<script src="/data/prizes1.js"></script>
-<script src="/data/prizes2.js"></script>
-<script src="/data/themedata1.js"></script>
-<script src="/data/themedata2.js"></script>`;
+const scripts = function(params) {
+	return `<script src="https://by-health-cdn.oss-cn-beijing.aliyuncs.com/region/regions.js"></script>
+	<script src="/data/${params}/prizes1.js"></script>
+	<script src="/data/${params}/prizes2.js"></script>
+	<script src="/data/${params}/themedata1.js"></script>
+	<script src="/data/${params}/themedata2.js"></script>`
+};
 
 // console.log('HtmlWebpackPlugin', HtmlWebpackPlugin);
 let HtmlPlugin = [];
@@ -22,7 +24,7 @@ configs.forEach(element => {
 		template,
 		filename: filename || `${name}.html`,
 		chunks: [name],
-		scripts
+		scripts: scripts(name)
 	});
 	entry[name] = path;
 	HtmlPlugin.push(HtmlPluginItem);

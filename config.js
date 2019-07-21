@@ -9,4 +9,9 @@ module.exports = [{
 	path: './src/games/BoxRoulette/index.js',
 	templatename: '九宫格',
 	template: './src/example/boxroulette.ejs'
+},{
+	name: 'flipcard',
+	path: './src/games/FlipCard/index.js',
+	templatename: '翻牌',
+	template: './src/example/flipcard.ejs'
 }];

@@ -1,6 +1,7 @@
 import s from './game.scss';
 import { htmlFactory } from '@byhealth/walle';
 const { inlineStyle } = htmlFactory;
+import { getFullNum } from './helper';
 
 
 /**
@@ -9,7 +10,7 @@ const { inlineStyle } = htmlFactory;
  * @param {Array} modify
  * @returns
  */
-function renderModify(modify){
+function renderModify(modify) {
 
 	if (!modify || !Array.isArray(modify)) {
 		return '';
@@ -32,37 +33,76 @@ function renderModify(modify){
  * @param { Array } prizes 奖项
  * @returns
  */
-export function renderGame(style, prizes) {
-	console.log(1);
-	const { wrap, modify, gameImg, prizeAlias, needle, lotteryButton, wheel, divide } = style;
-	const prizeLength = prizes.length;
-	const eachDeg = 360 / prizeLength;
-	let dom = '';
+export function renderGame(style, prizes, id) {
+	const { wrap, modify, prize, gameImg, prizeAlias, activated, lotteryButton } = style;
 
 	const gameImgStyle = inlineStyle(gameImg);
 	const prizeAliasStyle = inlineStyle(prizeAlias);
-	const needleStyle = inlineStyle(needle);
+	const prizeStyle = inlineStyle(prize);
 	const lotteryButtonStyle = inlineStyle(lotteryButton);
 	const wrapStyle = inlineStyle(wrap);
-	const wheelStyle = inlineStyle(wheel);
-	const divideStyle = inlineStyle(divide);
-	
-	for (let index = 0; index < prizeLength; index++) {
+	const activatedStyle = inlineStyle(activated);
+
+	let sideLength = getFullNum((prizes.length - 4) / 4 + 2);
+	let step = getFullNum(100 / sideLength);
+	let maxRate = getFullNum((sideLength - 1) * step);
+	const loatingThreshold = 0.3;
+	let X = 0,
+		Y = 0,
+		dom = "",
+		stepGrown = 1;
+
+	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
-		const deg = index * eachDeg;
-		dom += `<div class="${s.award}" 
-		style="transform:rotate(${deg + eachDeg/2}deg); -webkit-transform:rotate(${deg + eachDeg/2}deg)">
-			<div class="${s.prizealias}" ${prizeAliasStyle && `style="${prizeAliasStyle}"`}>${element.prizeAlias}</div>
+		dom = `${dom}<div class="${s.prizeItem}" style="width:${step}%; height:${step}%; left: ${X}%; top: ${Y}%"><div class="${s.prize}" ${prizeStyle && `style="${prizeStyle}"`}>
+			<div class="${s.selected}">
+				<div ${activatedStyle && `style="${activatedStyle}"`}> </div>
+			</div>
 			<img class="${s.gameimg}" ${gameImgStyle && `style="${gameImgStyle}"`} src="${element.gameImg}" />
-		</div><div class="${s.divide}"  style="transform:rotate(${deg}deg); -webkit-transform:rotate(${deg}deg); ${divideStyle ? divideStyle : ''}"></div>`;
+			<div class="${s.prizealias}" ${prizeAliasStyle && `style="${prizeAliasStyle}"`}>${element.prizeAlias}</div>
+		</div></div>`;
+
+		if (stepGrown === 1) {
+			X = X + step;
+			if (X >= maxRate + loatingThreshold) {
+				X = maxRate;
+				Y = 0;
+				stepGrown = 2;
+			}
+		}
+
+		if (stepGrown === 2) {
+			Y = Y + step;
+			if (Y >= maxRate + loatingThreshold) {
+				X = maxRate;
+				Y = 0;
+				stepGrown = 3;
+			}
+		}
+
+		if (stepGrown === 3) {
+			Y = maxRate;
+			X = X - step;
+			if (X <= 0 - loatingThreshold) {
+				X = 0;
+				Y = maxRate;
+				stepGrown = 4;
+			}
+		}
+
+		if (stepGrown === 4) {
+			Y = Y - step;
+			if (Y === step) {
+				stepGrown = 1;
+			}
+		}
 	}
-	
+
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
-	<div class="${s.lottery}"><div class="${s.wheel}"  ${wheelStyle ? `style="${wheelStyle}"` : ''}>
+	<div id="${id}" class="${s.lottery}">
 		${dom}
-	</div></div> 
-	<div class="${s.needle}" ${needleStyle ? `style="${needleStyle}"` : ''}>&nbsp;</div>
-	<div class="${s.lotterybutton}" ${lotteryButtonStyle ? `style="${lotteryButtonStyle}"` : ''}>&nbsp;</div>
+	</div>
+	<div class="${s.lotterybutton}" ><div class="${s.button}" ${lotteryButtonStyle ? `style="${lotteryButtonStyle}"` : ''}>&nbsp;</div></div>
 	</div>`;
 }
