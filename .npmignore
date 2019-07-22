@@ -3,8 +3,8 @@
 /npm-debug.log
 .DS_Store
 /.idea
-/dist/demo
-/dist/lib/*.js.map
+/dist/demo/
+/dist/**/*.map
 .babelrc
 .eslintrc
 .gitignore
