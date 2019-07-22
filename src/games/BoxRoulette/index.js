@@ -3,8 +3,10 @@ if (window.Promise === undefined) {
 }
 
 import Core from '../Core';
-import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory } from '@byhealth/walle';
-const { inlineStyle } = htmlFactory;
+import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory, tools } from '@byhealth/walle';
+
+const { dormancyFor } = tools;
+const { createDom, inlineStyle } = htmlFactory;
 
 import { renderGame } from './template';
 import s from './game.scss';
@@ -14,29 +16,50 @@ const stamp = (new Date()).getTime();
 
 class Game {
 	constructor(config){
-		const { style, prizes, targetId } = config;
+		const { style, prizes, targetId, parentId } = config;
 		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
 
 		this.prizesLength = getGameDataLength(prizes.length);
 		this.prizes = supplementingData(prizes, this.prizesLength);
-
-		this.game = new Core({...config, targetId: this.targetId, lotteryForms: {
-			template: this.renderGame(
-				style.GameTheme,
-				this.prizes,
-				`${this.targetId}_items`
-			),
-			launcher: `.${s.lotterybutton}`,
-			action: this.lottery
-		}});
+		this.GameTheme = style.GameTheme;
+		this.parentId         = parentId;
+		this.game = new Core({...config,
+			targetId: this.targetId,
+			lottery: this.lottery
+		});
 		this.Loading = this.game.Loading;
+		this.distory = this.game.distory;
+		this.renderGame();
 		// 历史位置
 		this.historyPrizeInd = 0;
 		// 缓冲阈值
 		this.buffer = 5;
 	}
 
-	renderGame = renderGame
+	renderGame = () => {
+		return createDom(
+			renderGame(
+				this.GameTheme,
+				this.prizes,
+				`${this.targetId}_items`
+			),
+			this.targetId,
+			this.parentId,
+			this.emBase
+		)
+			.then(() => {
+				const target = document.getElementById(this.targetId);
+				target.classList.add(s.target);
+				return dormancyFor(50);
+			})
+			.then(() => {
+				const target = document.getElementById(this.targetId);
+				const lotterybtn = target.querySelector(`.${s.lotterybutton}`);
+				lotterybtn.onclick = e => {
+					return this.game.lottery(e);
+				};
+			});
+	}
 
 	/**
 	 *

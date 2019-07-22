@@ -3,26 +3,65 @@ if (window.Promise === undefined) {
 }
 
 import Core from '../Core';
-import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory } from '@byhealth/walle';
-const { inlineStyle } = htmlFactory;
+import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory, tools } from '@byhealth/walle';
+import s from './game.scss';
+
+const { dormancyFor } = tools;
+const { createDom, inlineStyle } = htmlFactory;
 
 import { renderGame } from './template';
-import s from './game.scss';
+
+const stamp = (new Date()).getTime();
 
 
 class Game {
 	constructor(config){
-		const { style, prizes } = config;
-		this.game = new Core({...config, lotteryForms: {
-			template: this.renderGame(style.GameTheme, prizes),
-			launcher: `.${s.lotterybutton}`,
-			action: this.startLottery
-		}});
+		const { style, prizes, targetId, parentId } = config;
+		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
+		
+		this.prizes = prizes;
+		this.GameTheme = style.GameTheme;
+		this.parentId         = parentId;
+		this.game = new Core({...config,
+			lottery: this.lottery,
+			targetId: this.targetId});
 		this.Loading = this.game.Loading;
-		this.oldDge = 0;
+		this.distory = this.game.distory;
+		this.oldDge           = 0;
+		this.renderGame();
+		this.activeElements = null;
 	}
 
-	renderGame = renderGame
+	/**
+	 *
+	 * 初始化翻牌模板
+	 * @memberof Game
+	 */
+	renderGame = () => {
+		return createDom(
+			renderGame(
+				this.GameTheme,
+				this.prizes
+			),
+			this.targetId,
+			this.parentId,
+			this.emBase
+		)
+			.then(() => {
+				const target = document.getElementById(this.targetId);
+				target.classList.add(s.target);
+				return dormancyFor(50);
+			})
+			.then(() => {
+				const target = document.getElementById(this.targetId);
+				const lotterybtn = target.querySelector(`.${s.lotterybutton}`);
+				lotterybtn.onclick = (e) => {
+					e.preventDefault();
+					return this.game.lottery();
+				};
+			});
+	}
+
 
 	/**
 	 *
@@ -33,13 +72,14 @@ class Game {
 	 * @returns
 	 * @memberof Game
 	 */
-	startLottery = (prize, time, round) => {
+	lottery = (prize, time, round) => {
+		console.log(prize, time, round);
 		const { prizeId } = prize || {};
-		const target = document.getElementById(this.game.targetId);
+		const target = document.getElementById(this.targetId);
 		const wheel = target.querySelector(`.${s.lottery}`);
-		const length = this.game.prizes.length;
+		const length = this.prizes.length;
 		const eachDeg = 360 / length;
-
+		
 		return new Promise((resolve, reject) => {
 			if (!prizeId) {
 				this.lotteryDrawing = false;
@@ -50,7 +90,7 @@ class Game {
 			const defaultRound = round || 6;
 			let position = 0;
 			const halfDeg = eachDeg / 2;
-			this.game.prizes.forEach((el, index) => {
+			this.prizes.forEach((el, index) => {
 				if (el.prizeId === prizeId) {
 					position = length - (index + 1);
 				}
@@ -78,6 +118,7 @@ class Game {
 		});
 
 	}
+
 }
 
 module.exports = {Game, NoticeModal, Loading, validate, Message, Modal, AddressModal, inlineStyle};

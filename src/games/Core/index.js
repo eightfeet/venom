@@ -201,14 +201,15 @@ class Core {
 	 */
 	startLottery = (prize) => {
 		const { prizeId } = prize || {};
+
 		if (!prizeId) {
 			this.lotteryDrawing = false;
 			throw (`抽奖失败,没有中奖ID（prizeId）\n 异常中奖信息：${JSON.stringify(prize, null, 2)}`);
 		}
 
 		const data = this.prizes.filter(item => item.prizeId === prizeId);
-
-		if (data && data.length === 1) {
+		// 可能存在多个同ID奖品
+		if (data && data.length >= 1) {
 			return this.lotteryAction(prize).then(() => prize);
 		}
 

@@ -110,6 +110,8 @@
                   window.LotteryGame1.Loading.hide();
                   resolve();
                   }, 3000);
+              }).catch(err => {
+                console.log('处理', err);
               });
           }
   

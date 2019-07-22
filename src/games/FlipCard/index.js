@@ -138,10 +138,9 @@ class Game {
 				.then(() => this.reset());
 		}
 		return () => {
-			throw '无保存地址方法';
+			throw '无保存地址方法, 确保方法new Promise & resolve';
 		};
 	}
-
 
 	/**
 	 * 分发奖品到对应卡牌
