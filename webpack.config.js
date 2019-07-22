@@ -5,7 +5,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const configs = require("./webpacksettes");
+const CreateFileWebpack = require('create-file-webpack');
+const configs = require("./tools/webpacksettes");
 
 const DefinePlugin = webpack.DefinePlugin;
 
@@ -86,7 +87,7 @@ module.exports = (env, argv) => ({
 		library: ['___Lottery___', '[name]'],
 		libraryTarget: 'umd',
 		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].js',
+		filename: 'lib/[name].js',
 		publicPath: argv.mode === 'development' ? '/' : cdn
 	},
 	module: {
@@ -211,9 +212,14 @@ module.exports = (env, argv) => ({
 			__UIWIDTH__: JSON.stringify(sassVars.width)
 		}),
 		new CopyWebpackPlugin([
-			{ from: './src/data', to: './data' },
-			{ from: './src/assets', to: './assets' }
-		])
+			{ from: './src/data', to: './demo/data' },
+			{ from: './src/assets', to: './demo/assets' }
+		]),
+		new CreateFileWebpack({
+			path: './dist',
+			fileName: 'index.js',
+			content: configs.entryfile
+		})
 		// new MiniCssExtractPlugin({
 		// 	// Options similar to the same options in webpackOptions.output both options are
 		// 	// optional

@@ -1,8 +1,8 @@
 {
-  "name": "@byhealth/lotteryroulette",
-  "version": "1.0.28",
+  "name": "@byhealth/lottery",
+  "version": "1.0.0",
   "description": "",
-  "main": "./dist/lotteryroulette.js",
+  "main": "./dist/index.js",
   "files": [
     "dist"
   ],
@@ -22,6 +22,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "create-file-webpack": "^1.0.2",
     "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "eslint": "^5.2.0",
