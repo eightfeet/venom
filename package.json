@@ -3,9 +3,6 @@
   "version": "1.0.2",
   "description": "",
   "main": "./dist/index.js",
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "webpack --mode production",
     "build:uat": "cross-env UAT_ENV=uat webpack --mode production",
@@ -44,7 +41,7 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "@byhealth/lottery": "^1.0.1",
+    "@byhealth/lottery": "^1.0.2",
     "@byhealth/walle": "^1.0.3",
     "autoprefix": "^1.0.1",
     "babel-polyfill": "^6.26.0",
