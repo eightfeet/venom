@@ -3,10 +3,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const scripts = function(params) {
 	return `<script src="https://by-health-cdn.oss-cn-beijing.aliyuncs.com/region/regions.js"></script>
-	<script src="/data/${params}/prizes1.js"></script>
-	<script src="/data/${params}/prizes2.js"></script>
-	<script src="/data/${params}/themedata1.js"></script>
-	<script src="/data/${params}/themedata2.js"></script>`;
+	<script src="./data/${params}/prizes1.js"></script>
+	<script src="./data/${params}/prizes2.js"></script>
+	<script src="./data/${params}/themedata1.js"></script>
+	<script src="./data/${params}/themedata2.js"></script>`;
 };
 
 // console.log('HtmlWebpackPlugin', HtmlWebpackPlugin);
