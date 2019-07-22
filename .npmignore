@@ -3,6 +3,7 @@
 /npm-debug.log
 .DS_Store
 /.idea
+/tools
 /dist/demo
 /dist/lib/*.js.map
 .babelrc

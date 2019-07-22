@@ -41,7 +41,6 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
-    "@byhealth/lottery": "^1.0.2",
     "@byhealth/walle": "^1.0.3",
     "autoprefix": "^1.0.1",
     "babel-polyfill": "^6.26.0",
