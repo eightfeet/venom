@@ -55,14 +55,14 @@ class Game {
 		this.prizes = prizes;
 		this.GameTheme = style.GameTheme;
 		this.parentId         = parentId;
-		this.game = new Core({...config,
+		this.core = new Core({...config,
 			onCancel: this.onCancel(onCancel),
 			onEnsure: this.onEnsure(onEnsure),
 			lottery: this.lottery,
 			saveAddress: this.onSaveAddress(saveAddress),
 			targetId: this.targetId});
-		this.Loading = this.game.Loading;
-		this.distory = this.game.distory;
+		this.Loading = this.core.Loading;
+		this.distory = this.core.distory;
 		this.renderGame();
 		this.activeElements = null;
 	}
@@ -98,7 +98,7 @@ class Game {
 					element.style.top = `${itemPosition[index][0] === 1 ? 0 : stepY*2}%`;
 					element.children[0].onclick = () => {
 						this.activeElements = index;
-						return this.game.lottery();
+						return this.core.lottery();
 					};
 				}
 			});

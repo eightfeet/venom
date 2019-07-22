@@ -23,12 +23,12 @@ class Game {
 		this.prizes = supplementingData(prizes, this.prizesLength);
 		this.GameTheme = style.GameTheme;
 		this.parentId         = parentId;
-		this.game = new Core({...config,
+		this.core = new Core({...config,
 			targetId: this.targetId,
 			lottery: this.lottery
 		});
-		this.Loading = this.game.Loading;
-		this.distory = this.game.distory;
+		this.Loading = this.core.Loading;
+		this.distory = this.core.distory;
 		this.renderGame();
 		// 历史位置
 		this.historyPrizeInd = 0;
@@ -56,7 +56,7 @@ class Game {
 				const target = document.getElementById(this.targetId);
 				const lotterybtn = target.querySelector(`.${s.lotterybutton}`);
 				lotterybtn.onclick = e => {
-					return this.game.lottery(e);
+					return this.core.lottery(e);
 				};
 			});
 	}

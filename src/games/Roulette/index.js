@@ -22,11 +22,11 @@ class Game {
 		this.prizes = prizes;
 		this.GameTheme = style.GameTheme;
 		this.parentId         = parentId;
-		this.game = new Core({...config,
+		this.core = new Core({...config,
 			lottery: this.lottery,
 			targetId: this.targetId});
-		this.Loading = this.game.Loading;
-		this.distory = this.game.distory;
+		this.Loading = this.core.Loading;
+		this.distory = this.core.distory;
 		this.oldDge           = 0;
 		this.renderGame();
 		this.activeElements = null;
@@ -57,7 +57,7 @@ class Game {
 				const lotterybtn = target.querySelector(`.${s.lotterybutton}`);
 				lotterybtn.onclick = (e) => {
 					e.preventDefault();
-					return this.game.lottery();
+					return this.core.lottery();
 				};
 			});
 	}
