@@ -10,7 +10,7 @@ const configs = require("./tools/webpacksettes");
 
 const DefinePlugin = webpack.DefinePlugin;
 
-let cdn = process.env.PUBLIC_PATH || './';
+let cdn = process.env.PUBLIC_PATH || '/';
 
 const evn = process.env.UAT_ENV;
 const isUat = evn === 'uat' ? true : false;
@@ -212,8 +212,8 @@ module.exports = (env, argv) => ({
 			__UIWIDTH__: JSON.stringify(sassVars.width)
 		}),
 		new CopyWebpackPlugin([
-			{ from: './src/data', to: './demo/data' },
-			{ from: './src/assets', to: './demo/assets' }
+			{ from: './src/data', to: './data' },
+			{ from: './src/assets', to: './assets' }
 		]),
 		new CreateFileWebpack({
 			path: './dist',
