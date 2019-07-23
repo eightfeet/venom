@@ -23,8 +23,6 @@ const Arr = {
 	5: [[1,0],[1,2],[1,4],[2,1],[2,3]],
 	6: [[1,0],[1,2],[1,4],[2,0],[2,2],[2,4]]
 };
-let timer = null;
-let timerB = null;
 
 let oldStyle = null;
 
@@ -51,7 +49,11 @@ class Game {
 	constructor(config){
 		const { style, prizes, targetId, parentId, onCancel, onEnsure, saveAddress } = config;
 		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
-		
+		this.timer = {
+			timerDelay: null,
+			timer: null,
+			timerB: null
+		};
 		this.prizes = prizes;
 		this.GameTheme = style.GameTheme;
 		this.parentId         = parentId;
@@ -63,7 +65,22 @@ class Game {
 			targetId: this.targetId});
 		this.Loading = this.core.Loading;
 		this.distory = this.core.distory;
-		this.renderGame();
+		this.renderGame()
+			.then(() => new Promise(resolve => {
+				this.core.lotteryDrawing = true;
+				this.distributePrize();
+				this.flipAll(180);
+				window.clearTimeout(this.timer.timerDelay);
+				this.timer.timerDelay = setTimeout(() => {
+					console.log(1, this.targetId);
+					this.flipAll(0);
+					resolve();
+				}, 3000);
+			}))
+			.then(() => {
+				this.reset();
+				this.core.lotteryDrawing = false;
+			});
 		this.activeElements = null;
 	}
 
@@ -150,14 +167,18 @@ class Game {
 	 */
 	distributePrize = (target, prize) => {
 		const { prizeImage, prizeTitle, cardSelected } = this.GameTheme;
-		const flipIndex = parseInt(target.getAttribute('data-index'), 10);
-		// 1、奖品组中过滤掉已中奖品
-		let newPrizeArr = this.prizes.filter((item) => item.prizeId !== prize.prizeId);
-		// 2、洗牌取出的奖品
-		newPrizeArr = KdShuffle(newPrizeArr);
-		// 3、在索引位置（对应target所在Dom中的索引位）插入所中奖品，
-		newPrizeArr.splice(flipIndex, 0, prize);
-		// 4、将新排位的奖品结果写入Dom
+		const flipIndex = target ? parseInt(target.getAttribute('data-index'), 10) : -1;
+		
+		let newPrizeArr = this.prizes;
+		if (prize) {
+			// 1、奖品组中过滤掉已中奖品
+			newPrizeArr = this.prizes.filter((item) => item.prizeId !== prize.prizeId);
+			// 2、洗牌取出的奖品
+			newPrizeArr = KdShuffle(newPrizeArr);
+			// 3、在索引位置（对应target所在Dom中的索引位）插入所中奖品，
+			newPrizeArr.splice(flipIndex, 0, prize);
+			// 4、将新排位的奖品结果写入Dom
+		}
 
 		const game = document.getElementById(this.targetId);
 		for (let index = 0; index < newPrizeArr.length; index++) {
@@ -170,9 +191,12 @@ class Game {
 				${element.prizeAlias}
 			</div>`;
 		}
-		const prizeDom = target.querySelector(`.${s.back}`);
-		oldStyle = prizeDom.getAttribute('style');
-		prizeDom.setAttribute('style', `${oldStyle}; ${cardSelected && inlineStyle(cardSelected)}`);
+
+		if (target) {
+			const prizeDom = target.querySelector(`.${s.back}`);
+			oldStyle = prizeDom.getAttribute('style');
+			prizeDom.setAttribute('style', `${oldStyle}; ${cardSelected && inlineStyle(cardSelected)}`);
+		}
 	}
 
 	/**
@@ -221,8 +245,8 @@ class Game {
 		const target = document.getElementById(this.targetId);
 		const items = target.querySelector(`.${s.wrap}`).children;
 		this.flipAll(0);
-		window.clearTimeout(timer);
-		timer = setTimeout(() => {
+		window.clearTimeout(this.timer.timer);
+		this.timer.timer = setTimeout(() => {
 			for (let index = 0; index < items.length; index++) {
 				const element = items[index];
 				element.style.left = null;
@@ -230,8 +254,8 @@ class Game {
 			}
 		}, 200);
 		
-		window.clearTimeout(timerB);
-		timerB = setTimeout(() => {
+		window.clearTimeout(this.timer.timerB);
+		this.timer.timerB = setTimeout(() => {
 			this.lotteryDrawing = false;
 			for (let index = 0; index < items.length; index++) {
 				const element = items[index];
