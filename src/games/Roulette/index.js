@@ -73,7 +73,6 @@ class Game {
 	 * @memberof Game
 	 */
 	lottery = (prize, time, round) => {
-		console.log(prize, time, round);
 		const { prizeId } = prize || {};
 		const target = document.getElementById(this.targetId);
 		const wheel = target.querySelector(`.${s.lottery}`);
