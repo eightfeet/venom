@@ -90,12 +90,12 @@ class Game {
 	 * @memberof Game
 	 */
 	renderGame = () => {
-		const prizesLength = this.prizes.length;
+		const prizesLength = this.prizes.length > 6 ? 6 : this.prizes.length;
 		const itemPosition = Arr[prizesLength];
 		return createDom(
 			renderGame(
 				this.GameTheme,
-				this.prizes
+				(this.prizes.length > 6 ? this.prizes.slice(0, 6) : this.prizes)
 			),
 			this.targetId,
 			this.parentId,
@@ -111,12 +111,14 @@ class Game {
 				const items = target.querySelector(`.${s.wrap}`).children;
 				for (let index = 0; index < items.length; index++) {
 					const element = items[index];
-					element.style.left = `${itemPosition[index][1]*stepX}%`;
-					element.style.top = `${itemPosition[index][0] === 1 ? 0 : stepY*2}%`;
-					element.children[0].onclick = () => {
-						this.activeElements = index;
-						return this.core.lottery();
-					};
+					if (element) {
+						element.style.left = `${itemPosition[index][1]*stepX}%`;
+						element.style.top = `${itemPosition[index][0] === 1 ? 0 : stepY*2}%`;
+						element.children[0].onclick = () => {
+							this.activeElements = index;
+							return this.core.lottery();
+						};
+					}
 				}
 			});
 	}
@@ -181,7 +183,8 @@ class Game {
 		}
 
 		const game = document.getElementById(this.targetId);
-		for (let index = 0; index < newPrizeArr.length; index++) {
+		const length = newPrizeArr.length > 6 ? 6 : newPrizeArr.length;
+		for (let index = 0; index < length; index++) {
 			const element = newPrizeArr[index];
 			game.querySelector(`.${s.wrap}`).children[index].querySelector(`.${s.back}`).innerHTML =
 			`<div style="${prizeImage && inlineStyle(prizeImage)}">
@@ -240,7 +243,7 @@ class Game {
 	 * @memberof Game
 	 */
 	reset = () => {
-		const prizesLength = this.prizes.length;
+		const prizesLength = this.prizes.length > 6 ? 6 : this.prizes.length;
 		const itemPosition = Arr[prizesLength];
 		const target = document.getElementById(this.targetId);
 		const items = target.querySelector(`.${s.wrap}`).children;
