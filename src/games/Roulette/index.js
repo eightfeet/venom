@@ -16,9 +16,9 @@ const stamp = (new Date()).getTime();
 
 class Game {
 	constructor(config){
-		const { style, prizes, targetId, parentId } = config;
+		const { style, prizes, targetId, parentId, emBase } = config;
 		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
-		
+		this.emBase = emBase;
 		this.prizes = prizes;
 		this.GameTheme = style.GameTheme;
 		this.parentId         = parentId;
