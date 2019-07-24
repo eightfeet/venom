@@ -131,13 +131,13 @@ window.prizes1 =[
     "memo": "该奖品由汤臣倍健药业有限公司统一提供！"
   },
   {
-    "prizeId": 6,
+    "prizeId": 12,
     "prizeType": 1,
     "receiveType": 2,
-    "prizeAlias": "六等奖",
-    "prizeName": "六等奖",
+    "prizeAlias": "多余测试奖",
+    "prizeName": "多余测试奖",
     "status": 1,
-    "awardMsg": "亲！恭喜您获得六等奖！",
+    "awardMsg": "亲！恭喜您获得多余测试奖！",
     "prizeImg": "http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190722232236169.png",
     "gameImg": "http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190722232815048.png",
     "memo": "该奖品由汤臣倍健药业有限公司统一提供！"
