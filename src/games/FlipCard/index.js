@@ -73,7 +73,6 @@ class Game {
 				this.flipAll(180);
 				window.clearTimeout(this.timer.timerDelay);
 				this.timer.timerDelay = setTimeout(() => {
-					console.log(1, this.targetId);
 					this.flipAll(0);
 					resolve();
 				}, 3000);
