@@ -24,6 +24,21 @@ function renderModify(modify){
 	return modifyDom;
 }
 
+function renderGameInfo(style, prizes) {
+
+	let dom = '';
+
+	for (let index = 0; index < prizes.length; index++) {
+		const element = prizes[index];
+		dom += `<div class="${s.infoItem}">
+			<img src="${element.prizeImg}" />
+			<div>${element.prizeAlias}</div>
+		</div>`;
+	}
+
+	return `<div class="${s.gameinfo}">${dom}</div>`;
+}
+
 /**
  *
  * 创建游戏主体
@@ -101,6 +116,7 @@ export function renderGame(style, prizes) {
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
+	${renderGameInfo(style, prizes)}
 	<div class="${s.lottery}">
 		${dom}
 	</div> 

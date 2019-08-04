@@ -8,29 +8,6 @@
     height: 100%;
     // overflow: hidden;
     position: relative;
-
-    .needle,
-    .lotterybutton {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-    }
-
-    .needle {
-        width: 25%;
-        height: 25%;
-        margin-top: -12.5%;
-        margin-left: -12.5%;
-        z-index: 12;
-    }
-
-    .lotterybutton {
-        width: 30%;
-        height: 30%;
-        margin-top: -15%;
-        margin-left: -15%;
-        z-index: 13;
-    }
 }
 
 .modifywrap {
@@ -225,5 +202,25 @@
 
     100% {
         transform: translate3d(0px, 0px, 0px)
+    }
+}
+
+.gameinfo {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    background-color: #ccc;
+    z-index: 12;
+
+    .infoItem {
+        float: left;
+        position: relative;
+        width: 33%;
+        text-align: center;
+
+        img {
+            height: 80%;
+            width: 80%;
+        }
     }
 }
