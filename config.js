@@ -14,4 +14,9 @@ module.exports = [{
 	path: './src/games/FlipCard/index.js',
 	templatename: '翻牌',
 	template: './src/example/flipcard.ejs'
+},{
+	name: 'dice',
+	path: './src/games/Dice/index.js',
+	templatename: '掷骰子',
+	template: './src/example/dice.ejs'
 }];
