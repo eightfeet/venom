@@ -25,6 +25,10 @@ window.themedata1 = {
             backgroundColor:'#fff',
             boxShadow: 'inset 0.2em 0 0.2em rgba(0,0,0,0.1)'
         },
+        "toggleprize": {
+          backgroundColor:'#f00',
+          "borderRadius": "0.64516rem",
+        },
         "modify": [
             {
                 top: "-1em",

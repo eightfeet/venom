@@ -48,7 +48,7 @@ function renderGameInfo(style, prizes) {
  * @returns
  */
 export function renderGame(style, prizes) {
-	const { wrap, modify, gameImg, prizeAlias, dice, side, dot } = style;
+	const { wrap, modify, gameImg, prizeAlias, dice, side, dot, toggleprize } = style;
 
 	const gameImgStyle = inlineStyle(gameImg);
 	const prizeAliasStyle = inlineStyle(prizeAlias);
@@ -56,6 +56,7 @@ export function renderGame(style, prizes) {
 	const diceStyle = inlineStyle(dice);
 	const sideStyle = inlineStyle(side);
 	const dotStyle = inlineStyle(dot);
+	const toggleprizeStyle = inlineStyle(toggleprize);
 
 	// const setSize = {
 	// 	transform: `scale(${((dice && dice.size) ? dice.size : '1')},${((dice && dice.size) ? dice.size : '1')})`
@@ -116,7 +117,10 @@ export function renderGame(style, prizes) {
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
-	<div style="display: none">${renderGameInfo(style, prizes)}</div>
+	<div class="${s.toggleprize} ${s.toggleb}" ${toggleprizeStyle ? `style="${toggleprizeStyle}"` : ''}>
+		奖品
+	</div>
+	<div class="${s.prizebox}">${renderGameInfo(style, prizes)}</div>
 	<div class="${s.lottery}">
 		${dom}
 	</div> 

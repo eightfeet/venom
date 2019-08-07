@@ -106,9 +106,21 @@ class Game {
 			.then(() => {
 				const target = document.getElementById(this.targetId);
 				const lotterybtn = target.querySelector(`.${s.dice}`);
+				const showprizebtn = target.querySelector(`.${s.toggleprize}`);
+				const prizebox = target.querySelector(`.${s.prizebox}`);
 				lotterybtn.onclick = (e) => {
 					e.preventDefault();
 					return this.core.lottery();
+				};
+				let showPrize = false;
+				showprizebtn.onclick = () => {
+					if (showPrize) {
+						prizebox.classList.remove(s.showprizebox);
+						showPrize = false;
+					} else {
+						prizebox.classList.add(s.showprizebox);
+						showPrize = true;
+					}
 				};
 			});
 	}
@@ -149,11 +161,6 @@ class Game {
 			platformEle.classList.remove(s.playing);
 			platformEle.classList.add(s.stop);
 			let x = 0, y = 20, z = -20;
-
-
-			console.log('this.prizes', this.prizes);
-			console.log('prize是', prize);
-			console.log('prizeId', prize.prizeId);
 			switch (prizeIndex){
 				case 1:
 					x = 0; y = 20; z = -20;

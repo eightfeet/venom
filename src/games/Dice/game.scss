@@ -224,3 +224,57 @@
         }
     }
 }
+
+.toggleprize {
+    width: 2em;
+    height: 2em;
+    z-index: 31;
+    position: absolute;
+    right: 0;
+    animation: breathe 10s infinite 0s;
+}
+
+@keyframes breathe {
+    0% {
+        transform: rotate(0deg);
+    }
+    5% {
+        transform: rotate(-20deg);
+    }
+    10% {
+        transform: rotate(0deg);
+    }
+    15% {
+        transform: rotate(20deg);
+    }
+    20% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-20deg);
+    }
+    30% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.prizebox {
+    position: absolute;
+    visibility: hidden;
+    width: 100%;
+    top: 2em;
+    right: 0;
+    z-index: 30;
+    opacity: 0;
+    font-weight: normal;
+    transition-property: all;
+    transition-duration: 0.3s;
+}
+
+.prizebox.showprizebox {
+    visibility: visible;
+    opacity: 1;
+}
