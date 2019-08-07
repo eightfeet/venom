@@ -37,12 +37,12 @@
     text-align: center;
 
     .platform.playing>.dice {
-        animation-duration: 1s;
+        animation-duration: 0.5s;
     }
 
     .platform.playing {
         transform-style: preserve-3d;
-        animation: roll 1s linear;
+        animation: roll 0.5s linear;
     }
 
     .platform.stop>.dice,

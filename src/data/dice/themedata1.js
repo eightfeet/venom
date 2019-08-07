@@ -12,8 +12,8 @@ window.themedata1 = {
             "fontSize": "normal"
         },
         "dice": {
-          "width": '4em',
-          "height": '4em',
+          "width": '13em',
+          "height": '13em',
           "left": '3em',
           top: '3em'
         },

@@ -116,7 +116,7 @@ export function renderGame(style, prizes) {
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
-	${renderGameInfo(style, prizes)}
+	<div style="display: none">${renderGameInfo(style, prizes)}</div>
 	<div class="${s.lottery}">
 		${dom}
 	</div> 

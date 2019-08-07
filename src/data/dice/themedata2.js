@@ -20,17 +20,6 @@ window.themedata2 = {
             boxShadow: 'inset 5px 0 10px #eee'
         },
         "modify": [
-            {
-                "top": "-2.56em",
-                "left": "-2.56em",
-                "backgroundImage": "url(http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190418143131266.png)",
-                "backgroundPosition":"center center",
-                "backgroundRepeat":"no-repeat",
-                "backgroundSize":"100% 100%",
-                "width": "22.56em",
-                "height": "22.56em"
-            }
-              
         ]
     },
     "FailedModalTheme": {
