@@ -1,3 +1,52 @@
+@font-face {
+    font-family: 'dice';
+    src:  url('./fonts/dice.eot?7oj4ak');
+    src:  url('./fonts/dice.eot?7oj4ak#iefix') format('embedded-opentype'),
+      url('./fonts/dice.ttf?7oj4ak') format('truetype'),
+      url('./fonts/dice.woff?7oj4ak') format('woff'),
+      url('./fonts/dice.svg?7oj4ak#dice') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+.diceicon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'dice' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-dice-6:before {
+    content: "\e900";
+  }
+  .icon-dice-5:before {
+    content: "\e901";
+  }
+  .icon-dice-4:before {
+    content: "\e902";
+  }
+  .icon-dice-3:before {
+    content: "\e903";
+  }
+  .icon-dice-2:before {
+    content: "\e904";
+  }
+  .icon-dice-1:before {
+    content: "\e905";
+  }
+  
+
+
+
 .target {
     width: 100%;
     height: 100%;
@@ -209,7 +258,7 @@
     position: absolute;
     right: 0;
     width: 100%;
-    background-color: #ccc;
+    height: 100%;
     z-index: 12;
 
     .infoItem {
@@ -217,9 +266,9 @@
         position: relative;
         width: 33%;
         text-align: center;
-
+        height: 48%;
+        margin-bottom: 2%;
         img {
-            height: 80%;
             width: 80%;
         }
     }
@@ -228,53 +277,89 @@
 .toggleprize {
     width: 2em;
     height: 2em;
-    z-index: 31;
+    z-index: 9;
     position: absolute;
     right: 0;
-    animation: breathe 10s infinite 0s;
+    animation: shake 6s infinite 0s;
 }
 
-@keyframes breathe {
+@keyframes shake {
     0% {
         transform: rotate(0deg);
     }
-    5% {
-        transform: rotate(-20deg);
-    }
-    10% {
-        transform: rotate(0deg);
-    }
-    15% {
+    1% {
         transform: rotate(20deg);
     }
-    20% {
-        transform: rotate(0deg);
-    }
-    25% {
+    3% {
         transform: rotate(-20deg);
     }
-    30% {
+    5% {
+        transform: rotate(16deg);
+    }
+    7% {
+        transform: rotate(-16deg);
+    }
+    9% {
+        transform: rotate(12deg);
+    }
+    11% {
+        transform: rotate(-12deg);
+    }
+    13% {
+        transform: rotate(8deg);
+    }
+    15% {
+        transform: rotate(-8deg);
+    }
+    17% {
+        transform: rotate(4deg);
+    }
+    19% {
+        transform: rotate(-4deg);
+    }
+    21% {
         transform: rotate(0deg);
     }
     100% {
         transform: rotate(0deg);
     }
 }
-
-.prizebox {
+.prizeswrap {
     position: absolute;
     visibility: hidden;
+    transform: translate3d(0, 0, 100px);
+    background-color: #fff;
     width: 100%;
-    top: 2em;
+    height: 100%;
+    top: 0;
     right: 0;
-    z-index: 30;
+    z-index: 10;
     opacity: 0;
     font-weight: normal;
     transition-property: all;
     transition-duration: 0.3s;
 }
 
-.prizebox.showprizebox {
+.prizeTag {
+    color: #aaa;
+    border-radius: 0.1rem;
+    left: 0;
+    top: 0;
+    font-size: 2rem;
+}
+
+.prizeswrap.showprizes {
     visibility: visible;
     opacity: 1;
+}
+
+.prizeItem {
+    position: relative;
+    width: 95%;
+    height: 100%;
+    margin: 2% auto;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 0.5em;
+    padding: 0.3rem;
 }

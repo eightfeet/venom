@@ -25,14 +25,23 @@ function renderModify(modify){
 }
 
 function renderGameInfo(style, prizes) {
+	const { gameImg, prizeAlias, prizeItem, prizeTag } = style;
+
+	const prizeItemStyle = inlineStyle(prizeItem);
+	const gameImgStyle = inlineStyle(gameImg);
+	const prizeAliasStyle = inlineStyle(prizeAlias);
+	const prizeTagStyle = inlineStyle(prizeTag);
 
 	let dom = '';
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
 		dom += `<div class="${s.infoItem}">
-			<img src="${element.prizeImg}" />
-			<div>${element.prizeAlias}</div>
+			<div class="${s.prizeItem}"  ${prizeItemStyle ? `style="${prizeItemStyle}"` : ''}>
+				<div class="${s.prizeTag} ${s.diceicon} ${s[`icon-dice-${index + 1}`]}" ${prizeTagStyle ? `style="${prizeTagStyle}"` : ''}></div>
+				<img ${gameImgStyle ? `style="${gameImgStyle}"` : ''} src="${element.prizeImg}" />
+				<div ${prizeAliasStyle ? `style="${prizeAliasStyle}"` : ''}>${element.prizeAlias}</div>
+			</div>
 		</div>`;
 	}
 
@@ -48,21 +57,18 @@ function renderGameInfo(style, prizes) {
  * @returns
  */
 export function renderGame(style, prizes) {
-	const { wrap, modify, gameImg, prizeAlias, dice, side, dot, toggleprize } = style;
+	const { wrap, modify, dice, side, dot, showPrizeButton, prizesWrap } = style;
 
-	const gameImgStyle = inlineStyle(gameImg);
-	const prizeAliasStyle = inlineStyle(prizeAlias);
 	const wrapStyle = inlineStyle(wrap);
 	const diceStyle = inlineStyle(dice);
 	const sideStyle = inlineStyle(side);
 	const dotStyle = inlineStyle(dot);
-	const toggleprizeStyle = inlineStyle(toggleprize);
+	const showPrizeButtonStyle = inlineStyle(showPrizeButton);
+	const prizesWrapStyle = inlineStyle(prizesWrap);
 
 	// const setSize = {
 	// 	transform: `scale(${((dice && dice.size) ? dice.size : '1')},${((dice && dice.size) ? dice.size : '1')})`
 	// };
-
-	console.log(gameImgStyle, prizeAliasStyle, prizes);
 
 	let dom = `
 	<div class="${s.ui_dado}">
@@ -117,10 +123,10 @@ export function renderGame(style, prizes) {
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
-	<div class="${s.toggleprize} ${s.toggleb}" ${toggleprizeStyle ? `style="${toggleprizeStyle}"` : ''}>
+	<div class="${s.toggleprize} ${s.toggleb}" ${showPrizeButtonStyle ? `style="${showPrizeButtonStyle}"` : ''}>
 		奖品
 	</div>
-	<div class="${s.prizebox}">${renderGameInfo(style, prizes)}</div>
+	<div class="${s.prizeswrap}" ${prizesWrapStyle ? `style="${prizesWrapStyle}"` : ''}>${renderGameInfo(style, prizes)}</div>
 	<div class="${s.lottery}">
 		${dom}
 	</div> 

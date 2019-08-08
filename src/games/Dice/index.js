@@ -107,20 +107,28 @@ class Game {
 				const target = document.getElementById(this.targetId);
 				const lotterybtn = target.querySelector(`.${s.dice}`);
 				const showprizebtn = target.querySelector(`.${s.toggleprize}`);
-				const prizebox = target.querySelector(`.${s.prizebox}`);
+				const prizeswrap = target.querySelector(`.${s.prizeswrap}`);
 				lotterybtn.onclick = (e) => {
 					e.preventDefault();
 					return this.core.lottery();
 				};
 				let showPrize = false;
-				showprizebtn.onclick = () => {
+				const toggle = () => {
 					if (showPrize) {
-						prizebox.classList.remove(s.showprizebox);
+						prizeswrap.classList.remove(s.showprizes);
+						showprizebtn.style.display = 'block';
 						showPrize = false;
 					} else {
-						prizebox.classList.add(s.showprizebox);
+						prizeswrap.classList.add(s.showprizes);
+						showprizebtn.style.display = 'none';
 						showPrize = true;
 					}
+				};
+				showprizebtn.onclick = () => {
+					toggle();
+				};
+				prizeswrap.onclick = () => {
+					toggle();
 				};
 			});
 	}

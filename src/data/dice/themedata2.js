@@ -2,7 +2,6 @@
 window.themedata2 = {
     "GameTheme": {
         "wrap": {
-            "zIndex": 10
         },
         "gameImg": {
             "fontSize": "normal",
