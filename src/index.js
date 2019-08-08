@@ -10,5 +10,3 @@ for (let index = 1; index < data.length; index++) {
 dom += '</ul>';
 
 document.getElementById('app').innerHTML = dom;
-
-console.log('dom', dom);
