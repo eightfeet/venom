@@ -1,0 +1,156 @@
+
+.target {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.wrap {
+    height: 100%;
+    // overflow: hidden;
+    position: relative;
+}
+
+.modifywrap {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    .modify {
+        position: absolute;
+        top: 0;
+    }
+}
+
+.lottery {
+    width: 100%;
+    height: 100%;
+    // overflow: hidden;
+    position: relative;
+}
+
+.slotboard {
+    width: 100%; /* no */
+    height: 100%; /* no */
+    position: relative;
+    overflow: hidden;
+}
+
+.outwrap {
+    position: relative;
+    transform: translate3d(0, -90%, 0);
+  }
+
+.slotwrap {
+
+}
+
+.gameinfo {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 12;
+
+    .infoItem {
+        float: left;
+        position: relative;
+        width: 33%;
+        text-align: center;
+        height: 48%;
+        margin-bottom: 2%;
+        img {
+            width: 80%;
+        }
+    }
+}
+
+.toggleprize {
+    width: 2em;
+    height: 2em;
+    z-index: 9;
+    position: absolute;
+    right: 0;
+    animation: shake 6s infinite 0s;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+    1% {
+        transform: rotate(20deg);
+    }
+    3% {
+        transform: rotate(-20deg);
+    }
+    5% {
+        transform: rotate(16deg);
+    }
+    7% {
+        transform: rotate(-16deg);
+    }
+    9% {
+        transform: rotate(12deg);
+    }
+    11% {
+        transform: rotate(-12deg);
+    }
+    13% {
+        transform: rotate(8deg);
+    }
+    15% {
+        transform: rotate(-8deg);
+    }
+    17% {
+        transform: rotate(4deg);
+    }
+    19% {
+        transform: rotate(-4deg);
+    }
+    21% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+.prizeswrap {
+    position: absolute;
+    visibility: hidden;
+    transform: translate3d(0, 0, 100px);
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    opacity: 0;
+    font-weight: normal;
+    transition-property: all;
+    transition-duration: 0.3s;
+}
+
+.prizeTag {
+    color: #aaa;
+    border-radius: 0.1rem;
+    left: 0;
+    top: 0;
+    font-size: 2rem;
+}
+
+.prizeswrap.showprizes {
+    visibility: visible;
+    opacity: 1;
+}
+
+.prizeItem {
+    position: relative;
+    width: 95%;
+    height: 100%;
+    margin: 2% auto;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 0.5em;
+    padding: 0.3rem;
+}

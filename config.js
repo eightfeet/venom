@@ -23,4 +23,9 @@ module.exports = [{
 	path: './src/games/Dice/index.js',
 	templatename: '掷骰子',
 	template: './src/example/dice.ejs'
+},{
+	name: 'slotmachine',
+	path: './src/games/SlotMachine/index.js',
+	templatename: '老虎机',
+	template: './src/example/slotmachine.ejs'
 }];
