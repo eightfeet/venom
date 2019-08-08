@@ -2,7 +2,7 @@
 window.themedata1 = {
   "GameTheme": {
     "wrap": {
-      "backgroundColor": "yellow"
+      "backgroundColor": "#efefef"
     },
     "prizesWrap": {
       "backgroundColor": "rgba(0, 0, 0, 0)"

@@ -1,11 +1,14 @@
-import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory } from '@byhealth/walle';
-const { inlineStyle } = htmlFactory;
-import Game from './modules/Game';
+import data from "../config";
 
+let dom = `<h1>CATEGORY</h1><ul>`;
 
-if (window.Promise === undefined) {
-	throw new Error('Promise pollyfill not found.');
+for (let index = 1; index < data.length; index++) {
+	const element = data[index];
+	dom += `<li><h3><a href="./${element.name}.html">${element.templatename}</a></h3></li>`;
 }
 
-module.exports = {Game, NoticeModal, Loading, validate, Message, Modal, AddressModal, inlineStyle};
+dom += '</ul>';
 
+document.getElementById('app').innerHTML = dom;
+
+console.log('dom', dom);

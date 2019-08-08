@@ -1,7 +1,11 @@
 module.exports = [{
+	name: 'index',
+	path: './src/index',
+	templatename: 'VENOM-DEMO',
+	template: './src/example/index.ejs'
+},{
 	name: 'roulette',
 	path: './src/games/Roulette/index.js',
-	filename: 'index.html',
 	templatename: '大转盘',
 	template: './src/example/roulette.ejs'
 },{
