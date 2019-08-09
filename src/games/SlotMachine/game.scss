@@ -36,15 +36,6 @@
     overflow: hidden;
 }
 
-.outwrap {
-    position: relative;
-    transform: translate3d(0, -90%, 0);
-  }
-
-.slotwrap {
-
-}
-
 .gameinfo {
     position: absolute;
     right: 0;
@@ -153,4 +144,80 @@
     background-color: #fff;
     border-radius: 0.5em;
     padding: 0.3rem;
+}
+
+.outwrap {
+    position: relative;
+    transform: translate3d(0, -90%, 0);
+  }
+
+.item {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.startbtn {
+    width: 135px; /* no */
+    height: 103px; /* no */
+    background-image: url(https://j-image.missfresh.cn/de02a61ad4384ffda88fbc53d2bf10dd_1551362449956.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    border: none;
+    background-color: transparent;
+    background-size: 100%;
+    position: absolute;
+    left: 78px; /* no */
+    bottom: 62px; /* no */
+    font-size: 0;
+}
+
+.slotwrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.outwrapslot {
+    animation: slotout 1.3s cubic-bezier(1, 0.06, 1, 0.44) 1;
+}
+  
+.outwrapslot .slotwrap {
+    animation: slot 0.3s 1.3s linear infinite;
+}
+
+.numwrapspin{
+    position: relative;
+    animation:shakeb ease-out 1s 1;
+}
+
+@keyframes shakeb {
+    0% {
+      transform: translate3d(0, -5%, 0);
+    }
+    80% {
+      transform: translate3d(0, 1%, 0);
+    }
+    100% {
+      transform: translate3d(0, 0%, 0);
+    }
+  }
+
+@keyframes slotout {
+    0% {
+      transform: translate3d(0, -90%, 0);
+    }
+    100% {
+      transform: translate3d(0, 0%, 0);
+    }
+}
+@keyframes slot {
+    0% {
+      transform: translate3d(0, 100%, 0);
+    }
+    100% {
+      transform: translate3d(0, 0%, 0);
+    }
 }

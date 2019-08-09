@@ -16,19 +16,21 @@ const stamp = (new Date()).getTime();
 let timer = null;
 
 class Game {
-	constructor(config){
+	constructor(config) {
 		const { style, prizes, targetId, parentId, emBase } = config;
 		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
 		this.emBase = emBase;
 		this.prizes = prizes;
 		this.GameTheme = style.GameTheme;
-		this.parentId         = parentId;
-		this.core = new Core({...config,
+		this.parentId = parentId;
+		this.core = new Core({
+			...config,
 			lottery: this.lottery,
-			targetId: this.targetId});
+			targetId: this.targetId
+		});
 		this.Loading = this.core.Loading;
 		this.distory = this.core.distory;
-		this.oldDge           = 0;
+		this.oldDge = 0;
 		this.renderGame();
 		this.activeElements = null;
 	}
@@ -64,6 +66,8 @@ class Game {
 				// const lotterybtn = target.querySelector(`.${s.dice}`);
 				const showprizebtn = target.querySelector(`.${s.toggleprize}`);
 				const prizeswrap = target.querySelector(`.${s.prizeswrap}`);
+				const startbtn = target.querySelector(`.${s.startbtn}`);
+
 				// lotterybtn.onclick = (e) => {
 				// 	e.preventDefault();
 				// 	return this.core.lottery();
@@ -86,7 +90,47 @@ class Game {
 				prizeswrap.onclick = () => {
 					toggle();
 				};
+				startbtn.onclick = () => {
+					this.start(3);
+				};
 			});
+	}
+
+
+	stopMachine = (score) => {
+		let num = ("000" + score).slice(-3);
+		let nums = num.toString().split("");
+
+		const target = document.getElementById(this.targetId);
+		const targetHeight = target.offsetHeight;
+
+		const numOutWrapEl = target.querySelector(`.${s.outwrap}`);
+		const numWrapEl = target.querySelector(`.${s.slotwrap}`);
+
+
+
+		setTimeout(() => {
+			numOutWrapEl.classList.remove(s.outwrapslot);
+			numWrapEl.style.top = `${score * targetHeight}px`;
+			numWrapEl.classList.add(s.numwrapspin);
+		}, 800);
+	}
+
+	startMachine = () => {
+		const target = document.getElementById(this.targetId);
+		const numOutWrapEl = target.querySelector(`.${s.outwrap}`);
+		// const numWrapEl = target.querySelector(`.${s.slotwrap}`);
+		setTimeout(() => {
+			numOutWrapEl.classList.add(s.outwrapslot);
+		}, 800);
+	}
+
+
+	start = (prize) => {
+		this.startMachine();
+		setTimeout(() => {
+			this.stopMachine(prize);
+		}, 5000);
 	}
 
 
@@ -121,4 +165,4 @@ class Game {
 
 }
 
-module.exports = {Game, NoticeModal, Loading, validate, Message, Modal, AddressModal, inlineStyle};
+module.exports = { Game, NoticeModal, Loading, validate, Message, Modal, AddressModal, inlineStyle };

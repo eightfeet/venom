@@ -48,6 +48,17 @@ function renderGameInfo(style, prizes) {
 	return `<div class="${s.gameinfo}">${dom}</div>`;
 }
 
+function renderGamePrize(style, prizes) {
+	let dom = '';
+
+	for (let index = 0; index < prizes.length; index++) {
+		const element = prizes[index];
+		dom += `<div class="${s.item}" style="height:${(1/prizes.length)*100}%">${index}<img src="${element.gameImg}" /></div>`;
+	}
+
+	return dom;
+}
+
 /**
  *
  * 创建游戏主体
@@ -67,13 +78,21 @@ export function renderGame(style, prizes) {
 	// 	transform: `scale(${((dice && dice.size) ? dice.size : '1')},${((dice && dice.size) ? dice.size : '1')})`
 	// };
 
-	let dom = `
-	<div class="${s.slotboard}">
-		<div class="${s.outwrap}">
-			老虎机
-		</div>
-	</div>
-	`;
+	// <div class="slot-machine">
+	// 	<div class="slot-machine-container">
+	// 		<!-- slot -->
+	// 		<div id="slotBoard" class="slot-board">
+	// 			<div class="board-item">
+	// 				<div class="num-out-wrap">
+	// 					<div class="num-wrap">
+	// 					</div>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 		<!-- start button -->
+	// 		<button onclick="start()" class="start-btn">开始游戏</button>
+	// 	</div>
+	// </div>
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
@@ -82,7 +101,15 @@ export function renderGame(style, prizes) {
 	</div>
 	<div class="${s.prizeswrap}" ${prizesWrapStyle ? `style="${prizesWrapStyle}"` : ''}>${renderGameInfo(style, prizes)}</div>
 	<div class="${s.lottery}">
-		${dom}
+		<div class="${s.slotboard}">
+			<div class="${s.outwrap}">
+				<div class="${s.slotwrap}">
+					${renderGamePrize(style, prizes)}
+				</div>
+			</div>
+		</div>
 	</div> 
-	</div>`;
+	</div>
+	<button onclick="start()" class="${s.startbtn}">开始游戏</button>
+	`;
 }
