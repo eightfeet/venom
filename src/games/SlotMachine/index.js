@@ -5,86 +5,17 @@ if (window.Promise === undefined) {
 import Core from '../Core';
 import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory, tools } from '@byhealth/walle';
 import s from './game.scss';
+import createCss from './createCss';
 
 const { dormancyFor } = tools;
 const { createDom, inlineStyle } = htmlFactory;
 
 import { renderGame } from './template';
+import { from } from 'rxjs';
 
 const stamp = (new Date()).getTime();
 
 let timer = null;
-
-
-//   .num-out-wrap-slot {
-//     animation: slot-out 1.3s cubic-bezier(1, 0.06, 1, 0.44) 1;
-//   }
-  
-//   .num-out-wrap-slot .num-wrap {
-//     animation: slot 0.3s 1.3s linear infinite;
-//   }
-
-//   @keyframes slot-out {
-//     0% {
-//       transform: translate3d(0, -90%, 0);
-//     }
-//     100% {
-//       transform: translate3d(0, 0%, 0);
-//     }
-//   }
-//   @keyframes slot {
-//     0% {
-//       transform: translate3d(0, 100%, 0);
-//     }
-//     100% {
-//       transform: translate3d(0, 0%, 0);
-//     }
-//   }
-
-const runkeyfremas = function(y, id) {
-	if (document.getElementById('slotrunninganimation')) {
-		return;
-	}
-
-	let stylecontent =  `@keyframes slot-out${id} {
-		0% {
-			-webkit-transform: translate3d(0, ${y}px, 0);
-			transform: translate3d(0, ${y}px, 0);
-		}
-		100% {
-			-webkit-transform: translate3d(0, 0%, 0);
-			transform: translate3d(0, 0%, 0);
-		}
-	}`;
-
-	stylecontent += `@keyframes slot${id} {
-		0% {
-			-webkit-transform: translate3d(0, 100%, 0);
-			transform: translate3d(0, 100%, 0);
-		}
-		100% {
-			-webkit-transform: translate3d(0, 0%, 0);
-			transform: translate3d(0, 0%, 0);
-		}
-	}`;
-
-	stylecontent += `.${s.outslotwrap} {
-		animation: slot-out${id} 1.3s cubic-bezier(1, 0.06, 1, 0.44) 1;
-	}`;
-
-	stylecontent += `.${s.outslotwrap} .${s.slotwrap} {
-		animation: slot${id} 0.3s 1.3s linear infinite;
-	}`;
-	
-	const style = document.createElement('style');
-	style.id = 'slotrunninganimation';
-	// 设置style属性
-	style.type = 'text/css';
-
-	style.innerHTML = stylecontent;
-
-	document.getElementsByTagName('head')[0].appendChild(style);
-};
 
 class Game {
 	constructor(config) {
@@ -133,7 +64,7 @@ class Game {
 				const startbtn = target.querySelector(`.${s.startbtn}`);
 				const targetHeight = target.offsetHeight;
 
-				runkeyfremas(-1 * targetHeight * (this.prizes.length - 1), this.targetId);
+				createCss(targetHeight, this.prizes, this.targetId);
 
 				// lotterybtn.onclick = (e) => {
 				// 	e.preventDefault();
