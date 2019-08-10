@@ -53,7 +53,7 @@ function renderGamePrize(style, prizes) {
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
-		dom += `<div class="${s.item}" style="height:${(1/prizes.length)*100}%">${index}<img src="${element.gameImg}" /></div>`;
+		dom += `<div class="${s.item}" style="height:${(1/prizes.length)*100}%; background-color: #${window.Math.floor(window.Math.random() * 10)}F${window.Math.floor(window.Math.random() * 10)}F${window.Math.floor(window.Math.random() * 10)}F"><span style="position: absoluet; top:0">${index}</span><img src="${element.gameImg}" /></div>`;
 	}
 
 	return dom;

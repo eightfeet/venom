@@ -15,6 +15,77 @@ const stamp = (new Date()).getTime();
 
 let timer = null;
 
+
+//   .num-out-wrap-slot {
+//     animation: slot-out 1.3s cubic-bezier(1, 0.06, 1, 0.44) 1;
+//   }
+  
+//   .num-out-wrap-slot .num-wrap {
+//     animation: slot 0.3s 1.3s linear infinite;
+//   }
+
+//   @keyframes slot-out {
+//     0% {
+//       transform: translate3d(0, -90%, 0);
+//     }
+//     100% {
+//       transform: translate3d(0, 0%, 0);
+//     }
+//   }
+//   @keyframes slot {
+//     0% {
+//       transform: translate3d(0, 100%, 0);
+//     }
+//     100% {
+//       transform: translate3d(0, 0%, 0);
+//     }
+//   }
+
+const runkeyfremas = function(y, id) {
+	if (document.getElementById('slotrunninganimation')) {
+		return;
+	}
+
+	let stylecontent =  `@keyframes slot-out${id} {
+		0% {
+			-webkit-transform: translate3d(0, ${y}px, 0);
+			transform: translate3d(0, ${y}px, 0);
+		}
+		100% {
+			-webkit-transform: translate3d(0, 0%, 0);
+			transform: translate3d(0, 0%, 0);
+		}
+	}`;
+
+	stylecontent += `@keyframes slot${id} {
+		0% {
+			-webkit-transform: translate3d(0, 100%, 0);
+			transform: translate3d(0, 100%, 0);
+		}
+		100% {
+			-webkit-transform: translate3d(0, 0%, 0);
+			transform: translate3d(0, 0%, 0);
+		}
+	}`;
+
+	stylecontent += `.${s.outslotwrap} {
+		animation: slot-out${id} 1.3s cubic-bezier(1, 0.06, 1, 0.44) 1;
+	}`;
+
+	stylecontent += `.${s.outslotwrap} .${s.slotwrap} {
+		animation: slot${id} 0.3s 1.3s linear infinite;
+	}`;
+	
+	const style = document.createElement('style');
+	style.id = 'slotrunninganimation';
+	// 设置style属性
+	style.type = 'text/css';
+
+	style.innerHTML = stylecontent;
+
+	document.getElementsByTagName('head')[0].appendChild(style);
+};
+
 class Game {
 	constructor(config) {
 		const { style, prizes, targetId, parentId, emBase } = config;
@@ -57,16 +128,12 @@ class Game {
 			})
 			.then(() => {
 				const target = document.getElementById(this.targetId);
-				const targetWidth = target.offsetWidth;
-				const targetHeight = target.offsetHeight;
-
-				const outwrap = target.querySelector(`.${s.outwrap}`);
-				outwrap.style.height = `${this.prizes.length * targetHeight}px`;
-				outwrap.style.width = `${targetWidth}px`;
-				// const lotterybtn = target.querySelector(`.${s.dice}`);
 				const showprizebtn = target.querySelector(`.${s.toggleprize}`);
 				const prizeswrap = target.querySelector(`.${s.prizeswrap}`);
 				const startbtn = target.querySelector(`.${s.startbtn}`);
+				const targetHeight = target.offsetHeight;
+
+				runkeyfremas(-1 * targetHeight * (this.prizes.length - 1), this.targetId);
 
 				// lotterybtn.onclick = (e) => {
 				// 	e.preventDefault();
@@ -98,30 +165,32 @@ class Game {
 
 
 	stopMachine = (score) => {
-		let num = ("000" + score).slice(-3);
-		let nums = num.toString().split("");
-
 		const target = document.getElementById(this.targetId);
 		const targetHeight = target.offsetHeight;
 
-		const numOutWrapEl = target.querySelector(`.${s.outwrap}`);
-		const numWrapEl = target.querySelector(`.${s.slotwrap}`);
+		const outwrap = target.querySelector(`.${s.outwrap}`);
+		const slotwrap = target.querySelector(`.${s.slotwrap}`);
 
 
 
 		setTimeout(() => {
-			numOutWrapEl.classList.remove(s.outwrapslot);
-			numWrapEl.style.top = `${score * targetHeight}px`;
-			numWrapEl.classList.add(s.numwrapspin);
+			outwrap.classList.remove(s.outslotwrap);
+			outwrap.style.animation = '';
+			slotwrap.style.top = `${score * targetHeight}px`;
+			slotwrap.classList.add(s.numwrapspin);
 		}, 800);
 	}
 
 	startMachine = () => {
 		const target = document.getElementById(this.targetId);
-		const numOutWrapEl = target.querySelector(`.${s.outwrap}`);
-		// const numWrapEl = target.querySelector(`.${s.slotwrap}`);
+		const outwrap = target.querySelector(`.${s.outwrap}`);
+		const slotwrap = target.querySelector(`.${s.slotwrap}`);
+
+		slotwrap.className = s.slotwrap;
+		slotwrap.style.top = 0;
+
 		setTimeout(() => {
-			numOutWrapEl.classList.add(s.outwrapslot);
+			outwrap.classList.add(s.outslotwrap);
 		}, 800);
 	}
 

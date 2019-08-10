@@ -148,7 +148,6 @@
 
 .outwrap {
     position: relative;
-    transform: translate3d(0, -90%, 0);
   }
 
 .item {
@@ -179,18 +178,13 @@
     height: 100%;
     width: 100%;
 }
-
-.outwrapslot {
-    animation: slotout 1.3s cubic-bezier(1, 0.06, 1, 0.44) 1;
-}
   
-.outwrapslot .slotwrap {
+.outslotwrap .slotwrap {
     animation: slot 0.3s 1.3s linear infinite;
 }
 
-.numwrapspin{
-    position: relative;
-    animation:shakeb ease-out 1s 1;
+.slotwrapspin{
+    font-style: normal;
 }
 
 @keyframes shakeb {
@@ -205,14 +199,6 @@
     }
   }
 
-@keyframes slotout {
-    0% {
-      transform: translate3d(0, -90%, 0);
-    }
-    100% {
-      transform: translate3d(0, 0%, 0);
-    }
-}
 @keyframes slot {
     0% {
       transform: translate3d(0, 100%, 0);
