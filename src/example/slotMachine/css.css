@@ -1,0 +1,296 @@
+.slot-machine {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-left: 18px;
+  }
+  
+  .top-text-wrap {
+    position: absolute;
+    color: #fff;
+    top: 86px;
+    /* no */
+    left: 28px;
+    /* no */
+    height: 28px;
+    /* no */
+    width: 232px;
+    /* no */
+    text-align: center;
+    font-size: 16px;
+    /* no */
+    font-weight: 500;
+    overflow: hidden;
+  }
+  
+  .top-text-inner {
+    transform: translate3d(0, -50%, 0);
+  }
+  
+  .text {
+    height: 28px;
+    /* no */
+    line-height: 28px;
+    /* no */
+  }
+  
+  .slot-machine-lights-wrap {
+    width: 247px;
+    /* no */
+    height: 143px;
+    /* no */
+    position: absolute;
+    top: 127px;
+    /* no */
+    left: 18px;
+    /* no */
+    overflow: hidden;
+  }
+  
+  .slot-machine-lights-wrap img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 247px;
+  }
+  
+  .slot-machine-lights-wrap .slot-machine-lights-2 {
+    left: 100%;
+  }
+  
+  .slot-machine-container {
+    position: relative;
+    margin: auto;
+    width: 330px;
+    /* no */
+    height: 413px;
+    /* no */
+  }
+  
+  .slot-machine-container-img {
+    width: 330px;
+    /* no */
+    height: 413px;
+    /* no */
+  }
+  
+  .slot-board {
+    position: absolute;
+    top: 148px;
+    /* no */
+    left: 40px;
+    /* no */
+    width: 210px;
+    /* no */
+    height: 100px;
+    /* no */
+    display: flex;
+    overflow: hidden;
+  }
+  
+  .board-item {
+    flex: 1;
+    height: 100px;
+    overflow: hidden;
+  }
+  
+  .num-out-wrap {
+    height: 1000px;
+    /* no */
+    position: relative;
+    transform: translate3d(0, -90%, 0);
+  }
+  
+  .num-wrap {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  .num-out-wrap-slot {
+    animation: slot-out 1.3s cubic-bezier(1, 0.06, 1, 0.44) 1;
+  }
+  
+  .num-out-wrap-slot .num-wrap {
+    animation: slot 0.3s 1.3s linear infinite;
+  }
+  
+  .num {
+    display: block;
+    width: 100%;
+    font-size: 80px;
+    /* no */
+    text-align: center;
+    height: 100px;
+    /* no */
+    overflow: hidden;
+    line-height: 100px;
+    /* no */
+    color: #7f483a;
+  }
+  
+  .start-btn {
+    width: 135px;
+    /* no */
+    height: 103px;
+    /* no */
+    background-image: url(https://j-image.missfresh.cn/de02a61ad4384ffda88fbc53d2bf10dd_1551362449956.png);
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    border: none;
+    background-color: transparent;
+    background-size: 100%;
+    position: absolute;
+    left: 78px;
+    /* no */
+    bottom: 62px;
+    /* no */
+    font-size: 0;
+  }
+  
+  .start-btn:active {
+    background-image: url(https://j-image.missfresh.cn/d332faf979aa4b7686d562722391412e_1551362449992.png);
+  }
+  
+  .close-btn {
+    left: 20px;
+    /* no */
+  }
+  
+  .share-btn {
+    right: 60px;
+    /* no */
+  }
+  
+  .other-button {
+    position: absolute;
+    border: none;
+    background: none;
+    opacity: 0.8;
+    display: block;
+    width: 58px;
+    /* no */
+    height: 50px;
+    /* no */
+    bottom: 80px;
+    /* no */
+  }
+  
+  .top-text-inner-animate {
+    animation: text-scroll 0.3s ease;
+  }
+  
+  .num-wrap-spin-0 {
+    position: relative;
+    top: 0px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  .num-wrap-spin-1 {
+    position: relative;
+    top: 100px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  .num-wrap-spin-2 {
+    position: relative;
+    top: 200px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  .num-wrap-spin-3 {
+    position: relative;
+    top: 300px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  .num-wrap-spin-4 {
+    position: relative;
+    top: 400px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  .num-wrap-spin-5 {
+    position: relative;
+    top: 500px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  .num-wrap-spin-6 {
+    position: relative;
+    top: 600px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  .num-wrap-spin-7 {
+    position: relative;
+    top: 700px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  .num-wrap-spin-8 {
+    position: relative;
+    top: 800px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  .num-wrap-spin-9 {
+    position: relative;
+    top: 900px;
+    animation: shake ease-out 1s 1;
+  }
+  
+  @keyframes text-scroll {
+    0% {
+      transform: translate3d(0, 0%, 0);
+    }
+    100% {
+      transform: translate3d(0, -50%, 0);
+    }
+  }
+  @keyframes slot-out {
+    0% {
+      transform: translate3d(0, -90%, 0);
+    }
+    100% {
+      transform: translate3d(0, 0%, 0);
+    }
+  }
+  @keyframes slot {
+    0% {
+      transform: translate3d(0, 100%, 0);
+    }
+    100% {
+      transform: translate3d(0, 0%, 0);
+    }
+  }
+  @keyframes shake {
+    0% {
+      transform: translate3d(0, -5%, 0);
+    }
+    80% {
+      transform: translate3d(0, 1%, 0);
+    }
+    100% {
+      transform: translate3d(0, 0%, 0);
+    }
+  }
+  .slot-machine-lights-animate-wrap {
+    animation: light steps(1) 1s infinite;
+  }
+  
+  @keyframes light {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
