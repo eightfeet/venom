@@ -48,12 +48,12 @@ function renderGameInfo(style, prizes) {
 	return `<div class="${s.gameinfo}">${dom}</div>`;
 }
 
-function renderGamePrize(style, prizes) {
+function renderGamePrize(style, prizes, id) {
 	let dom = '';
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
-		dom += `<div class="${s.item}" style="height:${(1/prizes.length)*100}%; background-color: #${window.Math.floor(window.Math.random() * 10)}F${window.Math.floor(window.Math.random() * 10)}F${window.Math.floor(window.Math.random() * 10)}F"><span style="position: absoluet; top:0">${index}</span><img src="${element.gameImg}" /></div>`;
+		dom += `<div class="item-${id}" style="height:${(1/prizes.length)*100}%; background-color: #${window.Math.floor(window.Math.random() * 10)}F${window.Math.floor(window.Math.random() * 10)}F${window.Math.floor(window.Math.random() * 10)}F"><span style="position: absolute; top:0">${index}</span><img src="${element.gameImg}" /></div>`;
 	}
 
 	return dom;
@@ -67,32 +67,12 @@ function renderGamePrize(style, prizes) {
  * @param { Array } prizes 奖项
  * @returns
  */
-export function renderGame(style, prizes) {
+export function renderGame(style, prizes, id) {
 	const { wrap, modify, showPrizeButton, prizesWrap } = style;
 
 	const wrapStyle = inlineStyle(wrap);
 	const showPrizeButtonStyle = inlineStyle(showPrizeButton);
 	const prizesWrapStyle = inlineStyle(prizesWrap);
-
-	// const setSize = {
-	// 	transform: `scale(${((dice && dice.size) ? dice.size : '1')},${((dice && dice.size) ? dice.size : '1')})`
-	// };
-
-	// <div class="slot-machine">
-	// 	<div class="slot-machine-container">
-	// 		<!-- slot -->
-	// 		<div id="slotBoard" class="slot-board">
-	// 			<div class="board-item">
-	// 				<div class="num-out-wrap">
-	// 					<div class="num-wrap">
-	// 					</div>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 		<!-- start button -->
-	// 		<button onclick="start()" class="start-btn">开始游戏</button>
-	// 	</div>
-	// </div>
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
@@ -101,10 +81,10 @@ export function renderGame(style, prizes) {
 	</div>
 	<div class="${s.prizeswrap}" ${prizesWrapStyle ? `style="${prizesWrapStyle}"` : ''}>${renderGameInfo(style, prizes)}</div>
 	<div class="${s.lottery}">
-		<div class="${s.slotboard}">
-			<div class="${s.outwrap}">
-				<div class="${s.slotwrap}">
-					${renderGamePrize(style, prizes)}
+		<div class="slotboard-${id}">
+			<div class="outwrap-${id}">
+				<div class="slotwrap-${id}">
+					${renderGamePrize(style, prizes, id)}
 				</div>
 			</div>
 		</div>

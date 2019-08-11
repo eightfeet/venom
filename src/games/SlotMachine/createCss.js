@@ -1,5 +1,3 @@
-import s from './game.scss';
-
 export default function createCss(height, prizes, id) {
 	if (document.getElementById('slotrunninganimation')) {
 		return;
@@ -44,27 +42,55 @@ export default function createCss(height, prizes, id) {
 		  }
 	}`;
 
-	stylecontent += `.${s.outslotwrap} {
+	stylecontent += `.outslotwrap-${id} {
 		animation: slot-out${id} 1.3s cubic-bezier(1, 0.06, 1, 0.44) 1;
 	}`;
 
-	stylecontent += `.${s.outslotwrap} .${s.slotwrap} {
+	stylecontent += `.outslotwrap-${id} .slotwrap-${id} {
 		animation: slot${id} 0.3s 1.3s linear infinite;
 	}`;
 
 	for (let index = 0; index < prizes.length; index++) {
-		stylecontent += `.${s.wrapspin}${index} {
+		stylecontent += `.wrapspin-${id}-${index} {
 			position: relative;
 			top: ${index * height}px;
 			animation: shake${id} ease-out 1s 1;
 		}`;
 	}
-
-	stylecontent += `.${s.outwrap} {
+	stylecontent += `.outwrap-${id} {
 		height: ${prizes.length * height}px; /* no */
 		position: relative;
 		transform: translate3d(0, ${posSlotOut}px, 0);
 	  }`;
+
+	  stylecontent += `.item-${id} {
+		width: 100%;
+		text-align: center;
+		overflow: hidden;
+		position: relative;
+	  }`;
+
+	  stylecontent += `.item-${id} img {
+		width: 100%;
+		height: 100%;
+	}`;
+	  
+
+	stylecontent += `.slotboard-${id} {
+		width: 100%; /* no */
+		height: 100%; /* no */
+		position: relative;
+		overflow: hidden;
+	}`;
+
+
+	stylecontent += `.slotwrap-${id} {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+	}`;
 	
 	
 	const style = document.createElement('style');

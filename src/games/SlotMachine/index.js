@@ -30,7 +30,6 @@ class Game {
 			targetId: this.targetId
 		});
 		this.Loading = this.core.Loading;
-		this.distory = this.core.distory;
 		this.oldDge = 0;
 		this.renderGame();
 		this.activeElements = null;
@@ -45,7 +44,8 @@ class Game {
 		return createDom(
 			renderGame(
 				this.GameTheme,
-				this.prizes
+				this.prizes,
+				this.targetId
 			),
 			this.targetId,
 			this.parentId,
@@ -54,6 +54,8 @@ class Game {
 			.then(() => {
 				const target = document.getElementById(this.targetId);
 				target.classList.add(s.target);
+				const targetHeight = target.offsetHeight;
+				createCss(targetHeight, this.prizes, this.targetId);
 				return dormancyFor(50);
 			})
 			.then(() => {
@@ -61,9 +63,7 @@ class Game {
 				const showprizebtn = target.querySelector(`.${s.toggleprize}`);
 				const prizeswrap = target.querySelector(`.${s.prizeswrap}`);
 				const startbtn = target.querySelector(`.${s.startbtn}`);
-				const targetHeight = target.offsetHeight;
-
-				createCss(targetHeight, this.prizes, this.targetId);
+				
 
 				// lotterybtn.onclick = (e) => {
 				// 	e.preventDefault();
@@ -93,24 +93,29 @@ class Game {
 			});
 	}
 
+	distory = () => {
+		const head = document.getElementsByTagName('head')[0];
+		head.removeChild(document.getElementById(`slotmachine${this.targetId}`));
+		this.core.distory();
+	}
 
 	stopMachine = (score) => {
 		const target = document.getElementById(this.targetId);
-		const outwrap = target.querySelector(`.${s.outwrap}`);
-		const slotwrap = target.querySelector(`.${s.slotwrap}`);
+		const outwrap = target.querySelector(`.outwrap-${this.targetId}`);
+		const slotwrap = target.querySelector(`.slotwrap-${this.targetId}`);
 		setTimeout(() => {
-			outwrap.classList.remove(s.outslotwrap);
-			slotwrap.classList.add(`${s.wrapspin}${score}`);
+			outwrap.classList.remove(`outslotwrap-${this.targetId}`);
+			slotwrap.classList.add(`wrapspin-${this.targetId}-${score}`);
 		}, 800);
 	}
 
 	startMachine = () => {
 		const target = document.getElementById(this.targetId);
-		const outwrap = target.querySelector(`.${s.outwrap}`);
-		const slotwrap = target.querySelector(`.${s.slotwrap}`);
-		slotwrap.className = s.slotwrap;
+		const outwrap = target.querySelector(`.outwrap-${this.targetId}`);
+		const slotwrap = target.querySelector(`.slotwrap-${this.targetId}`);
+		slotwrap.className = `slotwrap-${this.targetId}`;
 		setTimeout(() => {
-			outwrap.classList.add(s.outslotwrap);
+			outwrap.classList.add(`outslotwrap-${this.targetId}`);
 		}, 800);
 	}
 
