@@ -11,7 +11,6 @@ const { dormancyFor } = tools;
 const { createDom, inlineStyle } = htmlFactory;
 
 import { renderGame } from './template';
-import { from } from 'rxjs';
 
 const stamp = (new Date()).getTime();
 
@@ -97,18 +96,11 @@ class Game {
 
 	stopMachine = (score) => {
 		const target = document.getElementById(this.targetId);
-		const targetHeight = target.offsetHeight;
-
 		const outwrap = target.querySelector(`.${s.outwrap}`);
 		const slotwrap = target.querySelector(`.${s.slotwrap}`);
-
-
-
 		setTimeout(() => {
 			outwrap.classList.remove(s.outslotwrap);
-			outwrap.style.animation = '';
-			slotwrap.style.top = `${score * targetHeight}px`;
-			slotwrap.classList.add(s.numwrapspin);
+			slotwrap.classList.add(`${s.wrapspin}${score}`);
 		}, 800);
 	}
 
@@ -116,10 +108,7 @@ class Game {
 		const target = document.getElementById(this.targetId);
 		const outwrap = target.querySelector(`.${s.outwrap}`);
 		const slotwrap = target.querySelector(`.${s.slotwrap}`);
-
 		slotwrap.className = s.slotwrap;
-		slotwrap.style.top = 0;
-
 		setTimeout(() => {
 			outwrap.classList.add(s.outslotwrap);
 		}, 800);

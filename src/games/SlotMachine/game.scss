@@ -146,14 +146,16 @@
     padding: 0.3rem;
 }
 
-.outwrap {
-    position: relative;
-  }
-
 .item {
     width: 100%;
     text-align: center;
     overflow: hidden;
+    position: relative;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .startbtn {
@@ -179,31 +181,7 @@
     width: 100%;
 }
   
-.outslotwrap .slotwrap {
-    animation: slot 0.3s 1.3s linear infinite;
-}
-
-.wrapspin{
+.outwrap, .outslotwrap, .wrapspin{
     font-style: normal;
 }
 
-@keyframes shakeb {
-    0% {
-      transform: translate3d(0, -5%, 0);
-    }
-    80% {
-      transform: translate3d(0, 1%, 0);
-    }
-    100% {
-      transform: translate3d(0, 0%, 0);
-    }
-  }
-
-@keyframes slot {
-    0% {
-      transform: translate3d(0, 100%, 0);
-    }
-    100% {
-      transform: translate3d(0, 0%, 0);
-    }
-}

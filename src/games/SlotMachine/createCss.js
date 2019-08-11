@@ -53,20 +53,27 @@ export default function createCss(height, prizes, id) {
 	}`;
 
 	for (let index = 0; index < prizes.length; index++) {
-		const element = prizes[index];
 		stylecontent += `.${s.wrapspin}${index} {
 			position: relative;
 			top: ${index * height}px;
 			animation: shake${id} ease-out 1s 1;
-		}`
+		}`;
 	}
+
+	stylecontent += `.${s.outwrap} {
+		height: ${prizes.length * height}px; /* no */
+		position: relative;
+		transform: translate3d(0, ${posSlotOut}px, 0);
+	  }`;
+	
 	
 	const style = document.createElement('style');
-	style.id = 'slotrunninganimation';
+	style.id = `slotmachine${id}`;
+	style.setAttribute('class', 'slotmachinetags');
 	// 设置style属性
 	style.type = 'text/css';
 
 	style.innerHTML = stylecontent;
 
 	document.getElementsByTagName('head')[0].appendChild(style);
-};
+}
