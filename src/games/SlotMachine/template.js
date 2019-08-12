@@ -9,7 +9,7 @@ const { inlineStyle } = htmlFactory;
  * @param {Array} modify
  * @returns
  */
-function renderModify(modify){
+function renderModify(modify) {
 
 	if (!modify || !Array.isArray(modify)) {
 		return '';
@@ -25,27 +25,33 @@ function renderModify(modify){
 }
 
 function renderGameInfo(style, prizes) {
-	const { gameImg, prizeAlias, prizeItem, prizeTag } = style;
+	const { gameInfoImg, prizeAlias, showGameInfoButton, gameInfoWrap, gameInfo, gameInfoItem } = style;
 
-	const prizeItemStyle = inlineStyle(prizeItem);
-	const gameImgStyle = inlineStyle(gameImg);
+	const showGameInfoButtonStyle = inlineStyle(showGameInfoButton);
+	const gameInfoWrapStyle = inlineStyle(gameInfoWrap);
+	const gameInfoStyle = inlineStyle(gameInfo);
+	const gameInfoImgStyle = inlineStyle(gameInfoImg);
 	const prizeAliasStyle = inlineStyle(prizeAlias);
-	const prizeTagStyle = inlineStyle(prizeTag);
+	const gameInfoItemStyle = inlineStyle(gameInfoItem);
 
 	let dom = '';
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
-		dom += `<div class="${s.infoItem}">
-			<div class="${s.prizeItem}"  ${prizeItemStyle ? `style="${prizeItemStyle}"` : ''}>
-				<div class="${s.prizeTag} ${s.diceicon} ${s[`icon-dice-${index + 1}`]}" ${prizeTagStyle ? `style="${prizeTagStyle}"` : ''}></div>
-				<img ${gameImgStyle ? `style="${gameImgStyle}"` : ''} src="${element.prizeImg}" />
+		dom += `<div class="${s.infoItem}" >
+			<div class="${s.prizeItem}"  ${gameInfoItemStyle ? `style="${gameInfoItemStyle}"` : ''}>
+				<img ${gameInfoImgStyle ? `style="${gameInfoImgStyle}"` : ''} src="${element.prizeImg}" />
 				<div ${prizeAliasStyle ? `style="${prizeAliasStyle}"` : ''}>${element.prizeAlias}</div>
 			</div>
 		</div>`;
 	}
 
-	return `<div class="${s.gameinfo}">${dom}</div>`;
+	return `<div class="${s.toggleprize} ${s.toggleb}" ${showGameInfoButtonStyle ? `style="${showGameInfoButtonStyle}"` : ''}>
+		奖品
+	</div>
+	<div class="${s.prizeswrap}" ${gameInfoWrapStyle ? `style="${gameInfoWrapStyle}"` : ''}>
+		<div class="${s.gameinfo}" ${gameInfoStyle ? `style="${gameInfoStyle}"` : ''}>${dom}</div>
+	</div>`;
 }
 
 function renderGamePrize(style, prizes, id) {
@@ -53,10 +59,19 @@ function renderGamePrize(style, prizes, id) {
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
-		dom += `<div class="item-${id}" style="height:${(1/prizes.length)*100}%; background-color: #${window.Math.floor(window.Math.random() * 10)}F${window.Math.floor(window.Math.random() * 10)}F${window.Math.floor(window.Math.random() * 10)}F"><span style="position: absolute; top:0">${index}</span><img src="${element.gameImg}" /></div>`;
+		dom += `<div class="item-${id}" style="height:${(1 / prizes.length) * 100}%;">
+			<span style="position: absolute; top:0">${index}</span>
+			<img src="${element.gameImg}" />
+		</div>`;
 	}
 
-	return dom;
+	return `<div class="slotboard-${id}">
+		<div class="outwrap-${id}">
+			<div class="slotwrap-${id}">
+				${dom}
+			</div>
+		</div>
+	</div>`;
 }
 
 /**
@@ -68,28 +83,14 @@ function renderGamePrize(style, prizes, id) {
  * @returns
  */
 export function renderGame(style, prizes, id) {
-	const { wrap, modify, showPrizeButton, prizesWrap } = style;
-
+	const { wrap, modify, startButton } = style;
 	const wrapStyle = inlineStyle(wrap);
-	const showPrizeButtonStyle = inlineStyle(showPrizeButton);
-	const prizesWrapStyle = inlineStyle(prizesWrap);
+	const startButtonStyle = inlineStyle(startButton);
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
-	<div class="${s.toggleprize} ${s.toggleb}" ${showPrizeButtonStyle ? `style="${showPrizeButtonStyle}"` : ''}>
-		奖品
+		${renderGameInfo(style, prizes)}
+		${renderGamePrize(style, prizes, id)}
 	</div>
-	<div class="${s.prizeswrap}" ${prizesWrapStyle ? `style="${prizesWrapStyle}"` : ''}>${renderGameInfo(style, prizes)}</div>
-	<div class="${s.lottery}">
-		<div class="slotboard-${id}">
-			<div class="outwrap-${id}">
-				<div class="slotwrap-${id}">
-					${renderGamePrize(style, prizes, id)}
-				</div>
-			</div>
-		</div>
-	</div> 
-	</div>
-	<button onclick="start()" class="${s.startbtn}">开始游戏</button>
-	`;
+	<button class="${s.startbtn}" ${startButtonStyle ? `style="${startButtonStyle}"` : ''}>开始游戏</button>`;
 }

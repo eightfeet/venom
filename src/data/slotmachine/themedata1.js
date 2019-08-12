@@ -1,35 +1,16 @@
 /* eslint-disable indent */
 window.themedata1 = {
   "GameTheme": {
+    // 外框
     "wrap": {
       "backgroundColor": "#efefef"
     },
-    "prizesWrap": {
-      "backgroundColor": "rgba(0, 0, 0, 0)"
+    // 开始按钮
+    "startButton": {
+
     },
-    "prizeItem": {},
-    "gameImg": {},
-    "prizeAlias": {
-      "fontSize": "0.8em"
-    },
-    "prizeTag": {
-      "color": "rgb(76, 175, 80)"
-    },
-    "dice": {
-      "width": "5em",
-      "height": "5em",
-      "left": "6em",
-      "top": "6em"
-    },
-    "side": {
-      "backgroundColor": "#4caf50",
-      "boxShadow": "inset 0 0 0.4em #0fa40f"
-    },
-    "dot": {
-      "backgroundColor": "#fff",
-      "boxShadow": "inset 0.2em 0 0.2em rgba(0,0,0,0.1)"
-    },
-    "showPrizeButton": {
+    // 显示活动信息按钮
+    "showGameInfoButton": {
       "width": "3em",
       "height": "3em",
       "color": "rgba(0,0,0,0)",
@@ -37,6 +18,20 @@ window.themedata1 = {
       "backgroundSize": "100% 100%",
       "borderRadius": "0.64516rem"
     },
+    // 活动信息外框
+    "gameInfoWrap": {
+
+    },
+    // 活动信息单项
+    "gameInfoItem": {
+
+    },
+    // 活动信息单项图片
+    "gameInfoImg": {},
+    "prizeAlias": {
+      "fontSize": "0.8em"
+    },
+    // 修饰层
     "modify": [
       {
         "top": "-1em",
