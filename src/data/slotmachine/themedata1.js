@@ -20,7 +20,7 @@ window.themedata1 = {
     },
     // 活动信息外框
     "gameInfoWrap": {
-
+      "paddingTop": '5em'
     },
     // 活动信息单项
     "gameInfoItem": {
@@ -28,7 +28,8 @@ window.themedata1 = {
     },
     // 活动信息单项图片
     "gameInfoImg": {},
-    "prizeAlias": {
+    // 奖品别名
+    "gameInfoPrizeAlias": {
       "fontSize": "0.8em"
     },
     // 修饰层
