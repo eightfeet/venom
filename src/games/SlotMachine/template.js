@@ -60,8 +60,8 @@ function renderGamePrize(style, prizes, id) {
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
 		dom += `<div class="item-${id}" style="height:${(1 / prizes.length) * 100}%;">
-			<span style="position: absolute; top:0">${index}</span>
-			<img src="${element.gameImg}" />
+			<span style="position: absolute; top:0">${index + 1}</span>
+			<img src="${element.prizeImg}" />
 		</div>`;
 	}
 

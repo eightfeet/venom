@@ -51,7 +51,7 @@ export default function createCss(height, prizes, id) {
 	}`;
 
 	for (let index = 0; index < prizes.length; index++) {
-		stylecontent += `.wrapspin-${id}-${index} {
+		stylecontent += `.wrapspin-${id}-${prizes.length - index} {
 			position: relative;
 			top: ${index * height}px;
 			animation: shake${id} ease-out 1s 1;
@@ -84,6 +84,12 @@ export default function createCss(height, prizes, id) {
 	}`;
 
 
+	stylecontent += `.comeback-${id} {
+		top: 0;
+		-webkit-transition: top 0.2s;
+		transition: top 0.5s;
+	}`;
+
 	stylecontent += `.slotwrap-${id} {
 		position: absolute;
 		bottom: 0;
@@ -91,7 +97,6 @@ export default function createCss(height, prizes, id) {
 		height: 100%;
 		width: 100%;
 	}`;
-	
 	
 	const style = document.createElement('style');
 	style.id = `slotmachine${id}`;

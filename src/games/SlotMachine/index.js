@@ -11,10 +11,11 @@ const { dormancyFor } = tools;
 const { createDom, inlineStyle } = htmlFactory;
 
 import { renderGame } from './template';
+import { setTimeout } from 'timers';
 
 const stamp = (new Date()).getTime();
 
-let timer = null;
+let gameTimer = null;
 
 class Game {
 	constructor(config) {
@@ -87,8 +88,9 @@ class Game {
 				prizeswrap.onclick = () => {
 					toggle();
 				};
-				startbtn.onclick = () => {
-					this.start(3);
+				startbtn.onclick = e => {
+					e.preventDefault();
+					return this.core.lottery();
 				};
 			});
 	}
@@ -96,16 +98,17 @@ class Game {
 	distory = () => {
 		const head = document.getElementsByTagName('head')[0];
 		head.removeChild(document.getElementById(`slotmachine${this.targetId}`));
+		window.clearTimeout(gameTimer);
 		this.core.distory();
 	}
 
-	stopMachine = (score) => {
+	stopMachine = (prizePosition) => {
 		const target = document.getElementById(this.targetId);
 		const outwrap = target.querySelector(`.outwrap-${this.targetId}`);
 		const slotwrap = target.querySelector(`.slotwrap-${this.targetId}`);
 		setTimeout(() => {
 			outwrap.classList.remove(`outslotwrap-${this.targetId}`);
-			slotwrap.classList.add(`wrapspin-${this.targetId}-${score}`);
+			slotwrap.classList.add(`wrapspin-${this.targetId}-${prizePosition}`);
 		}, 800);
 	}
 
@@ -113,19 +116,24 @@ class Game {
 		const target = document.getElementById(this.targetId);
 		const outwrap = target.querySelector(`.outwrap-${this.targetId}`);
 		const slotwrap = target.querySelector(`.slotwrap-${this.targetId}`);
-		slotwrap.className = `slotwrap-${this.targetId}`;
-		setTimeout(() => {
-			outwrap.classList.add(`outslotwrap-${this.targetId}`);
-		}, 800);
+		slotwrap.classList.add(`comeback-${this.targetId}`);
+		Promise.resolve()
+			.then(() => dormancyFor(800))
+			.then(() => {
+				slotwrap.className = `slotwrap-${this.targetId}`;
+				outwrap.classList.add(`outslotwrap-${this.targetId}`);
+			});
 	}
 
 
-	start = (prize) => {
+	start = (prizePosition) => new Promise(resolve => {
 		this.startMachine();
-		setTimeout(() => {
-			this.stopMachine(prize);
+		window.clearTimeout(gameTimer);
+		gameTimer = setTimeout(() => {
+			this.stopMachine(prizePosition);
+			resolve();
 		}, 5000);
-	}
+	})
 
 
 	/**
@@ -138,7 +146,6 @@ class Game {
 	 * @memberof Game
 	 */
 	lottery = (prize) => new Promise((resolve) => {
-
 		let prizeIndex = null;
 		// 确认中奖位置
 		for (let index = 0; index < this.prizes.length; index++) {
@@ -150,11 +157,17 @@ class Game {
 
 		if (prize && !prizeIndex) {
 			resolve(prize);
+			console.log('所中奖品非展示奖池内奖品', prize);
 			console.error('所中奖品非展示奖池内奖品');
+			return;
 		}
 
-		window.clearTimeout(timer);
-		resolve(prize);
+		if (prizeIndex !== null) {
+			Promise.resolve()
+				.then(() =>this.start(prizeIndex))
+				.then(() =>dormancyFor(800))
+				.then(() => resolve(prize));
+		}
 	});
 
 }
