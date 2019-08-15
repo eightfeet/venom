@@ -3,7 +3,10 @@ export default function createCss(height, prizes, id) {
 		return;
 	}
 
-	const posSlotOut = -1 * height * (prizes.length - 1);
+	const prizesLength = prizes.length;
+
+	const posSlotOut = -1 * height * (prizesLength - 1);
+	const totalTimes =  prizesLength * 215;
 
 	let stylecontent =  `@keyframes slot-out${id} {
 		0% {
@@ -43,11 +46,11 @@ export default function createCss(height, prizes, id) {
 	}`;
 
 	stylecontent += `.outslotwrap-${id} {
-		animation: slot-out${id} 1.3s cubic-bezier(1, 0.06, 1, 0.44) 1;
+		animation: slot-out${id} ${totalTimes}ms cubic-bezier(1, 0.06, 1, 0.44) 1;
 	}`;
 
 	stylecontent += `.outslotwrap-${id} .slotwrap-${id} {
-		animation: slot${id} 0.3s 1.3s linear infinite;
+		animation: slot${id} 0.3s ${totalTimes}ms linear infinite;
 	}`;
 
 	for (let index = 0; index < prizes.length; index++) {
