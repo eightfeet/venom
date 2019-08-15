@@ -25,13 +25,13 @@ function renderModify(modify) {
 }
 
 function renderGameInfo(style, prizes) {
-	const { gameInfoImg, prizeAlias, showGameInfoButton, gameInfoWrap, gameInfo, gameInfoItem } = style;
+	const { gameInfoImg, gameInfoName, showGameInfoButton, gameInfoWrap, gameInfo, gameInfoItem } = style;
 
 	const showGameInfoButtonStyle = inlineStyle(showGameInfoButton);
 	const gameInfoWrapStyle = inlineStyle(gameInfoWrap);
 	const gameInfoStyle = inlineStyle(gameInfo);
 	const gameInfoImgStyle = inlineStyle(gameInfoImg);
-	const prizeAliasStyle = inlineStyle(prizeAlias);
+	const gameInfoNameStyle = inlineStyle(gameInfoName);
 	const gameInfoItemStyle = inlineStyle(gameInfoItem);
 
 	let dom = '';
@@ -40,8 +40,8 @@ function renderGameInfo(style, prizes) {
 		const element = prizes[index];
 		dom += `<div class="${s.infoItem}" >
 			<div class="${s.prizeItem}"  ${gameInfoItemStyle ? `style="${gameInfoItemStyle}"` : ''}>
-				<img ${gameInfoImgStyle ? `style="${gameInfoImgStyle}"` : ''} src="${element.prizeImg}" />
-				<div ${prizeAliasStyle ? `style="${prizeAliasStyle}"` : ''}>${element.prizeAlias}</div>
+				<img ${gameInfoImgStyle ? `style="${gameInfoImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
+				<div ${gameInfoNameStyle ? `style="${gameInfoNameStyle}"` : ''}>${element.prizeAlias || element.prizeName}</div>
 			</div>
 		</div>`;
 	}
@@ -56,16 +56,23 @@ function renderGameInfo(style, prizes) {
 
 function renderGamePrize(style, prizes, id) {
 	let dom = '';
+	const { gameName, gameImg, gameItem, game} = style;
+	const gameNameStyle = inlineStyle(gameName);
+	const gameImgStyle = inlineStyle(gameImg);
+	const gameItemStyle = inlineStyle(gameItem);
+	const gameStyle = inlineStyle(game);
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
 		dom += `<div class="item-${id}" style="height:${(1 / prizes.length) * 100}%;">
-			<span style="position: absolute; top:0">${index + 1}</span>
-			<img src="${element.prizeImg}" />
+			<div ${gameItemStyle ? `style="${gameItemStyle}"` : ''}>
+				<img ${gameImgStyle ? `style="${gameImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
+				<p ${gameNameStyle ? `style="${gameNameStyle}"` : ''} style="position: absolute; top:0">${element.prizeAlias || element.prizeName}</p>
+			</div>
 		</div>`;
 	}
 
-	return `<div class="slotboard-${id}">
+	return `<div class="slotboard-${id}" ${gameStyle ? `style="${gameStyle}"` : ''}>
 		<div class="outwrap-${id}">
 			<div class="slotwrap-${id}">
 				${dom}

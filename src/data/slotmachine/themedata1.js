@@ -24,14 +24,23 @@ window.themedata1 = {
     },
     // 活动信息单项
     "gameInfoItem": {
-
+      height: '10em'
     },
     // 活动信息单项图片
     "gameInfoImg": {},
-    // 奖品别名
-    "gameInfoPrizeAlias": {
-      "fontSize": "0.8em"
+    // 活动信息奖品名称
+    "gameInfoName": {
+      "fontSize": "0.8em",
+      "color": "red"
     },
+    // 游戏单项
+    "gameItem": {"width":"50%","margin":"0 auto", "backgroundColor": "green"},
+    // 名字
+    "gameName": {"color": "red", "height": "1em"},
+    // 游戏图片
+    "gameImg": {"width":"20%", "height": "1em"},
+    // 游戏
+    "game": {"width":"20%", "height":"5em", "margin": "0 auto", "backgroundColor": "blue"},
     // 修饰层
     "modify": [
       {
