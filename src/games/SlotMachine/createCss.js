@@ -6,9 +6,9 @@ export default function createCss(height, prizes, id) {
 	const prizesLength = prizes.length;
 
 	const posSlotOut = -1 * height * (prizesLength - 1);
-	const totalTimes =  prizesLength * 215;
+	const totalTimes = prizesLength * 215;
 
-	let stylecontent =  `@keyframes slot-out${id} {
+	let stylecontent = `@keyframes slot-out${id} {
 		0% {
 			-webkit-transform: translate3d(0, ${posSlotOut}px, 0);
 			transform: translate3d(0, ${posSlotOut}px, 0);
@@ -66,18 +66,17 @@ export default function createCss(height, prizes, id) {
 		transform: translate3d(0, ${posSlotOut}px, 0);
 	  }`;
 
-	  stylecontent += `.item-${id} {
+	stylecontent += `.item-${id} {
 		width: 100%;
 		text-align: center;
 		overflow: hidden;
 		position: relative;
 	  }`;
 
-	  stylecontent += `.item-${id} img {
+	stylecontent += `.item-${id} img {
 		width: 100%;
 		height: 100%;
 	}`;
-	  
 
 	stylecontent += `.slotboard-${id} {
 		width: 100%; /* no */
@@ -85,7 +84,6 @@ export default function createCss(height, prizes, id) {
 		position: relative;
 		overflow: hidden;
 	}`;
-
 
 	stylecontent += `.comeback-${id} {
 		top: 0;
@@ -100,7 +98,7 @@ export default function createCss(height, prizes, id) {
 		height: 100%;
 		width: 100%;
 	}`;
-	
+
 	const style = document.createElement('style');
 	style.id = `slotmachine${id}`;
 	style.setAttribute('class', 'slotmachinetags');
