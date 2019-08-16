@@ -6,9 +6,7 @@ window.themedata1 = {
       "backgroundColor": "#efefef"
     },
     // 开始按钮
-    "startButton": {
-
-    },
+    "startButton": {},
     // 显示活动信息按钮
     "showGameInfoButton": {
       "width": "3em",
@@ -20,27 +18,33 @@ window.themedata1 = {
     },
     // 活动信息外框
     "gameInfoWrap": {
-      "paddingTop": '5em'
+      "paddingTop": "5em"
     },
-    // 活动信息单项
-    "gameInfoItem": {
-      height: '10em'
+    // 活动信息奖品单项
+    "gameInfoPrizeItem": {
+      "height": "10em"
     },
     // 活动信息单项图片
-    "gameInfoImg": {},
+    "gameInfoPrizeImg": {},
     // 活动信息奖品名称
-    "gameInfoName": {
+    "gameInfoPrizeName": {
       "fontSize": "0.8em",
       "color": "red"
     },
     // 游戏单项
-    "gameItem": {"width":"50%","margin":"0 auto", "backgroundColor": "green"},
-    // 名字
-    "gameName": {"color": "red", "height": "1em"},
-    // 游戏图片
-    "gameImg": {"width":"20%", "height": "1em"},
+    "gameItem": {
+    },
+    // 游戏奖项标题
+    "gamePrizeName": {
+      "color": "red",
+      "height": "1em"
+    },
+    // 游戏奖项图片
+    "gamePrizeImg": {
+    },
     // 游戏
-    "game": {"width":"20%", "height":"5em", "margin": "0 auto", "backgroundColor": "blue"},
+    "game": {
+    },
     // 修饰层
     "modify": [
       {
@@ -94,7 +98,7 @@ window.themedata1 = {
       "backgroundSize": "100% auto"
     },
     "close": {
-      "backgroundImage": "url(assets/bfa23a6d.png)",
+      "backgroundImage": "url(http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190415152642358.png)",
       "backgroundSize": "contain",
       "backgroundRepeat": "no-repeat",
       "width": "1.3em",
@@ -108,7 +112,7 @@ window.themedata1 = {
       "height": "2.4em",
       "borderRadius": "3em",
       "boxShadow": "0 3px 4px rgba(31,156,203,.53), inset 0 2px rgba(255,255,255,.7)",
-      "backgroundImage": "url(assets/9b1e8c7b.jpg)",
+      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190415152744574.jpg)",
       "backgroundSize": "auto 100%",
       "fontSize": "1em",
       "color": "#fff",

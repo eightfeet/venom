@@ -25,23 +25,23 @@ function renderModify(modify) {
 }
 
 function renderGameInfo(style, prizes) {
-	const { gameInfoImg, gameInfoName, showGameInfoButton, gameInfoWrap, gameInfo, gameInfoItem } = style;
+	const { gameInfoPrizeImg, gameInfoPrizeName, showGameInfoButton, gameInfoWrap, gameInfo, gameInfoPrizeItem } = style;
 
 	const showGameInfoButtonStyle = inlineStyle(showGameInfoButton);
 	const gameInfoWrapStyle = inlineStyle(gameInfoWrap);
 	const gameInfoStyle = inlineStyle(gameInfo);
-	const gameInfoImgStyle = inlineStyle(gameInfoImg);
-	const gameInfoNameStyle = inlineStyle(gameInfoName);
-	const gameInfoItemStyle = inlineStyle(gameInfoItem);
+	const gameInfoPrizeImgStyle = inlineStyle(gameInfoPrizeImg);
+	const gameInfoPrizeNameStyle = inlineStyle(gameInfoPrizeName);
+	const gameInfoPrizeItemStyle = inlineStyle(gameInfoPrizeItem);
 
 	let dom = '';
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
 		dom += `<div class="${s.infoItem}" >
-			<div class="${s.prizeItem}"  ${gameInfoItemStyle ? `style="${gameInfoItemStyle}"` : ''}>
-				<img ${gameInfoImgStyle ? `style="${gameInfoImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
-				<div ${gameInfoNameStyle ? `style="${gameInfoNameStyle}"` : ''}>${element.prizeAlias || element.prizeName}</div>
+			<div class="${s.gimeinfoItem}"  ${gameInfoPrizeItemStyle ? `style="${gameInfoPrizeItemStyle}"` : ''}>
+				<img ${gameInfoPrizeImgStyle ? `style="${gameInfoPrizeImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
+				<div ${gameInfoPrizeNameStyle ? `style="${gameInfoPrizeNameStyle}"` : ''}>${element.prizeAlias || element.prizeName}</div>
 			</div>
 		</div>`;
 	}
@@ -56,9 +56,9 @@ function renderGameInfo(style, prizes) {
 
 function renderGamePrize(style, prizes, id) {
 	let dom = '';
-	const { gameName, gameImg, gameItem, game} = style;
-	const gameNameStyle = inlineStyle(gameName);
-	const gameImgStyle = inlineStyle(gameImg);
+	const { gamePrizeName, gamePrizeImg, gameItem, game} = style;
+	const gamePrizeNameStyle = inlineStyle(gamePrizeName);
+	const gamePrizeImgStyle = inlineStyle(gamePrizeImg);
 	const gameItemStyle = inlineStyle(gameItem);
 	const gameStyle = inlineStyle(game);
 
@@ -66,8 +66,8 @@ function renderGamePrize(style, prizes, id) {
 		const element = prizes[index];
 		dom += `<div class="item-${id}" style="height:${(1 / prizes.length) * 100}%;">
 			<div ${gameItemStyle ? `style="${gameItemStyle}"` : ''}>
-				<img ${gameImgStyle ? `style="${gameImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
-				<p ${gameNameStyle ? `style="${gameNameStyle}"` : ''} style="position: absolute; top:0">${element.prizeAlias || element.prizeName}</p>
+				<img ${gamePrizeImgStyle ? `style="${gamePrizeImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
+				<p ${gamePrizeNameStyle ? `style="${gamePrizeNameStyle}"` : ''} style="position: absolute; top:0">${element.prizeAlias || element.prizeName}</p>
 			</div>
 		</div>`;
 	}

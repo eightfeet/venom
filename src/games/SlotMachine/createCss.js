@@ -78,6 +78,14 @@ export default function createCss(height, prizes, id) {
 		height: 100%;
 	}`;
 
+	stylecontent += `.item-${id} p {
+		padding: 0;
+		margin: 0;
+		top: 0;
+		text-align: center;
+		position: absolute;
+	}`;
+
 	stylecontent += `.slotboard-${id} {
 		width: 100%; /* no */
 		height: 100%; /* no */
