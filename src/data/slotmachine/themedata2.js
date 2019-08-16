@@ -6,44 +6,25 @@ window.themedata2 = {
       },
       "startButton": {},
       "showGameInfoButton": {
-        "width": "3em",
-        "height": "3em",
-        "color": "rgba(0,0,0,0)",
-        "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190808141018604.png)",
-        "backgroundSize": "100% 100%",
-        "borderRadius": "0.64516rem"
       },
       "gameInfoWrap": {
         "paddingTop": "5em"
       },
-      "gameInfoItem": {
+      "gameInfoPrizeItem": {
         "height": "10em"
       },
-      "gameInfoImg": {},
-      "gameInfoName": {
+      "gameInfoPrizeImg": {},
+      "gameInfoPrizeName": {
         "fontSize": "0.8em",
         "color": "red"
       },
-      "gameItem": {
-        "width": "50%",
-        "margin": "0 auto",
-        "backgroundColor": "green"
+      "gameItem": {},
+      "gamePrizeName": {
       },
-      "gameName": {
-        "color": "red",
-        "height": "1em"
-      },
-      "gameImg": {
-        "width": "20%",
-        "height": "1em"
-      },
-      "game": {
-        "width": "20%",
-        "height": "5em",
-        "margin": "0 auto",
-        "backgroundColor": "blue"
-      },
-      "modify": []
+      "gamePrizeImg": {},
+      "game": {},
+      "modify": [
+      ]
     },
     "FailedModalTheme": {
       "overlay": {
