@@ -4,15 +4,16 @@ window.themedata1 = {
     "wrap": {
       "backgroundColor": "#efefef"
     },
-    "prizesWrap": {
-      "backgroundColor": "rgba(0, 0, 0, 0)"
+    "gameInfoWrap": {
+      "backgroundColor": "rgba(0, 0, 0, 0.8)"
     },
-    "prizeItem": {},
-    "gameImg": {},
-    "prizeAlias": {
+    "gameInfo": {},
+    "gameInfoPrizeItem": {},
+    "gameInfoPrizeImg": {},
+    "gameInfoPrizeName": {
       "fontSize": "0.8em"
     },
-    "prizeTag": {
+    "gameInfoPrizeTag": {
       "color": "rgb(76, 175, 80)"
     },
     "dice": {
@@ -29,7 +30,7 @@ window.themedata1 = {
       "backgroundColor": "#fff",
       "boxShadow": "inset 0.2em 0 0.2em rgba(0,0,0,0.1)"
     },
-    "showPrizeButton": {
+    "showGameInfoButton": {
       "width": "3em",
       "height": "3em",
       "color": "rgba(0,0,0,0)",

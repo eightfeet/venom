@@ -2,21 +2,35 @@
 window.themedata2 = {
     "GameTheme": {
         "wrap": {
+            "backgroundColor": "#efefef"
         },
-        "gameImg": {
-            "fontSize": "normal",
-            "height": "40%"
+        "gameInfoWrap": {
+            "backgroundColor": "rgba(0, 0, 0, 0.8)"
         },
-        "prizeAlias": {
-            "fontSize": "0.704em"
+        "gameInfo": {},
+        "gameInfoPrizeItem": {},
+        "gameInfoPrizeImg": {},
+        "gameInfoPrizeName": {
+            "fontSize": "0.8em"
+        },
+        "gameInfoPrizeTag": {
+            "color": "gray"
+        },
+        "dice": {
+            "width": "3em",
+            "height": "3em",
+            "left": "8em",
+            "top": "8em"
         },
         "side": {
-            backgroundColor:'#f00',
-            boxShadow: 'inset 0 0 0.6em #db0505'
+            "backgroundColor": "#f00",
+            "boxShadow": "inset 0 0 0.4em #d63100"
         },
         "dot": {
-            backgroundColor:'#fff',
-            boxShadow: 'inset 5px 0 10px #eee'
+            "backgroundColor": "#fff",
+            "boxShadow": "inset 0.2em 0 0.2em rgba(0,0,0,0.1)"
+        },
+        "showGameInfoButton": {
         },
         "modify": [
         ]
@@ -85,7 +99,7 @@ window.themedata2 = {
         },
         prizeAlias: {
         },
-		prizeName: {
+        prizeName: {
             textAlign: "center",
             padding: "0 1em",
             fontSize: "1.2em",
@@ -233,7 +247,7 @@ window.themedata2 = {
         },
         prizeAlias: {
         },
-		prizeName: {
+        prizeName: {
             textAlign: "center",
             padding: "0 1em",
             fontSize: "1.2em",

@@ -24,28 +24,37 @@ function renderModify(modify){
 	return modifyDom;
 }
 
-function renderGameInfo(style, prizes) {
-	const { gameImg, prizeAlias, prizeItem, prizeTag } = style;
 
-	const prizeItemStyle = inlineStyle(prizeItem);
-	const gameImgStyle = inlineStyle(gameImg);
-	const prizeAliasStyle = inlineStyle(prizeAlias);
-	const prizeTagStyle = inlineStyle(prizeTag);
+function renderGameInfo(style, prizes) {
+	const { gameInfoPrizeImg, gameInfoPrizeName, showGameInfoButton, gameInfoWrap, gameInfo, gameInfoPrizeItem, gameInfoPrizeTag } = style;
+
+	const showGameInfoButtonStyle = inlineStyle(showGameInfoButton);
+	const gameInfoWrapStyle = inlineStyle(gameInfoWrap);
+	const gameInfoStyle = inlineStyle(gameInfo);
+	const gameInfoPrizeImgStyle = inlineStyle(gameInfoPrizeImg);
+	const gameInfoPrizeNameStyle = inlineStyle(gameInfoPrizeName);
+	const gameInfoPrizeItemStyle = inlineStyle(gameInfoPrizeItem);
+	const gameInfoPrizeTagStyle = inlineStyle(gameInfoPrizeTag);
 
 	let dom = '';
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
-		dom += `<div class="${s.infoItem}">
-			<div class="${s.prizeItem}"  ${prizeItemStyle ? `style="${prizeItemStyle}"` : ''}>
-				<div class="${s.prizeTag} ${s.diceicon} ${s[`icon-dice-${index + 1}`]}" ${prizeTagStyle ? `style="${prizeTagStyle}"` : ''}></div>
-				<img ${gameImgStyle ? `style="${gameImgStyle}"` : ''} src="${element.prizeImg}" />
-				<div ${prizeAliasStyle ? `style="${prizeAliasStyle}"` : ''}>${element.prizeAlias}</div>
+		dom += `<div class="${s.infoItem}" >
+			<div class="${s.gimeinfoItem}"  ${gameInfoPrizeItemStyle ? `style="${gameInfoPrizeItemStyle}"` : ''}>
+				<div class="${s.prizeTag} ${s.diceicon} ${s[`icon-dice-${index + 1}`]}" ${gameInfoPrizeTagStyle ? `style="${gameInfoPrizeTagStyle}"` : ''}></div>
+				<img ${gameInfoPrizeImgStyle ? `style="${gameInfoPrizeImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
+				<div ${gameInfoPrizeNameStyle ? `style="${gameInfoPrizeNameStyle}"` : ''}>${element.prizeAlias || element.prizeName}</div>
 			</div>
 		</div>`;
 	}
 
-	return `<div class="${s.gameinfo}">${dom}</div>`;
+	return `<div class="${s.toggleprize} ${s.toggleb}" ${showGameInfoButtonStyle ? `style="${showGameInfoButtonStyle}"` : ''}>
+		奖品
+	</div>
+	<div class="${s.prizeswrap}" ${gameInfoWrapStyle ? `style="${gameInfoWrapStyle}"` : ''}>
+		<div class="${s.gameinfo}" ${gameInfoStyle ? `style="${gameInfoStyle}"` : ''}>${dom}</div>
+	</div>`;
 }
 
 /**
@@ -57,18 +66,12 @@ function renderGameInfo(style, prizes) {
  * @returns
  */
 export function renderGame(style, prizes) {
-	const { wrap, modify, dice, side, dot, showPrizeButton, prizesWrap } = style;
+	const { wrap, modify, dice, side, dot } = style;
 
 	const wrapStyle = inlineStyle(wrap);
 	const diceStyle = inlineStyle(dice);
 	const sideStyle = inlineStyle(side);
 	const dotStyle = inlineStyle(dot);
-	const showPrizeButtonStyle = inlineStyle(showPrizeButton);
-	const prizesWrapStyle = inlineStyle(prizesWrap);
-
-	// const setSize = {
-	// 	transform: `scale(${((dice && dice.size) ? dice.size : '1')},${((dice && dice.size) ? dice.size : '1')})`
-	// };
 
 	let dom = `
 	<div class="${s.ui_dado}">
@@ -123,10 +126,7 @@ export function renderGame(style, prizes) {
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
-	<div class="${s.toggleprize} ${s.toggleb}" ${showPrizeButtonStyle ? `style="${showPrizeButtonStyle}"` : ''}>
-		奖品
-	</div>
-	<div class="${s.prizeswrap}" ${prizesWrapStyle ? `style="${prizesWrapStyle}"` : ''}>${renderGameInfo(style, prizes)}</div>
+	${renderGameInfo(style, prizes)}
 	<div class="${s.lottery}">
 		${dom}
 	</div> 
