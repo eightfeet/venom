@@ -4,8 +4,24 @@ window.themedata2 = {
       "wrap": {
         "backgroundColor": "#efefef"
       },
-      "startButton": {},
+      "startButton": {
+        position: 'absolute',
+        width: '8.7em',
+        height: '3.5em',
+        top: '19.5em',
+        left: '5em',
+        zIndex: '7',
+        color: 'rgba(0,0,0,0)',
+        "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190816133908571.png)"
+      },
       "showGameInfoButton": {
+        "backgroundImage":"url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190816143200527.png)",
+        "width": '1.7em',
+        "height": '1.7em',
+        "overflow": 'hidden',
+        "color": 'rgba(0,0,0,0)',
+        "top": "4.1em",
+        "right": "0.35em"
       },
       "gameInfoWrap": {
         "paddingTop": "5em"
@@ -18,12 +34,41 @@ window.themedata2 = {
         "fontSize": "0.8em",
         "color": "red"
       },
-      "gameItem": {},
-      "gamePrizeName": {
+      "gameItem": {
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100% 100%',
+        width: '11em',
+        height: '9em',
+        margin: '0 auto'
       },
-      "gamePrizeImg": {},
-      "game": {},
+      "gamePrizeName": {
+        color: "#520807",
+        textAlign: "center",
+        width: "100%",
+        bottom: "2em"
+      },
+      "gamePrizeImg": {
+        "width": "8em",
+        "height": "8em"
+      },
+      "game": {
+        "position": "absolute",
+        "top": "7.35em",
+        "left": "2.45em",
+        "width": "14em",
+        "height": "9.5em",
+        "zIndex": "6"
+      },
       "modify": [
+        {
+          "top": "0",
+          "left": "0",
+          "zIndex": "1",
+          "height": "25em",
+          "width": "19em",
+          "backgroundSize": "100% auto",
+          "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190816115029395.png)",
+        }
       ]
     },
     "FailedModalTheme": {

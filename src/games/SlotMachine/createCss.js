@@ -73,6 +73,10 @@ export default function createCss(height, prizes, id) {
 		position: relative;
 	  }`;
 
+	stylecontent += `.item-prize-${id} {
+		position: relative;
+	  }`;
+
 	stylecontent += `.item-${id} img {
 		width: 100%;
 		height: 100%;
@@ -81,7 +85,6 @@ export default function createCss(height, prizes, id) {
 	stylecontent += `.item-${id} p {
 		padding: 0;
 		margin: 0;
-		top: 0;
 		text-align: center;
 		position: absolute;
 	}`;

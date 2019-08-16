@@ -55,8 +55,8 @@ class Game {
 			.then(() => {
 				const target = document.getElementById(this.targetId);
 				target.classList.add(s.target);
-				const targetHeight = target.offsetHeight;
-				createCss(targetHeight, this.prizes, this.targetId);
+				const boxHeight = target.querySelector(`.slotboard-${this.targetId}`).offsetHeight;
+				createCss(boxHeight, this.prizes, this.targetId);
 				return dormancyFor(50);
 			})
 			.then(() => {
@@ -64,12 +64,7 @@ class Game {
 				const showprizebtn = target.querySelector(`.${s.toggleprize}`);
 				const prizeswrap = target.querySelector(`.${s.prizeswrap}`);
 				const startbtn = target.querySelector(`.${s.startbtn}`);
-				
 
-				// lotterybtn.onclick = (e) => {
-				// 	e.preventDefault();
-				// 	return this.core.lottery();
-				// };
 				let showPrize = false;
 				const toggle = () => {
 					if (showPrize) {

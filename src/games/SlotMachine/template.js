@@ -65,7 +65,7 @@ function renderGamePrize(style, prizes, id) {
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
 		dom += `<div class="item-${id}" style="height:${(1 / prizes.length) * 100}%;">
-			<div ${gameItemStyle ? `style="${gameItemStyle}"` : ''}>
+			<div class="item-prize-${id}" ${gameItemStyle ? `style="${gameItemStyle}"` : ''}>
 				<img ${gamePrizeImgStyle ? `style="${gamePrizeImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
 				<p ${gamePrizeNameStyle ? `style="${gamePrizeNameStyle}"` : ''} style="position: absolute; top:0">${element.prizeAlias || element.prizeName}</p>
 			</div>
@@ -99,5 +99,5 @@ export function renderGame(style, prizes, id) {
 		${renderGameInfo(style, prizes)}
 		${renderGamePrize(style, prizes, id)}
 	</div>
-	<button class="${s.startbtn}" ${startButtonStyle ? `style="${startButtonStyle}"` : ''}>开始游戏</button>`;
+	<div class="${s.startbtn}" ${startButtonStyle ? `style="${startButtonStyle}"` : ''}>开始游戏</div>`;
 }
