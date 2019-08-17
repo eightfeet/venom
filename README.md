@@ -52,7 +52,7 @@ prizes = [{
 #### case
 
 ```javascript
-import { Game } from '@byhealth/lotteryroulette';
+import { Game } from '@byhealth/lottery/lib/roulette'; // roulette 大转盘， boxroulette 九宫格，flipcard 翻牌，dice 掷骰子，slotmachine 老虎机
 
 const LotteryGame = new Game({
           targetId: "target",
