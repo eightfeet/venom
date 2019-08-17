@@ -2,7 +2,6 @@
 window.themedata2 = {
     "GameTheme": {
         "wrap": {
-            "backgroundColor": "#efefef"
         },
         "gameInfoWrap": {
             "backgroundColor": "rgba(0, 0, 0, 0.8)"
@@ -20,7 +19,8 @@ window.themedata2 = {
             "width": "3em",
             "height": "3em",
             "left": "8em",
-            "top": "8em"
+            "top": "8em",
+            "zIndex": 7
         },
         "side": {
             "backgroundColor": "#f00",
@@ -33,6 +33,14 @@ window.themedata2 = {
         "showGameInfoButton": {
         },
         "modify": [
+            {
+                "width": "18em",
+                "height": "19em",
+                "left": "-0.2em",
+                "top": "-1em",
+                "backgroundImage":"url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190817225256559.png)",
+                "backgroundSize": "100% 100%"
+            }
         ]
     },
     "FailedModalTheme": {

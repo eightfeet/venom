@@ -12,6 +12,7 @@ window.themedata2 = {
       "left": "5em",
       "zIndex": "7",
       "color": "rgba(0,0,0,0)",
+      "backgroundSize":"100% 100%",
       "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190816133908571.png)"
     },
     "showGameInfoButton": {
