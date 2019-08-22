@@ -5,13 +5,12 @@ if (window.Promise === undefined) {
 import Core from '../Core';
 import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory, tools } from '@byhealth/walle';
 import s from './game.scss';
-import createCss from './createCss';
 
 const { dormancyFor } = tools;
 const { createDom, inlineStyle } = htmlFactory;
 
 import { renderGame } from './template';
-import { setTimeout } from 'timers';
+import { handleGamePrizes } from './helper';
 
 const stamp = (new Date()).getTime();
 
@@ -31,9 +30,15 @@ class Game {
 			targetId: this.targetId
 		});
 		this.Loading = this.core.Loading;
-		this.oldDge = 0;
+
+		this.target = null;
+		this.itemHeight = null;
+		this.wrapHeight = null;
+		this.prizesRepeats = 6; // 每组奖品重复的次数
+		this.repeats = 1;
+		this.gamePrizes = [];
+
 		this.renderGame();
-		this.activeElements = null;
 	}
 
 	/**
@@ -42,10 +47,14 @@ class Game {
 	 * @memberof Game
 	 */
 	renderGame = () => {
+		const { prizesResult, repeats} = handleGamePrizes(this.prizes, this.prizesRepeats);
+		this.repeats = repeats;
+		this.gamePrizes = prizesResult;
+
 		return createDom(
 			renderGame(
 				this.GameTheme,
-				this.prizes,
+				this.gamePrizes,
 				this.targetId
 			),
 			this.targetId,
@@ -53,36 +62,19 @@ class Game {
 			this.emBase
 		)
 			.then(() => {
-				const target = document.getElementById(this.targetId);
-				target.classList.add(s.target);
-				const boxHeight = target.querySelector(`.slotboard-${this.targetId}`).offsetHeight;
-				createCss(boxHeight, this.prizes, this.targetId);
+				this.target = document.getElementById(this.targetId);
+				this.slotwrap = this.target.querySelector(`.${s.slotwrap}`);
+				this.target.classList.add(s.target);
+				this.itemHeight = this.target.querySelector(`.${s.game}`).offsetHeight;
+				this.wrapHeight = this.itemHeight * this.gamePrizes.length;
+				this.slotwrap.style.height = `${this.wrapHeight}px`;
+				
 				return dormancyFor(50);
 			})
 			.then(() => {
-				const target = document.getElementById(this.targetId);
-				const showprizebtn = target.querySelector(`.${s.toggleprize}`);
-				const prizeswrap = target.querySelector(`.${s.prizeswrap}`);
-				const startbtn = target.querySelector(`.${s.startbtn}`);
+				this.slotwrap.style.visibility = 'visible';
+				const startbtn = this.target.querySelector(`.${s.startbtn}`);
 
-				let showPrize = false;
-				const toggle = () => {
-					if (showPrize) {
-						prizeswrap.classList.remove(s.showprizes);
-						showprizebtn.style.display = 'block';
-						showPrize = false;
-					} else {
-						prizeswrap.classList.add(s.showprizes);
-						showprizebtn.style.display = 'none';
-						showPrize = true;
-					}
-				};
-				showprizebtn.onclick = () => {
-					toggle();
-				};
-				prizeswrap.onclick = () => {
-					toggle();
-				};
 				startbtn.onclick = e => {
 					e.preventDefault();
 					return this.core.lottery();
@@ -91,45 +83,9 @@ class Game {
 	}
 
 	distory = () => {
-		const head = document.getElementsByTagName('head')[0];
-		head.removeChild(document.getElementById(`slotmachine${this.targetId}`));
 		window.clearTimeout(gameTimer);
 		this.core.distory();
 	}
-
-	stopMachine = (prizePosition) => {
-		const target = document.getElementById(this.targetId);
-		const outwrap = target.querySelector(`.outwrap-${this.targetId}`);
-		const slotwrap = target.querySelector(`.slotwrap-${this.targetId}`);
-		setTimeout(() => {
-			outwrap.classList.remove(`outslotwrap-${this.targetId}`);
-			slotwrap.classList.add(`wrapspin-${this.targetId}-${prizePosition}`);
-		}, 800);
-	}
-
-	startMachine = () => {
-		const target = document.getElementById(this.targetId);
-		const outwrap = target.querySelector(`.outwrap-${this.targetId}`);
-		const slotwrap = target.querySelector(`.slotwrap-${this.targetId}`);
-		slotwrap.classList.add(`comeback-${this.targetId}`);
-		Promise.resolve()
-			.then(() => dormancyFor(800))
-			.then(() => {
-				slotwrap.className = `slotwrap-${this.targetId}`;
-				outwrap.classList.add(`outslotwrap-${this.targetId}`);
-			});
-	}
-
-
-	start = (prizePosition) => new Promise(resolve => {
-		this.startMachine();
-		window.clearTimeout(gameTimer);
-		gameTimer = setTimeout(() => {
-			this.stopMachine(prizePosition);
-			resolve();
-		}, 5000);
-	})
-
 
 	/**
 	 *
@@ -147,6 +103,7 @@ class Game {
 			const element = this.prizes[index];
 			if (element.prizeId === prize.prizeId) {
 				prizeIndex = index + 1;
+				break;
 			}
 		}
 
@@ -159,7 +116,36 @@ class Game {
 
 		if (prizeIndex !== null) {
 			Promise.resolve()
-				.then(() =>this.start(prizeIndex))
+				.then(() => {
+					let beginningIndex = null;
+					let endingIndex = null;
+					for (let index = this.gamePrizes.length - 1; index > 0; index--) {
+						const element = this.gamePrizes[index];
+						console.log(element);
+						if (element['prizeId'] === prize.prizeId) {
+							endingIndex = index;
+							break;
+						}
+					}
+
+					for (let index = 0; index < this.gamePrizes.length; index++) {
+						const element = this.gamePrizes[index];
+						if (element['prizeId'] === prize.prizeId) {
+							beginningIndex = index;
+							break;
+						}
+					}
+
+					const endingPositionY = endingIndex * this.itemHeight;
+					const beginningPositionY = beginningIndex * this.itemHeight;
+
+					this.slotwrap.style.top = `-${endingPositionY}px`;
+
+					setTimeout(() => {
+						this.slotwrap.style.top = `-${beginningPositionY}px`;
+					}, 3000);
+					// return this.start(prizeIndex);
+				})
 				.then(() =>dormancyFor(800))
 				.then(() => resolve(prize));
 		}

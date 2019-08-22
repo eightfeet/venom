@@ -10,7 +10,6 @@ const { inlineStyle } = htmlFactory;
  * @returns
  */
 function renderModify(modify) {
-
 	if (!modify || !Array.isArray(modify)) {
 		return '';
 	}
@@ -64,19 +63,17 @@ function renderGamePrize(style, prizes, id) {
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
-		dom += `<div class="item-${id}" style="height:${(1 / prizes.length) * 100}%;">
+		dom += `<div class="${s.gameitem}" style="height:${(1 / prizes.length) * 100}%;">
 			<div class="item-prize-${id}" ${gameItemStyle ? `style="${gameItemStyle}"` : ''}>
 				<img ${gamePrizeImgStyle ? `style="${gamePrizeImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
-				<p ${gamePrizeNameStyle ? `style="${gamePrizeNameStyle}"` : ''} style="position: absolute; top:0">${element.prizeAlias || element.prizeName}</p>
+				<p ${gamePrizeNameStyle ? `style="${gamePrizeNameStyle}"` : ''} style="position: absolute; top:0">${element.prizeAlias || element.prizeName}-${index}</p>
 			</div>
 		</div>`;
 	}
 
-	return `<div class="slotboard-${id}" ${gameStyle ? `style="${gameStyle}"` : ''}>
-		<div class="outwrap-${id}">
-			<div class="slotwrap-${id}">
-				${dom}
-			</div>
+	return `<div class="${s.game}" ${gameStyle ? `style="${gameStyle}"` : ''}>
+		<div class="${s.slotwrap} 66666">
+			${dom}
 		</div>
 	</div>`;
 }
