@@ -24,6 +24,10 @@ window.themedata2 = {
       "top": "4.1em",
       "right": "0.35em"
     },
+    // 活动信息布局
+    "gameInfoLayout": {
+
+    },
     "gameInfoWrap": {
       "paddingTop": "5em"
     },

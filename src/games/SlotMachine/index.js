@@ -3,11 +3,11 @@ if (window.Promise === undefined) {
 }
 
 import Core from '../Core';
-import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory, tools } from '@byhealth/walle';
+import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory, tools, webAnimation } from '@byhealth/walle';
 import s from './game.scss';
-
 const { dormancyFor } = tools;
 const { createDom, inlineStyle } = htmlFactory;
+const { onceTransitionEnd } = webAnimation;
 
 import { renderGame } from './template';
 import { handleGamePrizes } from './helper';
@@ -55,6 +55,7 @@ class Game {
 			renderGame(
 				this.GameTheme,
 				this.gamePrizes,
+				this.prizes,
 				this.targetId
 			),
 			this.targetId,
@@ -74,10 +75,31 @@ class Game {
 			.then(() => {
 				this.slotwrap.style.visibility = 'visible';
 				const startbtn = this.target.querySelector(`.${s.startbtn}`);
+				const showprizebtn = this.target.querySelector(`.${s.toggleprize}`);
+				const prizeslayout = this.target.querySelector(`.${s.prizeslayout}`);
 
 				startbtn.onclick = e => {
 					e.preventDefault();
 					return this.core.lottery();
+				};
+
+				let showPrize = false;
+				const toggle = () => {
+					if (showPrize) {
+						prizeslayout.classList.remove(s.showprizes);
+						showprizebtn.style.display = 'block';
+						showPrize = false;
+					} else {
+						prizeslayout.classList.add(s.showprizes);
+						showprizebtn.style.display = 'none';
+						showPrize = true;
+					}
+				};
+				showprizebtn.onclick = () => {
+					toggle();
+				};
+				prizeslayout.onclick = () => {
+					toggle();
 				};
 			});
 	}
@@ -121,7 +143,6 @@ class Game {
 					let endingIndex = null;
 					for (let index = this.gamePrizes.length - 1; index > 0; index--) {
 						const element = this.gamePrizes[index];
-						console.log(element);
 						if (element['prizeId'] === prize.prizeId) {
 							endingIndex = index;
 							break;
@@ -138,15 +159,22 @@ class Game {
 
 					const endingPositionY = endingIndex * this.itemHeight;
 					const beginningPositionY = beginningIndex * this.itemHeight;
-
-					this.slotwrap.style.top = `-${endingPositionY}px`;
-
-					setTimeout(() => {
-						this.slotwrap.style.top = `-${beginningPositionY}px`;
-					}, 3000);
-					// return this.start(prizeIndex);
+					this.slotwrap.style.webkitTransition = `top ${this.gamePrizes.length*115}ms cubic-bezier(0.77, 0, 0.21, 1) 0s`;
+					this.slotwrap.style.top = `-${endingPositionY + this.itemHeight/4}px`;
+					return Promise.resolve()
+						.then(() => {
+							return onceTransitionEnd(this.slotwrap);
+						})
+						.then(() => {
+							this.slotwrap.style.webkitTransition = 'top 800ms cubic-bezier(0, 0, 0.42, 1) 0s';
+							this.slotwrap.style.top = `-${endingPositionY}px`;
+							return onceTransitionEnd(this.slotwrap);
+						})
+						.then(() => {
+							this.slotwrap.style.webkitTransition = null;
+							this.slotwrap.style.top = `-${beginningPositionY}px`;
+						});
 				})
-				.then(() =>dormancyFor(800))
 				.then(() => resolve(prize));
 		}
 	});

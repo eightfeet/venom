@@ -24,14 +24,15 @@ function renderModify(modify) {
 }
 
 function renderGameInfo(style, prizes) {
-	const { gameInfoPrizeImg, gameInfoPrizeName, showGameInfoButton, gameInfoWrap, gameInfo, gameInfoPrizeItem } = style;
+	const { gameInfoPrizeImg, gameInfoPrizeName, showGameInfoButton, gameInfoWrap, gameInfoContent, gameInfoLayout, gameInfoPrizeItem } = style;
 
 	const showGameInfoButtonStyle = inlineStyle(showGameInfoButton);
 	const gameInfoWrapStyle = inlineStyle(gameInfoWrap);
-	const gameInfoStyle = inlineStyle(gameInfo);
+	const gameInfoLayoutStyle = inlineStyle(gameInfoLayout);
 	const gameInfoPrizeImgStyle = inlineStyle(gameInfoPrizeImg);
 	const gameInfoPrizeNameStyle = inlineStyle(gameInfoPrizeName);
 	const gameInfoPrizeItemStyle = inlineStyle(gameInfoPrizeItem);
+	const gameInfoContentStyle = inlineStyle(gameInfoContent);
 
 	let dom = '';
 
@@ -45,11 +46,13 @@ function renderGameInfo(style, prizes) {
 		</div>`;
 	}
 
-	return `<div class="${s.toggleprize} ${s.toggleb}" ${showGameInfoButtonStyle ? `style="${showGameInfoButtonStyle}"` : ''}>
+	return `<div class="${s.toggleprize}" ${showGameInfoButtonStyle ? `style="${showGameInfoButtonStyle}"` : ''}>
 		奖品
 	</div>
-	<div class="${s.prizeswrap}" ${gameInfoWrapStyle ? `style="${gameInfoWrapStyle}"` : ''}>
-		<div class="${s.gameinfo}" ${gameInfoStyle ? `style="${gameInfoStyle}"` : ''}>${dom}</div>
+	<div class="${s.prizeslayout}"" ${gameInfoLayoutStyle ? `style="${gameInfoLayoutStyle}"` : ''}>
+		<div class="${s.prizeswrap}" ${gameInfoWrapStyle ? `style="${gameInfoWrapStyle}"` : ''}>
+			<div class="${s.gameinfo}" ${gameInfoContentStyle ? `style="${gameInfoContentStyle}"` : ''}>${dom}</div>
+		</div>
 	</div>`;
 }
 
@@ -66,13 +69,13 @@ function renderGamePrize(style, prizes, id) {
 		dom += `<div class="${s.gameitem}" style="height:${(1 / prizes.length) * 100}%;">
 			<div class="item-prize-${id}" ${gameItemStyle ? `style="${gameItemStyle}"` : ''}>
 				<img ${gamePrizeImgStyle ? `style="${gamePrizeImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
-				<p ${gamePrizeNameStyle ? `style="${gamePrizeNameStyle}"` : ''} style="position: absolute; top:0">${element.prizeAlias || element.prizeName}-${index}</p>
+				<p ${gamePrizeNameStyle ? `style="${gamePrizeNameStyle}"` : ''} style="position: absolute; top:0">${element.prizeAlias || element.prizeName}</p>
 			</div>
 		</div>`;
 	}
 
 	return `<div class="${s.game}" ${gameStyle ? `style="${gameStyle}"` : ''}>
-		<div class="${s.slotwrap} 66666">
+		<div class="${s.slotwrap}">
 			${dom}
 		</div>
 	</div>`;
@@ -86,7 +89,7 @@ function renderGamePrize(style, prizes, id) {
  * @param { Array } prizes 奖项
  * @returns
  */
-export function renderGame(style, prizes, id) {
+export function renderGame(style, gamePrizes, prizes, id) {
 	const { wrap, modify, startButton } = style;
 	const wrapStyle = inlineStyle(wrap);
 	const startButtonStyle = inlineStyle(startButton);
@@ -94,7 +97,7 @@ export function renderGame(style, prizes, id) {
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
 		${renderGameInfo(style, prizes)}
-		${renderGamePrize(style, prizes, id)}
+		${renderGamePrize(style, gamePrizes, id)}
 	</div>
 	<div class="${s.startbtn}" ${startButtonStyle ? `style="${startButtonStyle}"` : ''}>开始游戏</div>`;
 }
