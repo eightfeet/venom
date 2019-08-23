@@ -16,6 +16,10 @@ window.themedata1 = {
       "backgroundSize": "100% 100%",
       "borderRadius": "0.64516rem"
     },
+    // 活动信息布局
+    "gameInfoLayout": {
+
+    },
     // 活动信息外框
     "gameInfoWrap": {
       "paddingTop": "5em"
