@@ -24,23 +24,23 @@ function renderModify(modify){
 	return modifyDom;
 }
 
-
-function renderGameInfo(style, prizes) {
-	const { gameInfoPrizeImg, gameInfoPrizeName, showGameInfoButton, gameInfoWrap, gameInfo, gameInfoPrizeItem, gameInfoPrizeTag } = style;
+function renderGameInfo(style, prizes, id) {
+	const { gameInfoPrizeImg, gameInfoPrizeName, showGameInfoButton, gameInfoWrap, gameInfoContent, gameInfoLayout, gameInfoPrizeItem, gameInfoPrizeTag } = style;
 
 	const showGameInfoButtonStyle = inlineStyle(showGameInfoButton);
 	const gameInfoWrapStyle = inlineStyle(gameInfoWrap);
-	const gameInfoStyle = inlineStyle(gameInfo);
+	const gameInfoLayoutStyle = inlineStyle(gameInfoLayout);
 	const gameInfoPrizeImgStyle = inlineStyle(gameInfoPrizeImg);
 	const gameInfoPrizeNameStyle = inlineStyle(gameInfoPrizeName);
 	const gameInfoPrizeItemStyle = inlineStyle(gameInfoPrizeItem);
+	const gameInfoContentStyle = inlineStyle(gameInfoContent);
 	const gameInfoPrizeTagStyle = inlineStyle(gameInfoPrizeTag);
 
 	let dom = '';
 
 	for (let index = 0; index < prizes.length; index++) {
 		const element = prizes[index];
-		dom += `<div class="${s.infoItem}" >
+		dom += `<div class="${s.infoItem} ${id}-item" >
 			<div class="${s.gimeinfoItem}"  ${gameInfoPrizeItemStyle ? `style="${gameInfoPrizeItemStyle}"` : ''}>
 				<div class="${s.prizeTag} ${s.diceicon} ${s[`icon-dice-${index + 1}`]}" ${gameInfoPrizeTagStyle ? `style="${gameInfoPrizeTagStyle}"` : ''}></div>
 				<img ${gameInfoPrizeImgStyle ? `style="${gameInfoPrizeImgStyle}"` : ''} src="${element.gameImg || element.prizeImg}" />
@@ -49,11 +49,13 @@ function renderGameInfo(style, prizes) {
 		</div>`;
 	}
 
-	return `<div class="${s.toggleprize} ${s.toggleb}" ${showGameInfoButtonStyle ? `style="${showGameInfoButtonStyle}"` : ''}>
+	return `<div class="${s.toggleprize}" ${showGameInfoButtonStyle ? `style="${showGameInfoButtonStyle}"` : ''}>
 		奖品
 	</div>
-	<div class="${s.prizeswrap}" ${gameInfoWrapStyle ? `style="${gameInfoWrapStyle}"` : ''}>
-		<div class="${s.gameinfo}" ${gameInfoStyle ? `style="${gameInfoStyle}"` : ''}>${dom}</div>
+	<div id="${id}-info" class="${s.prizeslayout}"" ${gameInfoLayoutStyle ? `style="${gameInfoLayoutStyle}"` : ''}>
+		<div class="${s.prizeswrap}" ${gameInfoWrapStyle ? `style="${gameInfoWrapStyle}"` : ''}>
+			<div class="${s.gameinfo}" ${gameInfoContentStyle ? `style="${gameInfoContentStyle}"` : ''}>${dom}</div>
+		</div>
 	</div>`;
 }
 

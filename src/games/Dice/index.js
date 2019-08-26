@@ -35,7 +35,7 @@ class Game {
 
 	/**
 	 *
-	 * 初始化翻牌模板
+	 * 初始化模板
 	 * @memberof Game
 	 */
 	renderGame = () => {
@@ -107,7 +107,7 @@ class Game {
 				const target = document.getElementById(this.targetId);
 				const lotterybtn = target.querySelector(`.${s.dice}`);
 				const showprizebtn = target.querySelector(`.${s.toggleprize}`);
-				const prizeswrap = target.querySelector(`.${s.prizeswrap}`);
+				const prizeslayout = target.querySelector(`.${s.prizeslayout}`);
 				lotterybtn.onclick = (e) => {
 					e.preventDefault();
 					return this.core.lottery();
@@ -115,11 +115,11 @@ class Game {
 				let showPrize = false;
 				const toggle = () => {
 					if (showPrize) {
-						prizeswrap.classList.remove(s.showprizes);
+						prizeslayout.classList.remove(s.showprizes);
 						showprizebtn.style.display = 'block';
 						showPrize = false;
 					} else {
-						prizeswrap.classList.add(s.showprizes);
+						prizeslayout.classList.add(s.showprizes);
 						showprizebtn.style.display = 'none';
 						showPrize = true;
 					}
@@ -127,7 +127,7 @@ class Game {
 				showprizebtn.onclick = () => {
 					toggle();
 				};
-				prizeswrap.onclick = () => {
+				prizeslayout.onclick = () => {
 					toggle();
 				};
 			});

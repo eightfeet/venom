@@ -313,7 +313,7 @@
         transform: rotate(0deg);
     }
 }
-.prizeswrap {
+.prizeslayout {
     position: fixed;
     visibility: hidden;
     transform: translate3d(0, 0, 100px);
@@ -331,15 +331,15 @@
     transition-duration: 0.3s;
 }
 
-.prizeTag {
-    color: #aaa;
-    border-radius: 0.1rem;
-    left: 0;
-    top: 0;
-    font-size: 2rem;
+.prizeswrap {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling:touch;
 }
 
-.prizeswrap.showprizes {
+.prizeslayout.showprizes {
     visibility: visible;
     opacity: 1;
 }
@@ -349,7 +349,7 @@
     width: 95%;
     height: 100%;
     margin: 2% auto;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
     background-color: #fff;
     border-radius: 0.5em;
     padding: 0.3rem;

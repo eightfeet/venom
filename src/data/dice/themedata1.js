@@ -4,17 +4,37 @@ window.themedata1 = {
     "wrap": {
       "backgroundColor": "#efefef"
     },
+    // 显示活动信息按钮
+    "showGameInfoButton": {
+      "width": "3em",
+      "height": "3em",
+      "color": "rgba(0,0,0,0)",
+      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190808141018604.png)",
+      "backgroundSize": "100% 100%",
+      "borderRadius": "0.64516rem"
+    },
+    // 活动信息布局
+    "gameInfoLayout": {
+
+    },
+    // 活动信息外框
     "gameInfoWrap": {
-      "backgroundColor": "rgba(0, 0, 0, 0.8)"
+      "paddingTop": "5em"
     },
-    "gameInfo": {},
-    "gameInfoPrizeItem": {},
+    // 活动信息奖品单项
+    "gameInfoPrizeItem": {
+      "height": "10em"
+    },
+    // 活动信息单项图片
     "gameInfoPrizeImg": {},
+    // 活动信息奖品名称
     "gameInfoPrizeName": {
-      "fontSize": "0.8em"
+      "fontSize": "0.8em",
+      "color": "red"
     },
+    // 对照标签
     "gameInfoPrizeTag": {
-      "color": "rgb(76, 175, 80)"
+      "color": "green"
     },
     "dice": {
       "width": "5em",
@@ -29,14 +49,6 @@ window.themedata1 = {
     "dot": {
       "backgroundColor": "#fff",
       "boxShadow": "inset 0.2em 0 0.2em rgba(0,0,0,0.1)"
-    },
-    "showGameInfoButton": {
-      "width": "3em",
-      "height": "3em",
-      "color": "rgba(0,0,0,0)",
-      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190808141018604.png)",
-      "backgroundSize": "100% 100%",
-      "borderRadius": "0.64516rem"
     },
     "modify": [
       {
