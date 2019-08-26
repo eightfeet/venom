@@ -1,14 +1,3 @@
-@font-face {
-    font-family: 'dice';
-    src:  url('./fonts/dice.eot?7oj4ak');
-    src:  url('./fonts/dice.eot?7oj4ak#iefix') format('embedded-opentype'),
-      url('./fonts/dice.ttf?7oj4ak') format('truetype'),
-      url('./fonts/dice.woff?7oj4ak') format('woff'),
-      url('./fonts/dice.svg?7oj4ak#dice') format('svg');
-    font-weight: normal;
-    font-style: normal;
-  }
-
 .diceicon {
     /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'dice' !important;
