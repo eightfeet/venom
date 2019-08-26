@@ -15,6 +15,7 @@ const fontface = `@font-face {
 }`;
 
 const styleDom = document.createElement('style');
+styleDom.setAttribute('type', 'text/css');
 styleDom.innerHTML = fontface;
 
 document.getElementsByTagName('head')[0].appendChild(styleDom);
