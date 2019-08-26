@@ -5,7 +5,6 @@ if (window.Promise === undefined) {
 import Core from '../Core';
 import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory, tools } from '@byhealth/walle';
 import s from './game.scss';
-// import './creatfontface';
 
 const { dormancyFor } = tools;
 const { createDom, inlineStyle } = htmlFactory;
