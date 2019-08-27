@@ -2,77 +2,87 @@
 window.themedata2 = {
   "GameTheme": {
     "wrap": {
-      "backgroundColor": "#efefef"
-    },
-    "startButton": {
-      "position": "absolute",
-      "width": "8.7em",
-      "height": "3.5em",
-      "top": "19.5em",
-      "left": "5em",
-      "zIndex": "7",
-      "color": "rgba(0,0,0,0)",
-      "backgroundSize":"100% 100%",
-      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190816133908571.png)"
-    },
-    "showGameInfoButton": {
-      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190816143200527.png)",
-      "width": "1.7em",
-      "height": "1.7em",
-      "overflow": "hidden",
-      "color": "rgba(0,0,0,0)",
-      "top": "4.1em",
-      "right": "0.35em"
-    },
-    // 活动信息布局
-    "gameInfoLayout": {
-
-    },
-    "gameInfoWrap": {
-      "paddingTop": "5em"
-    },
-    "gameInfoPrizeItem": {
       "height": "10em"
     },
+    "startButton": {
+      "zIndex": "7",
+      "position": "absolute",
+      "color": "rgba(0,0,0,0)",
+      "backgroundRepeat": "no-repeat",
+      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190821142604604.png)",
+      "backgroundPosition": "center center",
+      "backgroundSize": "100% 100%",
+      "width": "8.224em",
+      "height": "5.728em",
+      "top": "12.2em",
+      "left": "4.8em"
+    },
+    "showGameInfoButton": {
+      "width": "3em",
+      "height": "3em",
+      "right": "-2em",
+      "top": "-9em",
+      "color": "rgba(0,0,0,0)",
+      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190808141018604.png)",
+      "backgroundSize": "100% 100%",
+      "borderRadius": "5rem",
+      "backgroundColor": "#fff"
+    },
+    "gameInfoWrap": {
+      "paddingTop": "0.5em"
+    },
+    "gameInfoPrizeItem": {},
     "gameInfoPrizeImg": {},
     "gameInfoPrizeName": {
       "fontSize": "0.8em",
       "color": "red"
     },
     "gameItem": {
+      "display": "table",
+      "width": "15.552em",
+      "height": "7.295em",
+      "margin": "0 auto",
+      "paddingTop": "1.2em",
       "backgroundRepeat": "no-repeat",
-      "backgroundSize": "100% 100%",
-      "width": "11em",
-      "height": "9em",
-      "margin": "0 auto"
+      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190821135429829.png)",
+      "backgroundPosition": "center bottom",
+      "backgroundSize": "100% auto",
+      "position": "relative"
     },
     "gamePrizeName": {
-      "color": "#520807",
-      "textAlign": "center",
-      "width": "100%",
-      "bottom": "1em"
+      "color": "#fff",
+      "textAlign": "left",
+      "width": "6.5em",
+      "right": "1em",
+      "height": "3em",
+      "position": "relative",
+      "display": "table-cell",
+      "verticalAlign": "middle"
     },
     "gamePrizeImg": {
-      "width": "8em",
-      "height": "8em"
+      "width": "6em",
+      "height": "6em",
+      "borderRadius": "0.2rem",
+      "backgroundColor": "#fff",
+      "position": "absolute",
+      "left": "0.8em",
+      "top": "1.7em"
     },
     "game": {
-      "position": "absolute",
-      "top": "7.35em",
-      "left": "2.45em",
-      "width": "14em",
-      "height": "9.5em",
-      "zIndex": "6"
+      "margin": "0 auto",
+      "width": "15.552em",
+      "height": "9.5em"
     },
     "modify": [
       {
-        "top": "0",
-        "left": "0",
-        "zIndex": "1",
-        "height": "25em",
-        "width": "19em",
-        "backgroundSize": "100% auto",
-        "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190816115029395.png)"
+        "top": "-3.1em",
+        "left": "-3.3em",
+        "width": "24.6em",
+        "height": "29.28em",
+        "backgroundSize": "100% 100%",
+        "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190821121125946.png)",
+        "backgroundRepeat": "no-repeat",
+        "backgroundPosition": "center center"
       }
     ]
   },
@@ -124,8 +134,8 @@ window.themedata2 = {
       "width": "12em",
       "height": "2.4em",
       "borderRadius": "3em",
+      "backgroundImage": "url(http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190415152744574.jpg)",
       "boxShadow": "0 3px 4px rgba(31,156,203,.53), inset 0 2px rgba(255,255,255,.7)",
-      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190415152744574.jpg)",
       "backgroundSize": "auto 100%",
       "fontSize": "1em",
       "color": "#fff",
@@ -158,6 +168,10 @@ window.themedata2 = {
       "fontSize": ".8em",
       "width": "100%",
       "color": "#999"
+    },
+    "awardMsg": {
+      "color": "green",
+      "display": "block"
     },
     "modify": []
   },
@@ -203,7 +217,6 @@ window.themedata2 = {
     "submit": {
       "width": "12em",
       "height": "2.4em",
-      "fontSize": "1rem",
       "borderRadius": "3em",
       "boxShadow": "0 3px 4px rgba(31,156,203,.53), inset 0 2px rgba(255,255,255,.7)",
       "border": "none",
@@ -266,7 +279,6 @@ window.themedata2 = {
     "submit": {
       "width": "12em",
       "height": "2.4em",
-      "fontSize": "1rem",
       "borderRadius": "3em",
       "boxShadow": "0 3px 4px rgba(31,156,203,.53), inset 0 2px rgba(255,255,255,.7)",
       "border": "none",
@@ -303,6 +315,7 @@ window.themedata2 = {
       "width": "100%",
       "color": "#999"
     },
+    "awardMsg": {},
     "modify": []
   },
   "AddressModalTheme": {
@@ -428,9 +441,15 @@ window.themedata2 = {
     },
     "vertices": {
       "backgroundColor": "#8bc34a",
-      "width": "2px",
-      "height": ".6em",
-      "elements": 12
+      "width": ".4em",
+      "height": ".4em",
+      "elements": [
+        "red",
+        "green",
+        "blue",
+        "yellow",
+        "orange"
+      ]
     }
   }
 };
