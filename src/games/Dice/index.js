@@ -158,6 +158,7 @@ class Game {
 		if (prize && !prizeIndex) {
 			resolve(prize);
 			console.error('所中奖品非展示奖池内奖品');
+			return;
 		}
 
 		const target = document.getElementById(this.targetId);
