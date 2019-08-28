@@ -67,7 +67,7 @@ function renderGameInfo(style, prizes, id) {
  * @param { Array } prizes 奖项
  * @returns
  */
-export function renderGame(style, prizes) {
+export function renderGame(style, prizes, id) {
 	const { wrap, modify, dice, side, dot } = style;
 
 	const wrapStyle = inlineStyle(wrap);
@@ -128,7 +128,7 @@ export function renderGame(style, prizes) {
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
-	${renderGameInfo(style, prizes)}
+	${renderGameInfo(style, prizes, id)}
 	<div class="${s.lottery}">
 		${dom}
 	</div> 

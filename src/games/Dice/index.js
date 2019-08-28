@@ -42,7 +42,8 @@ class Game {
 		return createDom(
 			renderGame(
 				this.GameTheme,
-				this.prizes
+				this.prizes,
+				this.targetId
 			),
 			this.targetId,
 			this.parentId,
