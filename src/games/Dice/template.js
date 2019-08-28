@@ -38,8 +38,10 @@ function renderGameInfo(style, prizes, id) {
 
 	let dom = '';
 
-	for (let index = 0; index < prizes.length; index++) {
-		const element = prizes[index];
+	const infoPrizes = prizes.slice(0, 6);
+
+	for (let index = 0; index < infoPrizes.length; index++) {
+		const element = infoPrizes[index];
 		dom += `<div class="${s.infoItem} ${id}-item" >
 			<div class="${s.gimeinfoItem}"  ${gameInfoPrizeItemStyle ? `style="${gameInfoPrizeItemStyle}"` : ''}>
 				<div class="${s.prizeTag} ${s.diceicon} ${s[`icon-dice-${index + 1}`]}" ${gameInfoPrizeTagStyle ? `style="${gameInfoPrizeTagStyle}"` : ''}></div>
