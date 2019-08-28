@@ -147,9 +147,10 @@ class Game {
 	lottery = (prize) => new Promise((resolve) => {
 
 		let prizeIndex = null;
+		const gamePrize = this.prizes.slice(0, 6);
 		// 确认中奖位置
-		for (let index = 0; index < this.prizes.length; index++) {
-			const element = this.prizes[index];
+		for (let index = 0; index < gamePrize.length; index++) {
+			const element = gamePrize[index];
 			if (element.prizeId === prize.prizeId) {
 				prizeIndex = index + 1;
 			}
