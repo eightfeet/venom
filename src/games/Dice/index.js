@@ -194,6 +194,7 @@ class Game {
 			}
 					
 			target.querySelector(`.${s.dice}`).style.transform = 'rotateX(' + x + 'deg) rotateY(' + y + 'deg) rotateZ(' + z + 'deg)';
+			target.querySelector(`.${s.dice}`).style.webkitTransform = 'rotateX(' + x + 'deg) rotateY(' + y + 'deg) rotateZ(' + z + 'deg)';
 					
 			platformEle.style.transform = 'translate3d(0,0, 0px)';
 			platformEle.style.webkitTransform = 'translate3d(0,0, 0px)';
