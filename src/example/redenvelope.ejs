@@ -20,13 +20,13 @@
       }
       
       .box {
-        width: 300px;
-        height: 300px;
+        width: 18.56em;
+        height: 30.656em;
         margin: 0 auto;
       }
       .box1 {
-        width: 17.408em;
-        height: 17.408em;
+        width: 18.56em;
+        height: 30.656em;
         margin: 0 auto;
         position: relative;
       }
@@ -86,8 +86,8 @@
         var prizesData1 = window.prizes1;
         var prizesData2 = window.prizes2;
         var rand = 10;
-        var Game = window.___Lottery___.roulette.Game;
-        var NoticeModal = window.___Lottery___.roulette.NoticeModal;
+        var Game = window.___Lottery___.redenvelope.Game;
+        var NoticeModal = window.___Lottery___.redenvelope.NoticeModal;
 
         var start1 = function() {
             return new Promise(function(resolve){
@@ -151,7 +151,7 @@
           receiverInfo: receiverInfo,
           checkVerificationCode: checkVerificationCode, // 检查手机验证码
           prizes: prizesData1.slice(0, rand),
-          emBase: 10,
+          // emBase: 10,
           onCancel: function(){console.log('放弃1')},
           onEnsure: function(prize){ console.log('确定中奖结果1！', prize);},
           loading: {

@@ -1,103 +1,84 @@
-/*
-var ReadPacket = React.createClass({
-    getInitialState: function() {
-        return {
-            animation: false,
-            status: 0  // 0: 等待拆开 1: 拆开后
-        };
-    },
-    stopAnimation: function() {
-        this.setState({animation: false});
-    },
-    showResult: function() {
-        this.setState({status: 1});
-    },
-    openRedPacket: function() {
-        this.setState({animation: true});
-        setTimeout(this.stopAnimation.bind(this), 3000);
-        setTimeout(this.showResult.bind(this), 4000);
-    },
-    render: function() {
-        var bonus = 88.88;
+if (window.Promise === undefined) {
+	throw new Error('Promise pollyfill not found.');
+}
 
-        if(this.state.status == 0) {
-            return (
-                <div className='redpack-container' id='redpack-container'>
-                    <div className='redpack'>
-                        <div className='topcontent'>
-                            <div className='redpack-avatar'>
-                                <img src='./assets/avatar.png' alt='头像' width='80' height='80'/>
-                                <span id='close'>+</span>
-                            </div>
-                            <h2 className='white-text'>老罗</h2>
-                            <span className='redpack-text'>给你发了一个红包</span>
-                            <div className='redpack-description white-text'>恭喜发财 大吉大利</div>
-                        </div>
+import Core from '../Core';
+import { Loading, AddressModal, NoticeModal, validate, Message, Modal, htmlFactory, tools, webAnimation } from '@byhealth/walle';
+import s from './game.scss';
+const { dormancyFor } = tools;
+const { createDom, inlineStyle } = htmlFactory;
+const { onceTransitionEnd } = webAnimation;
+console.log('?---', onceTransitionEnd);
 
-                        <div id='redpack-open' className={this.state.animation ? 'rotate' : ''}
-                             onClick={this.openRedPacket.bind(this)}
-                        >
-                            <span>拆红包</span>
-                        </div>
-                    </div>
-                </div>
-            );
-        } else if (bonus == 0) {
-            // 谢谢参与
-            return (
-                <div className='redpack-container' id='redpack-container'>
-                    <div className='redpack'>
-                        <div className='topcontent-open'>
-                            <div className='redpack-avatar'>
-                                <span id='close'></span>
-                            </div>
-                            <h1 className='white-text' style={{marginTop: 180}}> 谢谢参与 </h1>
-                            <span className='redpack-text'>多多参与的奖励的机会更多哦</span>
-                            <div>
-                                <a className='white-text' style={{textDecoration: 'underline'}}>
-                                    去我的账户查看积分
-                                </a>
-                            </div>
-                        </div>
+import { renderGame } from './template';
 
-                        <div id='redpack-opened'>
-                            <div className='redpack-avatar'>
-                                <img src='./assets/avatar.png' alt='头像' width='80' height='80'/>
-                            </div>
-                        </div>
+const stamp = (new Date()).getTime();
 
-                    </div>
-                </div>
-            );
-        } else {
-            // 显示奖励金额
-            return (
-                <div className='redpack-container' id='redpack-container'>
-                    <div className='redpack'>
-                        <div className='topcontent-open'>
-                            <div className='redpack-avatar'>
-                                <span id='close'></span>
-                            </div>
-                            <h1 className='white-text' style={{marginTop: 180}}> {bonus.toFixed(2)} </h1>
-                            <span className='redpack-text'>奖励积分已经存入您的账户</span>
-                            <div>
-                                <a className='white-text' style={{textDecoration: 'underline'}}>
-                                    去我的账户查看积分
-                                </a>
-                            </div>
-                        </div>
+class Game {
+	constructor(config) {
+		const { style, prizes, targetId, parentId, emBase } = config;
+		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
+		this.emBase = emBase;
+		this.prizes = prizes;
+		this.GameTheme = style.GameTheme;
+		this.parentId = parentId;
+		this.core = new Core({
+			...config,
+			lottery: this.lottery,
+			targetId: this.targetId
+		});
+		this.Loading = this.core.Loading;
 
-                        <div id='redpack-opened'>
-                            <div className='redpack-avatar'>
-                                <img src='./assets/avatar.png' alt='头像' width='80' height='80'/>
-                            </div>
-                        </div>
+		this.target = null;
+		this.itemHeight = null;
+		this.wrapHeight = null;
+		this.prizesRepeats = 6; // 每组奖品重复的次数
+		this.repeats = 1;
+		this.gamePrizes = [];
 
-                    </div>
-                </div>
-            );
-        }
-    }
-});
+		this.renderGame();
+	}
+    
+	/**
+	 *
+	 * 初始化红包
+	 * @memberof Game
+	 */
+	renderGame = () => {
+		return createDom(
+			renderGame(
+				this.GameTheme,
+				this.prizes,
+				this.targetId
+			),
+			this.targetId,
+			this.parentId,
+			this.emBase
+		)
+			.then(() => {
+				this.target = document.getElementById(this.targetId);
+				// targer 自身的样式无法通过配置控制
+				this.target.classList.add(s.target);
+				return dormancyFor(50);
+			})
+			.then(() => {
+				const startbtn = this.target.querySelector(`.${s.startbutton}`);
+				const topcontent = this.target.querySelector(`.${s.topcontent}`);
+				const redpack = this.target.querySelector(`.${s.redpack}`);
+				startbtn.onclick = () => {
+				    console.log('红包抽奖');
+					startbtn.classList.add(s.rotate);
+					Promise.resolve()
+						.then(() => dormancyFor(1500))
+						.then(() => {
+							startbtn.style.display = 'none';
+							redpack.classList.add(s.redpackopen);
+							topcontent.classList.add(s.topcontentopen);
+						});
+				};
+			});
+	}
+}
 
-*/
+module.exports = {Game, NoticeModal, Loading, validate, Message, Modal, AddressModal, inlineStyle};
+
