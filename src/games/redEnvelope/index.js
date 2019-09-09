@@ -8,7 +8,6 @@ import s from './game.scss';
 const { dormancyFor } = tools;
 const { createDom, inlineStyle } = htmlFactory;
 const { onceTransitionEnd } = webAnimation;
-console.log('?---', onceTransitionEnd);
 
 import { renderGame } from './template';
 
@@ -16,7 +15,7 @@ const stamp = (new Date()).getTime();
 
 class Game {
 	constructor(config) {
-		const { style, prizes, targetId, parentId, emBase } = config;
+		const { style, prizes, targetId, parentId, emBase, onCancel, onEnsure } = config;
 		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
 		this.emBase = emBase;
 		this.prizes = prizes;
@@ -24,6 +23,8 @@ class Game {
 		this.parentId = parentId;
 		this.core = new Core({
 			...config,
+			onCancel: this.onCancel(onCancel),
+			onEnsure: this.onEnsure(onEnsure),
 			lottery: this.lottery,
 			targetId: this.targetId
 		});
@@ -37,6 +38,21 @@ class Game {
 		this.gamePrizes = [];
 
 		this.renderGame();
+	}
+
+	reset = () => {
+		const startbtn = this.target.querySelector(`.${s.startbutton}`);
+		const topcontent = this.target.querySelector(`.${s.topcontent}`);
+		const redpack = this.target.querySelector(`.${s.redpack}`);
+		const info = this.target.querySelector(`.${s.info}`);
+		// const ensure = this.target.querySelector(`.${s.ensure}`);
+		startbtn.classList.remove(s.rotate);
+		topcontent.classList.remove(s.topcontentopen);
+		redpack.classList.remove(s.redpackopen);
+		topcontent.classList.remove(s.topcontentopen);
+		info.innerHTML = '';
+		info.style.display = 'none';
+		startbtn.style.display = 'block';
 	}
     
 	/**
@@ -63,21 +79,70 @@ class Game {
 			})
 			.then(() => {
 				const startbtn = this.target.querySelector(`.${s.startbutton}`);
-				const topcontent = this.target.querySelector(`.${s.topcontent}`);
-				const redpack = this.target.querySelector(`.${s.redpack}`);
-				startbtn.onclick = () => {
-				    console.log('红包抽奖');
-					startbtn.classList.add(s.rotate);
-					Promise.resolve()
-						.then(() => dormancyFor(1500))
-						.then(() => {
-							startbtn.style.display = 'none';
-							redpack.classList.add(s.redpackopen);
-							topcontent.classList.add(s.topcontentopen);
-						});
-				};
+				startbtn.onclick = () => this.core.lottery();
 			});
 	}
+
+
+	/**
+	 *
+	 * 开始抽奖
+	 * @param {Object} prize 所获奖品
+	 * @returns
+	 * @memberof Game
+	 */
+	lottery = (prize) => new Promise((resolve) => {
+		const startbtn = this.target.querySelector(`.${s.startbutton}`);
+		const topcontent = this.target.querySelector(`.${s.topcontent}`);
+		const redpack = this.target.querySelector(`.${s.redpack}`);
+		const gameprize = this.target.querySelector(`.${s.gameprize}`);
+		const result = this.target.querySelector(`.${s.result}`);
+		const info = this.target.querySelector(`.${s.info}`);
+		startbtn.classList.add(s.rotate);
+		Promise.resolve()
+			.then(() => dormancyFor(1500))
+			.then(() => {
+				result.querySelector(`.${s.gameprizename}`).innerHTML = `${prize.prizeName}`;
+				result.style.display = 'block';
+				startbtn.style.display = 'none';
+				info.style.display = 'none';
+				redpack.classList.add(s.redpackopen);
+				topcontent.classList.add(s.topcontentopen);
+				onceTransitionEnd(redpack)
+					.then(() => {
+						gameprize.innerHTML = `<img src="${prize.prizeImg}" />`;
+						gameprize.style.display = 'block';
+						const ensure = this.target.querySelector(`.${s.ensure}`);
+						ensure.onclick = () => this.core.SuccessModal.onEnsure(prize);
+					})
+					.then(() => dormancyFor(50))
+					.then(() => resolve(prize));
+			});
+	});
+
+	/**
+	 *
+	 * @param { function } cancel
+	 * @memberof Game
+	 */
+	onCancel = (cancel) => () => {
+		cancel && cancel();
+		// this.reset();
+	}
+
+	/**
+	 *
+	 * @param { function } cancel
+	 * @memberof Game
+	 */
+	onEnsure = (ensure) => (prize) => {
+		if (prize.receiveType === 2) {
+			this.core.AddressModal.showModal(this.core.saveAddress);
+		} else {
+			ensure && ensure();
+		}
+	}
+	
 }
 
 module.exports = {Game, NoticeModal, Loading, validate, Message, Modal, AddressModal, inlineStyle};

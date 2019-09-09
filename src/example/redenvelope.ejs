@@ -85,7 +85,7 @@
         document.body.style.fontSize = isPC ? '16px' : rate+'px';
         var prizesData1 = window.prizes1;
         var prizesData2 = window.prizes2;
-        var rand = 10;
+        var rand = 7;
         var Game = window.___Lottery___.redenvelope.Game;
         var NoticeModal = window.___Lottery___.redenvelope.NoticeModal;
 
@@ -94,7 +94,9 @@
                 window.LotteryGame1.Loading.show();
                 window.setTimeout(function(){
                 window.LotteryGame1.Loading.hide();
-                resolve(prizes1[Math.floor(Math.random() * rand)]);
+                const randId = Math.floor(Math.random() * rand);
+                console.log(9999, randId);
+                resolve(prizes1[randId]);
                 }, 1000);
             });
         }

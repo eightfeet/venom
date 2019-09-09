@@ -40,13 +40,26 @@ export function renderGame(style) {
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
         <div class="${s.redpack}">
-            <div class="${s.topcontent}">
-                <div class="${s.subtitle}">开启您的红包</div>
-                <div class="${s.title}">恭喜发财，大吉大利</div>
+			<div class="${s.topcontent}">
+				<div class="${s.info}">
+					<div class="${s.subtitle}">开启您的红包</div>
+					<div class="${s.title}">恭喜发财，大吉大利</div>
+				</div>
+				<div class="${s.result}">
+					<div class="${s.gameprizetag}">
+					</div>
+					<div class="${s.gameprizename}">
+					</div>
+				</div>
                 <div class="${s.actionbox}">
                     <div class="${s.startbutton}">开始</div>
-                </div>
-            </div>
+				</div>
+			</div>
+			<div class="${s.gameprize}">
+			</div>
+			<div class="${s.ensure}">
+				确定
+			</div>
         </div>   
 	</div>`;
 }
