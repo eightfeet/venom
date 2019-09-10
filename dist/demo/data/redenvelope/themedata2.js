@@ -1,54 +1,67 @@
 /* eslint-disable indent */
-window.themedata1 = {
+window.themedata2 = {
   "GameTheme": {
-    // 外框
     "wrap": {
+      "height": "10em"
     },
-    // 开始按钮
-    "startButton": {},
-    // 显示活动信息按钮
+    "startButton": {
+    },
     "showGameInfoButton": {
       "width": "3em",
       "height": "3em",
+      "right": "-2em",
+      "top": "-9em",
       "color": "rgba(0,0,0,0)",
       "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190808141018604.png)",
       "backgroundSize": "100% 100%",
-      "borderRadius": "0.64516rem"
+      "borderRadius": "5rem",
+      "backgroundColor": "#fff"
     },
-    // 活动信息布局
-    "gameInfoLayout": {
-
-    },
-    // 活动信息外框
     "gameInfoWrap": {
-      "paddingTop": "5em"
+      "paddingTop": "0.5em"
     },
-    // 活动信息奖品单项
-    "gameInfoPrizeItem": {
-      "height": "10em"
-    },
-    // 活动信息单项图片
+    "gameInfoPrizeItem": {},
     "gameInfoPrizeImg": {},
-    // 活动信息奖品名称
     "gameInfoPrizeName": {
       "fontSize": "0.8em",
       "color": "red"
     },
-    // 游戏单项
     "gameItem": {
+      "display": "table",
+      "width": "15.552em",
+      "height": "7.295em",
+      "margin": "0 auto",
+      "paddingTop": "1.2em",
+      "backgroundRepeat": "no-repeat",
+      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190821135429829.png)",
+      "backgroundPosition": "center bottom",
+      "backgroundSize": "100% auto",
+      "position": "relative"
     },
-    // 游戏奖项标题
     "gamePrizeName": {
-      "color": "red",
-      "height": "1em"
+      "color": "#fff",
+      "textAlign": "left",
+      "width": "6.5em",
+      "right": "1em",
+      "height": "3em",
+      "position": "relative",
+      "display": "table-cell",
+      "verticalAlign": "middle"
     },
-    // 游戏奖项图片
     "gamePrizeImg": {
+      "width": "6em",
+      "height": "6em",
+      "borderRadius": "0.2rem",
+      "backgroundColor": "#fff",
+      "position": "absolute",
+      "left": "0.8em",
+      "top": "1.7em"
     },
-    // 游戏
     "game": {
+      "margin": "0 auto",
+      "width": "15.552em",
+      "height": "9.5em"
     },
-    // 修饰层
     "modify": []
   },
   "FailedModalTheme": {
@@ -99,8 +112,8 @@ window.themedata1 = {
       "width": "12em",
       "height": "2.4em",
       "borderRadius": "3em",
+      "backgroundImage": "url(http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190415152744574.jpg)",
       "boxShadow": "0 3px 4px rgba(31,156,203,.53), inset 0 2px rgba(255,255,255,.7)",
-      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190415152744574.jpg)",
       "backgroundSize": "auto 100%",
       "fontSize": "1em",
       "color": "#fff",
@@ -133,6 +146,10 @@ window.themedata1 = {
       "fontSize": ".8em",
       "width": "100%",
       "color": "#999"
+    },
+    "awardMsg": {
+      "color": "green",
+      "display": "block"
     },
     "modify": []
   },
@@ -178,7 +195,6 @@ window.themedata1 = {
     "submit": {
       "width": "12em",
       "height": "2.4em",
-      "fontSize": "1rem",
       "borderRadius": "3em",
       "boxShadow": "0 3px 4px rgba(31,156,203,.53), inset 0 2px rgba(255,255,255,.7)",
       "border": "none",
@@ -198,7 +214,6 @@ window.themedata1 = {
   },
   "SuccessModalTheme": {
     "overlay": {
-      // "display": "none",
       "backgroundColor": "rgba(0,0,0,0.5)"
     },
     "modalTitle": {
@@ -242,7 +257,6 @@ window.themedata1 = {
     "submit": {
       "width": "12em",
       "height": "2.4em",
-      "fontSize": "1rem",
       "borderRadius": "3em",
       "boxShadow": "0 3px 4px rgba(31,156,203,.53), inset 0 2px rgba(255,255,255,.7)",
       "border": "none",
@@ -279,6 +293,7 @@ window.themedata1 = {
       "width": "100%",
       "color": "#999"
     },
+    "awardMsg": {},
     "modify": []
   },
   "AddressModalTheme": {
@@ -404,9 +419,15 @@ window.themedata1 = {
     },
     "vertices": {
       "backgroundColor": "#8bc34a",
-      "width": "2px",
-      "height": ".6em",
-      "elements": 12
+      "width": ".4em",
+      "height": ".4em",
+      "elements": [
+        "red",
+        "green",
+        "blue",
+        "yellow",
+        "orange"
+      ]
     }
   }
 };

@@ -45,20 +45,21 @@ export function renderGame(style) {
 					<div class="${s.subtitle}">开启您的红包</div>
 					<div class="${s.title}">恭喜发财，大吉大利</div>
 				</div>
-				<div class="${s.result}">
-					<div class="${s.gameprizetag}">
-					</div>
+				<div class="${s.result} ${s.hide}">
 					<div class="${s.gameprizename}">
+					</div>
+					<div class="${s.gameawardmsg}">
 					</div>
 				</div>
                 <div class="${s.actionbox}">
                     <div class="${s.startbutton}">开始</div>
 				</div>
 			</div>
-			<div class="${s.gameprize}">
+			<div class="${s.gameprize} ${s.hide}">
 			</div>
-			<div class="${s.ensure}">
-				确定
+			<div class="${s.memo} ${s.hide}">
+			</div>
+			<div class="${s.ensure} ${s.hide}">
 			</div>
         </div>   
 	</div>`;

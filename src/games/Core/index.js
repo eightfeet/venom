@@ -102,7 +102,17 @@ class Core {
 			onCancel: this.onCancel(onCancel)
 		});
 
-		this.AddressModal     = new AddressModal({ AddressModalTheme,outerFrameId, MessageTheme, playerPhone, receiverInfo, cardIdRequest, checkVerificationCode });
+		this.AddressModal     =
+		new AddressModal({
+			AddressModalTheme,
+			outerFrameId,
+			MessageTheme,
+			playerPhone,
+			receiverInfo,
+			cardIdRequest,
+			checkVerificationCode
+		});
+		
 		const data = {style:LoadingTheme, parentId:outerFrameId, ...this.loadingSet};
 		this.Loading          = new Loading(data);
 		this.start            = start || function(){ throw '无抽奖方法';};
@@ -131,11 +141,12 @@ class Core {
 
 	/**
 	 * 修改和保存地址
-	 * @param {Function} callback 承接保存地
+	 * @param {Function} callback 保存地址回调
+	 * @param {Function} didSaveCallback 完成保存地址后的回调
 	 * @memberof Core
 	 */
-	handleSaveAddress = (callback) => {
-		this.AddressModal.showModal(this.saveAddress, callback);
+	handleSaveAddress = (onCancel, onEnsure) => {
+		this.AddressModal.showModal(this.saveAddress, onCancel, onEnsure);
 	}
 
 	/**

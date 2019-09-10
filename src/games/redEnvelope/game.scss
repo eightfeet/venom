@@ -53,7 +53,7 @@
   }
   
   .topcontentopen {
-    height: 50%;
+    height: 15em;
     background-color: #f45e4d;
     border-radius: .5em .5em 50% 50% / .5em .5em 22% 22%;
     box-shadow: 0px .1em .19em 0px rgba(88, 9, 0, 0.22);
@@ -117,7 +117,6 @@
     border: 1px solid #e0e0e0;
     background-color: #fff;
     border-radius: 0.5em;
-    display: none;
 
     img {
       width: 100%;
@@ -126,12 +125,8 @@
     }
   }
 
-  .info {
-    display: block;
-  }
-
-  .result {
-    display: none;
+  .info, .result {
+    font-style: normal;
   }
 
   .gameprizename{
@@ -142,16 +137,21 @@
     padding: 0 1em;
     width: 100%;
     font-size: 1.375em;
-    top: 53%;
+    top: 6em;
   }
 
-  .gameprizetag{
+  .gameawardmsg{
     width: 100%;
     color: #eff2b7;
     position: absolute;
     text-align: center;
     font-size: 0.8em;
-    top: 45%;
+    top: 8em;
+  }
+
+  .memo {
+    color: #666;
+    font-size: 1em;
   }
 
   .ensure{
@@ -164,4 +164,12 @@
     text-align: center;
     font-size: 1em;
     line-height: 1em;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
   }

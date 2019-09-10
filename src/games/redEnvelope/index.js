@@ -15,7 +15,7 @@ const stamp = (new Date()).getTime();
 
 class Game {
 	constructor(config) {
-		const { style, prizes, targetId, parentId, emBase, onCancel, onEnsure } = config;
+		const { style, prizes, targetId, parentId, emBase, onCancel, onEnsure, saveAddress } = config;
 		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
 		this.emBase = emBase;
 		this.prizes = prizes;
@@ -25,6 +25,7 @@ class Game {
 			...config,
 			onCancel: this.onCancel(onCancel),
 			onEnsure: this.onEnsure(onEnsure),
+			saveAddress: this.onSaveAddress(saveAddress),
 			lottery: this.lottery,
 			targetId: this.targetId
 		});
@@ -38,21 +39,7 @@ class Game {
 		this.gamePrizes = [];
 
 		this.renderGame();
-	}
-
-	reset = () => {
-		const startbtn = this.target.querySelector(`.${s.startbutton}`);
-		const topcontent = this.target.querySelector(`.${s.topcontent}`);
-		const redpack = this.target.querySelector(`.${s.redpack}`);
-		const info = this.target.querySelector(`.${s.info}`);
-		// const ensure = this.target.querySelector(`.${s.ensure}`);
-		startbtn.classList.remove(s.rotate);
-		topcontent.classList.remove(s.topcontentopen);
-		redpack.classList.remove(s.redpackopen);
-		topcontent.classList.remove(s.topcontentopen);
-		info.innerHTML = '';
-		info.style.display = 'none';
-		startbtn.style.display = 'block';
+		this.disableReset = false;
 	}
     
 	/**
@@ -83,6 +70,37 @@ class Game {
 			});
 	}
 
+	reset = () => {
+		if (this.disableReset) {
+			return;
+		}
+		const startbtn = this.target.querySelector(`.${s.startbutton}`);
+		const topcontent = this.target.querySelector(`.${s.topcontent}`);
+		const redpack = this.target.querySelector(`.${s.redpack}`);
+		const info = this.target.querySelector(`.${s.info}`);
+
+		const result = this.target.querySelector(`.${s.result}`);
+		const gameprize = this.target.querySelector(`.${s.gameprize}`);
+
+		topcontent.classList.remove(s.topcontentopen);
+		redpack.classList.remove(s.redpackopen);
+		const ensurebtn = this.target.querySelector(`.${s.ensure}`);
+		startbtn.classList.remove(s.hide);
+		info.classList.remove(s.hide);
+
+		result.classList.add(s.hide);
+		ensurebtn.classList.add(s.hide);
+		gameprize.classList.add(s.hide);
+
+	}
+
+
+	forceReset = () => {
+		this.disableReset = true;
+		this.reset();
+		this.disableReset = false;
+	}
+
 
 	/**
 	 *
@@ -93,27 +111,47 @@ class Game {
 	 */
 	lottery = (prize) => new Promise((resolve) => {
 		const startbtn = this.target.querySelector(`.${s.startbutton}`);
+		const ensurebtn = this.target.querySelector(`.${s.ensure}`);
 		const topcontent = this.target.querySelector(`.${s.topcontent}`);
 		const redpack = this.target.querySelector(`.${s.redpack}`);
 		const gameprize = this.target.querySelector(`.${s.gameprize}`);
 		const result = this.target.querySelector(`.${s.result}`);
 		const info = this.target.querySelector(`.${s.info}`);
+		const prizeName = result.querySelector(`.${s.gameprizename}`);
+		const gameawardmsg = result.querySelector(`.${s.gameawardmsg}`);
+
 		startbtn.classList.add(s.rotate);
+
 		Promise.resolve()
 			.then(() => dormancyFor(1500))
 			.then(() => {
-				result.querySelector(`.${s.gameprizename}`).innerHTML = `${prize.prizeName}`;
-				result.style.display = 'block';
-				startbtn.style.display = 'none';
-				info.style.display = 'none';
+				prizeName.innerHTML = `${prize.prizeName}`;
+				gameawardmsg.innerHTML =  `${prize.awardMsg}`;
+				if (prize.receiveType === 2) {
+					ensurebtn.innerHTML = `${this.core.SuccessModal.submitAddressText}`;
+				} else {
+					ensurebtn.innerHTML = `${this.core.SuccessModal.submitText}`;
+				}
+
+				
+				startbtn.classList.remove(s.rotate);
+
+				startbtn.classList.add(s.hide);
+				info.classList.add(s.hide);
 				redpack.classList.add(s.redpackopen);
 				topcontent.classList.add(s.topcontentopen);
+				gameprize.innerHTML = `<img src="${prize.prizeImg}" />`;
+
 				onceTransitionEnd(redpack)
 					.then(() => {
-						gameprize.innerHTML = `<img src="${prize.prizeImg}" />`;
-						gameprize.style.display = 'block';
+						result.classList.remove(s.hide);
+						ensurebtn.classList.remove(s.hide);
+						gameprize.classList.remove(s.hide);
 						const ensure = this.target.querySelector(`.${s.ensure}`);
 						ensure.onclick = () => this.core.SuccessModal.onEnsure(prize);
+						if (this.disableReset) {
+							console.log('再抽一次！');
+						}
 					})
 					.then(() => dormancyFor(50))
 					.then(() => resolve(prize));
@@ -127,7 +165,7 @@ class Game {
 	 */
 	onCancel = (cancel) => () => {
 		cancel && cancel();
-		// this.reset();
+		this.reset();
 	}
 
 	/**
@@ -136,11 +174,27 @@ class Game {
 	 * @memberof Game
 	 */
 	onEnsure = (ensure) => (prize) => {
-		if (prize.receiveType === 2) {
-			this.core.AddressModal.showModal(this.core.saveAddress);
-		} else {
-			ensure && ensure();
+		ensure && ensure(prize);
+		if (prize.receiveType !== 2) {
+			this.reset();
 		}
+	}
+
+	/**
+	 * 保存地址成功后重置游戏
+	 * @param { Function } saveAddress 承接保存地址方法
+	 * @memberof Game
+	 */
+	onSaveAddress = (saveAddress) => (data) => {
+		if (saveAddress && typeof saveAddress === 'function') {
+			return saveAddress(data)
+				.then(() => {
+					this.reset();
+				});
+		}
+		return () => {
+			throw '无保存地址方法, 确保方法new Promise & resolve';
+		};
 	}
 	
 }
