@@ -88,7 +88,7 @@ class Core {
 			// 重制游戏时嫁接onCancel方法
 			onCancel: this.onCancel(onCancel),
 			submitText: submitSuccessText,
-			onEnsure,
+			onEnsure: this.onEnsure(onEnsure),
 			submitAddressText
 		});
 
@@ -96,6 +96,7 @@ class Core {
 		new ResultModal({
 			outerFrameId,
 			style:FailedModalTheme,
+			onEnsure: this.onEnsure(onEnsure),
 			submitText:submitFailedText,
 			modalTitle:failedModalTitle,
 			// 重制游戏时this.onCancel嫁接onCancel方法
@@ -139,13 +140,17 @@ class Core {
 		cancel();
 	}
 
+	onEnsure = (ensure) => (prize) => {
+		ensure(prize);
+	}
+
 	/**
 	 * 修改和保存地址
 	 * @param {Function} callback 保存地址回调
 	 * @param {Function} didSaveCallback 完成保存地址后的回调
 	 * @memberof Core
 	 */
-	handleSaveAddress = (onCancel, onEnsure) => {
+	handleSaveAddress = (onEnsure, onCancel) => {
 		this.AddressModal.showModal(this.saveAddress, onCancel, onEnsure);
 	}
 

@@ -40,6 +40,7 @@ class Game {
 
 		this.renderGame();
 		this.disableReset = false;
+		this.config = config;
 	}
     
 	/**
@@ -51,7 +52,6 @@ class Game {
 		return createDom(
 			renderGame(
 				this.GameTheme,
-				this.prizes,
 				this.targetId
 			),
 			this.targetId,
@@ -82,6 +82,8 @@ class Game {
 		const result = this.target.querySelector(`.${s.result}`);
 		const gameprize = this.target.querySelector(`.${s.gameprize}`);
 
+		const gamememo = this.target.querySelector(`.${s.memo}`);
+
 		topcontent.classList.remove(s.topcontentopen);
 		redpack.classList.remove(s.redpackopen);
 		const ensurebtn = this.target.querySelector(`.${s.ensure}`);
@@ -91,6 +93,7 @@ class Game {
 		result.classList.add(s.hide);
 		ensurebtn.classList.add(s.hide);
 		gameprize.classList.add(s.hide);
+		gamememo.classList.add(s.hide);
 
 	}
 
@@ -119,6 +122,7 @@ class Game {
 		const info = this.target.querySelector(`.${s.info}`);
 		const prizeName = result.querySelector(`.${s.gameprizename}`);
 		const gameawardmsg = result.querySelector(`.${s.gameawardmsg}`);
+		const gamememo = this.target.querySelector(`.${s.memo}`);
 
 		startbtn.classList.add(s.rotate);
 
@@ -141,17 +145,22 @@ class Game {
 				redpack.classList.add(s.redpackopen);
 				topcontent.classList.add(s.topcontentopen);
 				gameprize.innerHTML = `<img src="${prize.prizeImg}" />`;
-
+				gamememo.innerHTML = prize.memo;
 				onceTransitionEnd(redpack)
 					.then(() => {
 						result.classList.remove(s.hide);
-						ensurebtn.classList.remove(s.hide);
 						gameprize.classList.remove(s.hide);
-						const ensure = this.target.querySelector(`.${s.ensure}`);
-						ensure.onclick = () => this.core.SuccessModal.onEnsure(prize);
-						if (this.disableReset) {
-							console.log('再抽一次！');
-						}
+						gamememo.classList.remove(s.hide);
+						
+						ensurebtn.classList.remove(s.hide);
+						ensurebtn.onclick = () => {
+							if (prize.receiveType === 2) {
+								this.core.handleSaveAddress(() => this.onEnsure(this.config.onEnsure)(prize));
+							} else {
+								this.onEnsure(this.config.onEnsure)(prize);
+							}
+						};
+						
 					})
 					.then(() => dormancyFor(50))
 					.then(() => resolve(prize));

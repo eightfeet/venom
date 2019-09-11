@@ -125,7 +125,7 @@
     }
   }
 
-  .info, .result {
+  .reset, .info, .result {
     font-style: normal;
   }
 
@@ -150,14 +150,15 @@
   }
 
   .memo {
-    color: #666;
-    font-size: 1em;
+    color: #888;
+    font-size: 0.8em;
+    text-align: center;
   }
 
   .ensure{
     color: #c8a76c;
     border: 1px dashed #c8a76c;
-    margin: 0 auto;
+    margin: 1em auto 0 auto;
     width: 8em;
     padding: 0.5em;
     border-radius: 0.3em;

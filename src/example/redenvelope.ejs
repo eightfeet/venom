@@ -88,6 +88,7 @@
         var rand = 7;
         var Game = window.___Lottery___.redenvelope.Game;
         var NoticeModal = window.___Lottery___.redenvelope.NoticeModal;
+        var Modal = ___Lottery___.redenvelope.Modal;
 
         var start1 = function() {
             return new Promise(function(resolve){
@@ -195,19 +196,46 @@
             cycleTime: 0.5
           }
         };
-        document.getElementById('changeCard').onchange = function(e){
-          rand = parseInt(e.target.value, 10);
-          data1.prizes = prizesData1.slice(0, rand);
-          window.LotteryGame1.distory();
-          window.LotteryGame1 = new Game(data1);
-        }
+
+        var data3 = {
+          targetId: "target3",
+          parentId: "parentId3",
+          playerPhone: "13635219421",
+          cardIdRequest: 3, // 填写收货地址时是否验证身份证: this.cardIdRequest = 1 隐藏身份证，2 验证身份证，3 身份证为空时不验证有填写时验证，4 不验证身份证
+          style: window.themedata1,
+          start: start1,
+          saveAddress: saveAddress,
+          receiverInfo: receiverInfo,
+          checkVerificationCode: checkVerificationCode, // 检查手机验证码
+          prizes: prizesData1.slice(0, rand),
+          // emBase: 10,
+          onCancel: function(){console.log('放弃1')},
+          onEnsure: function(prize){ console.log('确定中奖结果1！', prize);},
+          loading: {
+            size: 20,
+            length: 5,
+            cycleTime: 1,
+          },
+          lotteryForms: {
+            action: function(prize) {
+              return new Promise(function(resolve, reject){
+                console.log('处理你的中奖形式', prize)
+                resolve();
+              })
+            },
+            template: '<div id="test">7777</div>',
+            launcher: '#test'
+          }
+        };
+
         window.LotteryGame1 = new Game(data1);
         window.LotteryGame2 = new Game(data2);
-        // window.myNoticeModal = new NoticeModal(window.themedata2.NoticeModalTheme);
-        // window.myNoticeModal.showModal({
-        //   title:"对不起",
-        //   content: "没有机会了"
-        // });
-        // LotteryGame2.AddressModal.showModal()
+        
+        window.myNoticeModal = new Modal(window.themedata1.NoticeModalTheme);
+        window.myNoticeModal.show({
+          article: '<div id="parentId3" style="width:100%;height:30em"></div>',
+        }, true);
+
+        window.LotteryGame3 = new Game(data3);
       </script>
 </html>

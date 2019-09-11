@@ -31,7 +31,7 @@ function renderModify(modify) {
  * @param { Object } style 卡牌皮肤
  * @returns
  */
-export function renderGame(style) {
+export function renderGame(style, id) {
 	const { wrap, modify, startButton } = style;
 	const wrapStyle = inlineStyle(wrap);
 	const startButtonStyle = inlineStyle(startButton);
@@ -59,7 +59,9 @@ export function renderGame(style) {
 			</div>
 			<div class="${s.memo} ${s.hide}">
 			</div>
-			<div class="${s.ensure} ${s.hide}">
+			<div class="${s.ensure} ${s.hide}" id="${id}-ensure">
+			</div>
+			<div class="${s.reset} ${s.hide}" id="${id}-reset">
 			</div>
         </div>   
 	</div>`;
