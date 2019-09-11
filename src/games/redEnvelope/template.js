@@ -35,7 +35,6 @@ export function renderGame(style, id) {
 	const { wrap, modify, startButton } = style;
 	const wrapStyle = inlineStyle(wrap);
 	const startButtonStyle = inlineStyle(startButton);
-	console.log(startButtonStyle);
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
@@ -52,7 +51,7 @@ export function renderGame(style, id) {
 					</div>
 				</div>
                 <div class="${s.actionbox}">
-                    <div class="${s.startbutton}">开始</div>
+                    <div class="${s.startbutton}" ${startButtonStyle ? `style="${startButtonStyle}"` : ''}>开始</div>
 				</div>
 			</div>
 			<div class="${s.gameprize} ${s.hide}">

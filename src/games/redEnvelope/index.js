@@ -129,8 +129,8 @@ class Game {
 		Promise.resolve()
 			.then(() => dormancyFor(1500))
 			.then(() => {
-				prizeName.innerHTML = `${prize.prizeName}`;
-				gameawardmsg.innerHTML =  `${prize.awardMsg}`;
+				prizeName.innerHTML = prize.prizeName || '中奖啦！';
+				gameawardmsg.innerHTML =  prize.awardMsg || '恭喜您';
 				if (prize.receiveType === 2) {
 					ensurebtn.innerHTML = `${this.core.SuccessModal.submitAddressText}`;
 				} else {
@@ -145,7 +145,7 @@ class Game {
 				redpack.classList.add(s.redpackopen);
 				topcontent.classList.add(s.topcontentopen);
 				gameprize.innerHTML = `<img src="${prize.prizeImg}" />`;
-				gamememo.innerHTML = prize.memo;
+				gamememo.innerHTML = prize.memo || '';
 				onceTransitionEnd(redpack)
 					.then(() => {
 						result.classList.remove(s.hide);

@@ -198,7 +198,6 @@ window.themedata1 = {
   },
   "SuccessModalTheme": {
     "overlay": {
-      "display": "none",
       "backgroundColor": "rgba(0,0,0,0.5)"
     },
     "modalTitle": {
