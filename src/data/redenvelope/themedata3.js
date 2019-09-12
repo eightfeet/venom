@@ -21,7 +21,6 @@ window.themedata3 = {
     },
     // 活动信息外框
     "gameInfoWrap": {
-      "paddingTop": "5em"
     },
     // 活动信息奖品单项
     "gameInfoPrizeItem": {

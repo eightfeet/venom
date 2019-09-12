@@ -52,6 +52,7 @@ class Game {
 		return createDom(
 			renderGame(
 				this.GameTheme,
+				this.prizes,
 				this.targetId
 			),
 			this.targetId,
@@ -67,6 +68,28 @@ class Game {
 			.then(() => {
 				const startbtn = this.target.querySelector(`.${s.startbutton}`);
 				startbtn.onclick = () => this.core.lottery();
+				const target = document.getElementById(this.targetId);
+				const showprizebtn = target.querySelector(`.${s.toggleprize}`);
+				const prizeslayout = target.querySelector(`.${s.prizeslayout}`);
+
+				let showPrize = false;
+				const toggle = () => {
+					if (showPrize) {
+						prizeslayout.classList.remove(s.showprizes);
+						showprizebtn.style.display = 'block';
+						showPrize = false;
+					} else {
+						prizeslayout.classList.add(s.showprizes);
+						showprizebtn.style.display = 'none';
+						showPrize = true;
+					}
+				};
+				showprizebtn.onclick = () => {
+					toggle();
+				};
+				prizeslayout.onclick = () => {
+					toggle();
+				};
 			});
 	}
 
