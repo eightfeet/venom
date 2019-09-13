@@ -71,7 +71,7 @@ function renderGameInfo(style, prizes, id) {
  * @returns
  */
 export function renderGame(style, prizes, id) {
-	const { wrap, modify, startButton, coverTexts, coverTitle, coverSubTitle, gameResult, gameResultPrizename, gameResultAwardMsg, gameResultMemo, ensureBtn } = style;
+	const { wrap, backCover, cover, modify, startButton, coverTexts, coverTitle, coverSubTitle, gameResult, gameResultPrizename, gameResultAwardMsg, gameResultMemo, ensureBtn } = style;
 	const wrapStyle = inlineStyle(wrap);
 	const startButtonStyle = inlineStyle(startButton);
 	const coverTextsStyle = inlineStyle(coverTexts);
@@ -82,12 +82,14 @@ export function renderGame(style, prizes, id) {
 	const gameResultAwardMsgStyle = inlineStyle(gameResultAwardMsg);
 	const gameResultMemoStyle = inlineStyle(gameResultMemo);
 	const ensureBtnStyle = inlineStyle(ensureBtn);
+	const coverStyle = inlineStyle(cover);
+	const backCoverStyle = inlineStyle(backCover);
 
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
 		${renderGameInfo(style, prizes, id)}
-        <div class="${s.redpack}">
-			<div class="${s.topcontent}">
+        <div class="${s.redpack}" ${backCoverStyle ? `style="${backCoverStyle}"` : ''}>
+			<div class="${s.topcontent}" ${coverStyle ? `style="${coverStyle}"` : ''}>
 				<div class="${s.info}" ${coverTextsStyle ? `style="${coverTextsStyle}"` : ''}>
 					<div class="${s.subtitle}" ${coverSubTitleStyle ? `style="${coverSubTitleStyle}"` : ''}>开启您的红包</div>
 					<div class="${s.title}" ${coverTitleStyle ? `style="${coverTitleStyle}"` : ''}>恭喜发财，大吉大利</div>

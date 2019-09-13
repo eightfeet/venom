@@ -4,6 +4,37 @@ window.themedata1 = {
     // 外框
     "wrap": {
     },
+    // 封面
+    "cover": {
+    },
+    // 封底
+    "backCover": {
+    },
+    // 封面文字
+    "coverTexts": {
+    },
+    // 封面标题
+    "coverTitle": {
+    },
+    // 封面次标题
+    "coverSubTitle": {
+    },
+    // 游戏结果
+    "gameResult": {
+      color: ""
+    },
+    // 获奖名字
+    "gameResultPrizename": {
+    },
+    // 获奖信息
+    "gameResultAwardMsg": {
+    },
+    // 奖品备注
+    "gameResultMemo": {
+    },
+    // 确定操作按钮
+    "ensureBtn": {
+    },
     // 开始按钮
     "startButton": {},
     // 显示活动信息按钮
@@ -21,7 +52,6 @@ window.themedata1 = {
     },
     // 活动信息外框
     "gameInfoWrap": {
-      "paddingTop": "5em"
     },
     // 活动信息奖品单项
     "gameInfoPrizeItem": {
@@ -33,20 +63,6 @@ window.themedata1 = {
     "gameInfoPrizeName": {
       "fontSize": "0.8em",
       "color": "red"
-    },
-    // 游戏单项
-    "gameItem": {
-    },
-    // 游戏奖项标题
-    "gamePrizeName": {
-      "color": "red",
-      "height": "1em"
-    },
-    // 游戏奖项图片
-    "gamePrizeImg": {
-    },
-    // 游戏
-    "game": {
     },
     // 修饰层
     "modify": []

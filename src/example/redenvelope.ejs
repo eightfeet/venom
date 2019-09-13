@@ -59,6 +59,10 @@
       padding-top: 1em;
       padding-left: 1em;
     }
+
+    .transform{
+      transform: none !important;
+    }
   </style>
 </head>
 
@@ -277,6 +281,11 @@
   function showMyModal() {
     window.myNoticeModal.create({
       article: '<div id="parentId3" style="width:100%;height:100%"></div>'
+    })
+    .then(function(){
+      var hackDom = document.getElementById(window.myNoticeModal.state.id).querySelector('.' + window.myNoticeModal.state.id + '_content');
+      hackDom.classList.add('transform')
+      console.log(555, hackDom);
     });
     window.LotteryGame3 = new Game(data3);
   }

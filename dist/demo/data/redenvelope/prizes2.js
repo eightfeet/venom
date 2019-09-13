@@ -65,5 +65,27 @@ window.prizes2 =[
     "gameImg": "http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190418145059992.png",
     "prizeImg": "http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190418145059992.png",
     "memo": "很遗憾，您没有中奖，再接再厉"
+  },
+  {
+    "prizeId": 16,
+    "prizeType": 0,
+    "receiveType": 1,
+    "prizeAlias": "100汤币",
+    "prizeName": "100汤币",
+    "awardMsg": null,
+    "gameImg": "http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190418145059992.png",
+    "prizeImg": "http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190418145059992.png",
+    "memo": "很遗憾，您没有中奖，再接再厉"
+  },
+  {
+    "prizeId": 16,
+    "prizeType": 0,
+    "receiveType": 1,
+    "prizeAlias": "100汤币",
+    "prizeName": "100汤币",
+    "awardMsg": null,
+    "gameImg": "http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190418145059992.png",
+    "prizeImg": "http://by-health-portal2.oss-cn-beijing.aliyuncs.com/images/20190418145059992.png",
+    "memo": "很遗憾，您没有中奖，再接再厉"
   }
 ];

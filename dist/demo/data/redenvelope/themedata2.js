@@ -1,67 +1,79 @@
 /* eslint-disable indent */
 window.themedata2 = {
   "GameTheme": {
+    // 外框
     "wrap": {
-      "height": "10em"
     },
-    "startButton": {
+    // 封面
+    "cover": {
+      backgroundColor: "#f94b7b"
     },
+    // 封底
+    "backCover": {
+      backgroundColor: "#ed3a6c",
+      backgroundImage: "none"
+    },
+    // 封面文字
+    "coverTexts": {
+    },
+    // 封面标题
+    "coverTitle": {
+    },
+    // 封面次标题
+    "coverSubTitle": {
+    },
+    // 游戏结果
+    "gameResult": {
+      color: ""
+    },
+    // 获奖名字
+    "gameResultPrizename": {
+    },
+    // 获奖信息
+    "gameResultAwardMsg": {
+    },
+    // 奖品备注
+    "gameResultMemo": {
+      color: "yellow"
+    },
+    // 确定操作按钮
+    "ensureBtn": {
+      border: "1px dashed #fff",
+      color: "#fff"
+    },
+    // 开始按钮
+    "startButton": {},
+    // 显示活动信息按钮
     "showGameInfoButton": {
       "width": "3em",
       "height": "3em",
-      "right": "-2em",
-      "top": "-9em",
+      "right": "7.5em",
+      "top": "3em",
       "color": "rgba(0,0,0,0)",
       "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190808141018604.png)",
       "backgroundSize": "100% 100%",
       "borderRadius": "5rem",
       "backgroundColor": "#fff"
     },
-    "gameInfoWrap": {
-      "paddingTop": "0.5em"
+    // 活动信息布局
+    "gameInfoLayout": {
+
     },
-    "gameInfoPrizeItem": {},
+    // 活动信息外框
+    "gameInfoWrap": {
+    },
+    // 活动信息奖品单项
+    "gameInfoPrizeItem": {
+      "height": "10em"
+    },
+    // 活动信息单项图片
     "gameInfoPrizeImg": {},
+    // 活动信息奖品名称
     "gameInfoPrizeName": {
       "fontSize": "0.8em",
       "color": "red"
     },
-    "gameItem": {
-      "display": "table",
-      "width": "15.552em",
-      "height": "7.295em",
-      "margin": "0 auto",
-      "paddingTop": "1.2em",
-      "backgroundRepeat": "no-repeat",
-      "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190821135429829.png)",
-      "backgroundPosition": "center bottom",
-      "backgroundSize": "100% auto",
-      "position": "relative"
-    },
-    "gamePrizeName": {
-      "color": "#fff",
-      "textAlign": "left",
-      "width": "6.5em",
-      "right": "1em",
-      "height": "3em",
-      "position": "relative",
-      "display": "table-cell",
-      "verticalAlign": "middle"
-    },
-    "gamePrizeImg": {
-      "width": "6em",
-      "height": "6em",
-      "borderRadius": "0.2rem",
-      "backgroundColor": "#fff",
-      "position": "absolute",
-      "left": "0.8em",
-      "top": "1.7em"
-    },
-    "game": {
-      "margin": "0 auto",
-      "width": "15.552em",
-      "height": "9.5em"
-    },
+    // 修饰层
     "modify": []
   },
   "FailedModalTheme": {
