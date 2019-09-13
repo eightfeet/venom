@@ -79,6 +79,7 @@
 
   .actionbox {
     position: absolute;
+    transform: perspective(1000);
     width: 100%;
     bottom: -2.4em;
   }

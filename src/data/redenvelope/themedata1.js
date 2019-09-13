@@ -418,10 +418,10 @@ window.themedata1 = {
       "backgroundColor": "transparent"
     },
     "vertices": {
-      "backgroundColor": "#8bc34a",
+      "backgroundColor": "yellow",
       "width": "2px",
-      "height": ".6em",
-      "elements": 12
+      "height": ".2em",
+      elements: 20
     }
   }
 };

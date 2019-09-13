@@ -45,14 +45,15 @@ window.themedata3 = {
     "startButton": {},
     // 显示活动信息按钮
     "showGameInfoButton": {
-      "width": "3em",
-      "height": "3em",
+      "width": "2em",
+      "height": "2em",
       "color": "rgba(0,0,0,0)",
       "backgroundImage": "url(http://by-health-portal-2019.oss-cn-shenzhen.aliyuncs.com/images/20190808141018604.png)",
       "backgroundSize": "100% 100%",
-      "borderRadius": "0.64516rem",
-      "right": "-1em",
-      "top": "-3em"
+      "borderRadius": "2em",
+      "left": "1em",
+      "top": "0.5em",
+      "backgroundColor": "#fff"
     },
     // 活动信息布局
     "gameInfoLayout": {
@@ -438,7 +439,7 @@ window.themedata3 = {
       "backgroundColor": "transparent"
     },
     "vertices": {
-      "backgroundColor": "#8bc34a",
+      "backgroundColor": "#fff",
       "width": "2px",
       "height": ".6em",
       "elements": 12
