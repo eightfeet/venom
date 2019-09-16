@@ -82,6 +82,7 @@ export function renderGame(style, prizes, id) {
 	const gameResultAwardMsgStyle = inlineStyle(gameResultAwardMsg);
 	const gameResultMemoStyle = inlineStyle(gameResultMemo);
 	const ensureBtnStyle = inlineStyle(ensureBtn);
+	delete cover.height; // 考虑动画原因cave的height的定义将无效
 	const coverStyle = inlineStyle(cover);
 	const backCoverStyle = inlineStyle(backCover);
 
