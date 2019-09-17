@@ -99,8 +99,8 @@ class Game {
 		}
 		const startbtn = this.target.querySelector(`.${s.startbutton}`);
 		const topcontent = this.target.querySelector(`.${s.topcontent}`);
-		const redpack = this.target.querySelector(`.${s.redpack}`);
 		const info = this.target.querySelector(`.${s.info}`);
+		const redpackopen = this.target.querySelector(`.${s.redpackopen}`);
 
 		const result = this.target.querySelector(`.${s.result}`);
 		const gameprize = this.target.querySelector(`.${s.gameprize}`);
@@ -108,7 +108,7 @@ class Game {
 		const gamememo = this.target.querySelector(`.${s.memo}`);
 
 		topcontent.classList.remove(s.topcontentopen);
-		redpack.classList.remove(s.redpackopen);
+		redpackopen.classList.remove(s.redpackopenact);
 		const ensurebtn = this.target.querySelector(`.${s.ensure}`);
 		startbtn.classList.remove(s.hide);
 		info.classList.remove(s.hide);
@@ -139,7 +139,7 @@ class Game {
 		const startbtn = this.target.querySelector(`.${s.startbutton}`);
 		const ensurebtn = this.target.querySelector(`.${s.ensure}`);
 		const topcontent = this.target.querySelector(`.${s.topcontent}`);
-		const redpack = this.target.querySelector(`.${s.redpack}`);
+		const redpackopen = this.target.querySelector(`.${s.redpackopen}`);
 		const gameprize = this.target.querySelector(`.${s.gameprize}`);
 		const result = this.target.querySelector(`.${s.result}`);
 		const info = this.target.querySelector(`.${s.info}`);
@@ -165,11 +165,11 @@ class Game {
 
 				startbtn.classList.add(s.hide);
 				info.classList.add(s.hide);
-				redpack.classList.add(s.redpackopen);
+				redpackopen.classList.add(s.redpackopenact);
 				topcontent.classList.add(s.topcontentopen);
 				gameprize.innerHTML = `<img src="${prize.prizeImg}" />`;
 				gamememo.innerHTML = prize.memo || '';
-				onceTransitionEnd(redpack)
+				onceTransitionEnd(topcontent)
 					.then(() => {
 						result.classList.remove(s.hide);
 						gameprize.classList.remove(s.hide);

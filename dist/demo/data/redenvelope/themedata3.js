@@ -6,7 +6,8 @@ window.themedata3 = {
     },
     // 封面
     "cover": {
-      backgroundColor: "#f49a4d"
+      backgroundColor: "#f49a4d",
+      height: "50em"
     },
     // 封底
     "backCover": {

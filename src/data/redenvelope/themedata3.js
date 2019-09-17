@@ -23,6 +23,10 @@ window.themedata3 = {
     // 封面次标题
     "coverSubTitle": {
     },
+    // 游戏结果封底
+    "gameResultBackCover": {
+      "backgroundColor": "#f45e4d"
+    },
     // 游戏结果
     "gameResult": {
       color: ""

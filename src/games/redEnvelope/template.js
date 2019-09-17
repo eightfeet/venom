@@ -71,13 +71,14 @@ function renderGameInfo(style, prizes, id) {
  * @returns
  */
 export function renderGame(style, prizes, id) {
-	const { wrap, backCover, cover, modify, startButton, coverTexts, coverTitle, coverSubTitle, gameResult, gameResultPrizename, gameResultAwardMsg, gameResultMemo, ensureBtn } = style;
+	const { wrap, backCover, cover, modify, startButton, coverTexts, coverTitle, coverSubTitle, gameResultBackCover, gameResult, gameResultPrizename, gameResultAwardMsg, gameResultMemo, ensureBtn } = style;
 	const wrapStyle = inlineStyle(wrap);
 	const startButtonStyle = inlineStyle(startButton);
 	const coverTextsStyle = inlineStyle(coverTexts);
 	const coverTitleStyle = inlineStyle(coverTitle);
 	const coverSubTitleStyle = inlineStyle(coverSubTitle);
 	const gameResultStyle = inlineStyle(gameResult);
+	const gameResultBackCoverStyle = inlineStyle(gameResultBackCover);
 	const gameResultPrizenameStyle = inlineStyle(gameResultPrizename);
 	const gameResultAwardMsgStyle = inlineStyle(gameResultAwardMsg);
 	const gameResultMemoStyle = inlineStyle(gameResultMemo);
@@ -89,7 +90,8 @@ export function renderGame(style, prizes, id) {
 	return `${modify.length > 0 ? `<div class="${s.modifywrap}">${renderModify(modify)}</div>` : ''} 
 	<div class="${s.wrap}" ${wrapStyle ? `style="${wrapStyle}"` : ''}>
 		${renderGameInfo(style, prizes, id)}
-        <div class="${s.redpack}" ${backCoverStyle ? `style="${backCoverStyle}"` : ''}>
+		<div class="${s.redpack}" ${backCoverStyle ? `style="${backCoverStyle}"` : ''}>
+			<div class="${s.redpackopen}" ${gameResultBackCoverStyle ? `style="${gameResultBackCoverStyle}"` : ''}></div>
 			<div class="${s.topcontent}" ${coverStyle ? `style="${coverStyle}"` : ''}>
 				<div class="${s.info}" ${coverTextsStyle ? `style="${coverTextsStyle}"` : ''}>
 					<div class="${s.subtitle}" ${coverSubTitleStyle ? `style="${coverSubTitleStyle}"` : ''}>开启您的红包</div>
@@ -105,13 +107,15 @@ export function renderGame(style, prizes, id) {
                     <div class="${s.startbutton}" ${startButtonStyle ? `style="${startButtonStyle}"` : ''}>开始</div>
 				</div>
 			</div>
-			<div class="${s.gameprize} ${s.hide}">
-			</div>
-			<div class="${s.memo} ${s.hide}" ${gameResultMemoStyle ? `style="${gameResultMemoStyle}"` : ''}>
-			</div>
-			<div class="${s.ensure} ${s.hide}" id="${id}-ensure" ${ensureBtnStyle ? `style="${ensureBtnStyle}"` : ''}>
-			</div>
-			<div class="${s.reset} ${s.hide}" id="${id}-reset">
+			<div class="${s.resultcontent}">
+				<div class="${s.gameprize} ${s.hide}">
+				</div>
+				<div class="${s.memo} ${s.hide}" ${gameResultMemoStyle ? `style="${gameResultMemoStyle}"` : ''}>
+				</div>
+				<div class="${s.ensure} ${s.hide}" id="${id}-ensure" ${ensureBtnStyle ? `style="${ensureBtnStyle}"` : ''}>
+				</div>
+				<div class="${s.reset} ${s.hide}" id="${id}-reset">
+				</div>
 			</div>
         </div>   
 	</div>`;
