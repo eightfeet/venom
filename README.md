@@ -19,7 +19,7 @@
 |              | cardIdRequest         | 是否要求填写或验证身份证<br />状态：1 隐藏身份证，2 验证身份证，3 身份证为空时不验证有填写时验证，4 不验证身份证 | 否       | Number                               |
 |              | emBase                | em基准像素，Game将把此值写入到parentId的style.fontSize中，子元素将以此为单位基准，默认计算window宽度 | 否       | Number                               |
 |              | onCancel              | 取消中奖结果或取消中奖后填写地址时的回调                     | 否       | Function                             |
-|              | onEnsure              | 确定中奖结果或完成中奖填写地址时的回调                       | 否       | Function                             |
+|              | onConfirm              | 确定中奖结果或完成中奖填写地址时的回调                       | 否       | Function                             |
 |              | loading               | 设置Loading的属性,也可以在style中设置<br />[document](<http://www.eightfeet.cn/Loading/>) | 否       | Object                               |
 | 显示文字定义 | failedModalTitle      | 未中奖弹窗标题                                               | 否       | String                               |
 |              | submitFailedText      | 未中奖按钮文字                                               | 否       | String                               |
@@ -93,7 +93,7 @@ const LotteryGame = new Game({
           },
           emBase: 10,
           onCancel: () => console.log('关闭中奖结果'),
-          onEnsure: function(prize){ console.log('确定中奖结果1！', prize); },
+          onConfirm: function(prize){ console.log('确定中奖结果1！', prize); },
           loading: {
             size: 20,
             length: 5,
