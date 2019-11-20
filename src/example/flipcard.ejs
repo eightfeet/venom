@@ -146,7 +146,7 @@
             prizes: prizesData1.slice(0, rand),
             emBase: 10,
             onCancel: () => console.log('放弃1'),
-            onEnsure: function(prize){ console.log('确定中奖结果1！', prize); },
+            onConfirm: function(prize){ console.log('确定中奖结果1！', prize); },
             loading: {
               size: 20,
               length: 5,
@@ -170,7 +170,7 @@
             successModalTitle: "恭喜您抽中",
             submitFailedText: "好吧~~~",
             onCancel: () => console.log('放弃2'),
-            onEnsure: function(prize){ console.log('确定中奖结果2！', prize); },
+            onConfirm: function(prize){ console.log('确定中奖结果2！', prize); },
             loading: {
               size: 20, // loading大小 默认20
               length: 5, // 由几个vertices组成默认12个

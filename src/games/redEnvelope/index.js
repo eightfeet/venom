@@ -15,7 +15,7 @@ const stamp = (new Date()).getTime();
 
 class Game {
 	constructor(config) {
-		const { style, prizes, targetId, parentId, emBase, onCancel, onEnsure, saveAddress } = config;
+		const { style, prizes, targetId, parentId, emBase, onCancel, onConfirm, saveAddress } = config;
 		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
 		this.emBase = emBase;
 		this.prizes = prizes;
@@ -24,7 +24,7 @@ class Game {
 		this.core = new Core({
 			...config,
 			onCancel: this.onCancel(onCancel),
-			onEnsure: this.onEnsure(onEnsure),
+			onConfirm: this.onEnsure(onConfirm),
 			saveAddress: this.onSaveAddress(saveAddress),
 			lottery: this.lottery,
 			targetId: this.targetId
@@ -178,9 +178,9 @@ class Game {
 						ensurebtn.classList.remove(s.hide);
 						ensurebtn.onclick = () => {
 							if (prize.receiveType === 2) {
-								this.core.handleSaveAddress(() => this.onEnsure(this.config.onEnsure)(prize));
+								this.core.handleSaveAddress(() => this.onEnsure(this.config.onConfirm)(prize));
 							} else {
-								this.onEnsure(this.config.onEnsure)(prize);
+								this.onEnsure(this.config.onConfirm)(prize);
 							}
 						};
 						

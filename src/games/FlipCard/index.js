@@ -47,7 +47,7 @@ function KdShuffle(arr){
 
 class Game {
 	constructor(config){
-		const { style, prizes, targetId, parentId, onCancel, onEnsure, saveAddress, emBase } = config;
+		const { style, prizes, targetId, parentId, onCancel, onConfirm, saveAddress, emBase } = config;
 		this.targetId = targetId || `game-target-${stamp}${window.Math.floor(window.Math.random() * 100)}`;
 		this.timer = {
 			timerDelay: null,
@@ -60,7 +60,7 @@ class Game {
 		this.emBase = emBase;
 		this.core = new Core({...config,
 			onCancel: this.onCancel(onCancel),
-			onEnsure: this.onEnsure(onEnsure),
+			onConfirm: this.onEnsure(onConfirm),
 			lottery: this.lottery,
 			saveAddress: this.onSaveAddress(saveAddress),
 			targetId: this.targetId});
