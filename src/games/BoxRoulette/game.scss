@@ -20,7 +20,7 @@
         .button {
             width: 100%;
             height: 100%;
-            border-radius: fixpx(10);
+            border-radius: 0.2em;
         }
     }
 }
@@ -52,7 +52,8 @@
         width: 98%;
         height: 98%;
         background-color: #fff;
-        border-radius: fixpx(10);
+        border-radius: 0.2em;
+        margin: 1% 1%;
         overflow: hidden;
     }
     .selected {
@@ -66,7 +67,7 @@
             height: 100%;
             box-sizing: border-box;
             border: 2px solid red;
-            border-radius: fixpx(10);
+            border-radius: 0.2em;
         }
     }
     .active {
