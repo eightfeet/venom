@@ -35,7 +35,7 @@
           width: 100%;
           overflow: auto;
           -webkit-overflow-scrolling: touch;
-        }</style></head><body><div id="app"><div class="clearfix" style="padding-bottom: 50px; padding-top: 50px;"><div class="box"><div id="parentId1"></div></div><div style="text-align: center; padding-top: 1em"><select id="changeCard"><option value="6">6张卡牌</option><option value="5">5张卡牌</option><option value="4">4张卡牌</option><option value="3">3张卡牌</option><option value="2">2张卡牌</option><option value="1">1张卡牌</option><option value="12">12张卡牌</option></select></div><br><br><br><div class="box1"><div id="parentId2"></div></div></div></div><script type="text/javascript" src="../lib/flipcard.js?3b15c3a16573fcbdf0ef"></script></body><script>var prizesData1 = window.prizes1;
+        }</style></head><body><div id="app"><div class="clearfix" style="padding-bottom: 50px; padding-top: 50px;"><div class="box"><div id="parentId1"></div></div><div style="text-align: center; padding-top: 1em"><select id="changeCard"><option value="6">6张卡牌</option><option value="5">5张卡牌</option><option value="4">4张卡牌</option><option value="3">3张卡牌</option><option value="2">2张卡牌</option><option value="1">1张卡牌</option><option value="12">12张卡牌</option></select></div><br><br><br><div class="box1"><div id="parentId2"></div></div></div></div><script type="text/javascript" src="../lib/flipcard.js?6fa54cdac065f75cf39c"></script></body><script>var prizesData1 = window.prizes1;
           var prizesData2 = window.prizes2;
           var rand = 6;
           var Game = window.___Lottery___.flipcard.Game;
@@ -106,7 +106,7 @@
             prizes: prizesData1.slice(0, rand),
             emBase: 10,
             onCancel: () => console.log('放弃1'),
-            onEnsure: function(prize){ console.log('确定中奖结果1！', prize); },
+            onConfirm: function(prize){ console.log('确定中奖结果1！', prize); },
             loading: {
               size: 20,
               length: 5,
@@ -130,7 +130,7 @@
             successModalTitle: "恭喜您抽中",
             submitFailedText: "好吧~~~",
             onCancel: () => console.log('放弃2'),
-            onEnsure: function(prize){ console.log('确定中奖结果2！', prize); },
+            onConfirm: function(prize){ console.log('确定中奖结果2！', prize); },
             loading: {
               size: 20, // loading大小 默认20
               length: 5, // 由几个vertices组成默认12个
