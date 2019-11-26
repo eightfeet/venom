@@ -14,5 +14,6 @@ postcss.config.js
 theme.config.js
 webpack.config.js
 yarn-error.log
+package-lock.json
 yarn.lock
 *.sh
